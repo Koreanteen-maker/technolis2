@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Заявка на ремонт — Техно Лис</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at 85% 10%, rgba(255,90,0,.15), transparent 30%),
+        radial-gradient(circle at 10% 60%, rgba(255,90,0,.08), transparent 25%),
+        #f3f3f3;
+    color: #111;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* HEADER */
+
+header {
+    background: #090909;
+    border-bottom: 3px solid #ff5a00;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header {
+    max-width: 1200px;
+    min-height: 80px;
+    margin: auto;
+    padding: 10px 25px;
+
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo {
+    width: 58px;
+    height: 58px;
+
+    border-radius: 50%;
+    border: 2px solid #ff5a00;
+    background: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #ff5a00;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.brand {
+    color: white;
+    font-size: 21px;
+    font-weight: 900;
+}
+
+.brand span {
+    color: #ff5a00;
+}
+
+nav {
+    margin-left: auto;
+
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: #ddd;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #ff5a00;
+}
+
+.call {
+    background: #ff5a00;
+    color: white;
+
+    padding: 14px 18px;
+    border-radius: 12px;
+
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* HERO */
+
+.hero {
+    max-width: 1200px;
+    margin: auto;
+    padding: 70px 25px 40px;
+}
+
+.subtitle {
+    color: #ff5a00;
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.hero h1 {
+    font-size: clamp(45px, 7vw, 72px);
+    line-height: .95;
+    letter-spacing: -3px;
+}
+
+.hero h1 span {
+    color: #ff5a00;
+}
+
+.hero p {
+    max-width: 700px;
+    color: #666;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-top: 20px;
+}
+
+/* FORM AREA */
+
+.form-wrapper {
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px 25px 90px;
+}
+
+.form-card {
+    background: white;
+
+    border: 1px solid #e3e3e3;
+    border-radius: 28px;
+
+    padding: 40px;
+
+    box-shadow: 0 15px 50px rgba(0,0,0,.07);
+}
+
+.form-title {
+    margin-bottom: 30px;
+}
+
+.form-title h2 {
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.form-title p {
+    color: #777;
+    line-height: 1.5;
+}
+
+/* FORM */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+}
+
+.field.full {
+    grid-column: 1 / -1;
+}
+
+label {
+    font-size: 14px;
+    font-weight: 900;
+    margin-bottom: 8px;
+}
+
+.required {
+    color: #ff5a00;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+
+    border: 2px solid #e6e6e6;
+    border-radius: 12px;
+
+    background: #fafafa;
+
+    padding: 15px;
+
+    font-family: inherit;
+    font-size: 15px;
+
+    outline: none;
+
+    transition: .2s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: #ff5a00;
+    background: white;
+}
+
+textarea {
+    min-height: 140px;
+    resize: vertical;
+}
+
+/* CHECKBOX */
+
+.agreement {
+    grid-column: 1 / -1;
+
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+
+    margin-top: 5px;
+}
+
+.agreement input {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+}
+
+.agreement label {
+    font-weight: normal;
+    color: #777;
+    line-height: 1.4;
+}
+
+/* BUTTON */
+
+.submit {
+    grid-column: 1 / -1;
+
+    border: none;
+
+    min-height: 60px;
+
+    background: #ff5a00;
+    color: white;
+
+    border-radius: 14px;
+
+    font-size: 17px;
+    font-weight: 900;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.submit:hover {
+    background: #ff6c20;
+    transform: translateY(-2px);
+}
+
+/* INFO */
+
+.info {
+    margin-top: 25px;
+
+    background: #090909;
+    color: white;
+
+    border-radius: 18px;
+
+    padding: 25px;
+}
+
+.info strong {
+    color: #ff5a00;
+}
+
+.info p {
+    color: #aaa;
+    line-height: 1.6;
+    margin-top: 7px;
+}
+
+/* SUCCESS */
+
+.success {
+    display: none;
+
+    margin-top: 25px;
+
+    background: #e9f8ee;
+    border: 1px solid #a9dcb8;
+
+    color: #246b38;
+
+    padding: 20px;
+
+    border-radius: 15px;
+
+    line-height: 1.5;
+}
+
+.success.show {
+    display: block;
+}
+
+/* FOOTER */
+
+footer {
+    background: #090909;
+    color: white;
+    padding: 50px 25px 25px;
+}
+
+.footer {
+    max-width: 1200px;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
+}
+
+footer h3 {
+    margin-bottom: 15px;
+}
+
+footer p,
+footer a {
+    display: block;
+    color: #999;
+    line-height: 1.8;
+}
+
+footer a:hover {
+    color: #ff5a00;
+}
+
+.copy {
+    max-width: 1200px;
+    margin: 30px auto 0;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #252525;
+
+    color: #666;
+    font-size: 13px;
+}
+
+/* MOBILE */
+
+.mobile-menu {
+    display: none;
+}
+
+@media(max-width: 900px) {
+
+    nav {
+        display: none;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .field.full {
+        grid-column: auto;
+    }
+
+    .agreement {
+        grid-column: auto;
+    }
+
+    .submit {
+        grid-column: auto;
+    }
+}
+
+@media(max-width: 600px) {
+
+    body {
+        padding-bottom: 65px;
+    }
+
+    .header {
+        padding: 8px 15px;
+    }
+
+    .brand {
+        font-size: 18px;
+    }
+
+    .logo {
+        width: 52px;
+        height: 52px;
+    }
+
+    .call {
+        margin-left: auto;
+
+        width: 48px;
+        height: 48px;
+
+        padding: 0;
+
+        border-radius: 50%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 0;
+    }
+
+    .call::before {
+        content: "☎";
+        font-size: 21px;
+    }
+
+    .hero {
+        padding: 55px 18px 30px;
+    }
+
+    .hero h1 {
+        font-size: 50px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .form-wrapper {
+        padding: 20px 18px 60px;
+    }
+
+    .form-card {
+        padding: 23px;
+        border-radius: 20px;
+    }
+
+    .form-title h2 {
+        font-size: 25px;
+    }
+
+    .info {
+        padding: 20px;
+    }
+
+    .footer {
+        grid-template-columns: 1fr;
+    }
+
+    .mobile-menu {
+        position: fixed;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        height: 65px;
+
+        background: #090909;
+        border-top: 2px solid #ff5a00;
+
+        z-index: 2000;
+    }
+
+    .mobile-menu a {
+        color: white;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-weight: bold;
+    }
+
+    .mobile-menu a:first-child {
+        background: #ff5a00;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="header">
+
+<a href="index.html" class="logo">
+    ЛОГО
+</a>
+
+<a href="index.html" class="brand">
+    Техно <span>Лис</span>
+</a>
+
+<nav>
+    <a href="index.html">Главная</a>
+    <a href="services.html">Услуги</a>
+    <a href="price.html">Прайс</a>
+    <a href="accessories.html">Аксессуары</a>
+    <a href="repair.html">Заявка</a>
+    <a href="location.html">Где мы</a>
+    <a href="contacts.html">Контакты</a>
+</nav>
+
+<a href="tel:+79621526990" class="call">
+    Позвонить
+</a>
+
+</div>
+
+</header>
+
+
+<section class="hero">
+
+<div class="subtitle">
+ТЕХНО ЛИС · РЕМОНТ
+</div>
+
+<h1>
+Записаться на <span>ремонт</span>
+</h1>
+
+<p>
+Заполните форму ниже. Опишите устройство и проблему —
+мы свяжемся с вами для уточнения деталей.
+</p>
+
+</section>
+
+
+<main class="form-wrapper">
+
+<div class="form-card">
+
+<div class="form-title">
+
+<h2>
+Информация об устройстве
+</h2>
+
+<p>
+Поля со знаком <span style="color:#ff5a00">*</span> обязательны для заполнения.
+</p>
+
+</div>
+
+
+<form id="repairForm">
+
+<div class="form-grid">
+
+
+<!-- ТИП -->
+
+<div class="field">
+
+<label>
+Тип устройства <span class="required">*</span>
+</label>
+
+<select id="deviceType" required>
+
+<option value="">
+Выберите устройство
+</option>
+
+<option value="Телефон">
+Телефон
+</option>
+
+<option value="Планшет">
+Планшет
+</option>
+
+<option value="Ноутбук">
+Ноутбук
+</option>
+
+<option value="ПК">
+ПК
+</option>
+
+<option value="Apple Watch">
+Apple Watch
+</option>
+
+<option value="VR-очки">
+VR-очки
+</option>
+
+<option value="Другое">
+Другое
+</option>
+
+</select>
+
+</div>
+
+
+<!-- МОДЕЛЬ -->
+
+<div class="field">
+
+<label>
+Марка и точная модель <span class="required">*</span>
+</label>
+
+<input
+type="text"
+id="model"
+placeholder="Например: iPhone 15 Pro Max"
+required
+>
+
+</div>
+
+
+<!-- ТЕЛЕФОН -->
+
+<div class="field">
+
+<label>
+Номер телефона <span class="required">*</span>
+</label>
+
+<input
+type="tel"
+id="phone"
+placeholder="8 900 000-00-00"
+required
+>
+
+</div>
+
+
+<!-- ПРИЧИНА -->
+
+<div class="field">
+
+<label>
+Предполагаемая причина
+</label>
+
+<select id="reason">
+
+<option value="">
+Выберите вариант
+</option>
+
+<option value="Падение">
+Падение
+</option>
+
+<option value="Попадание воды">
+Попадание воды
+</option>
+
+<option value="Удар / механическое повреждение">
+Удар / механическое повреждение
+</option>
+
+<option value="Износ">
+Износ
+</option>
+
+<option value="Проблема появилась сама">
+Проблема появилась сама
+</option>
+
+<option value="После ремонта">
+Проблема появилась после ремонта
+</option>
+
+<option value="После обновления / прошивки">
+После обновления / прошивки
+</option>
+
+<option value="Не знаю">
+Не знаю
+</option>
+
+</select>
+
+</div>
+
+
+<!-- ОПИСАНИЕ -->
+
+<div class="field full">
+
+<label>
+Описание проблемы <span class="required">*</span>
+</label>
+
+<textarea
+id="problem"
+placeholder="Например: телефон включается, но экран остаётся чёрным..."
+required
+></textarea>
+
+</div>
+
+
+<!-- ДОПОЛНИТЕЛЬНО -->
+
+<div class="field full">
+
+<label>
+Дополнительная информация
+</label>
+
+<textarea
+id="additional"
+placeholder="Любая дополнительная информация..."
+></textarea>
+
+</div>
+
+
+<!-- СОГЛАСИЕ -->
+
+<div class="agreement">
+
+<input
+type="checkbox"
+id="agreement"
+required
+>
+
+<label for="agreement">
+Я подтверждаю правильность указанных данных и согласен
+на обработку информации для связи со мной.
+</label>
+
+</div>
+
+
+<button
+type="submit"
+class="submit"
+>
+🛠️ Сформировать заявку
+</button>
+
+
+</div>
+
+</form>
+
+
+<div class="success" id="success">
+
+<strong>Заявка сформирована!</strong>
+
+<p>
+Сейчас откроется Telegram с готовым сообщением.
+Проверьте текст и нажмите кнопку отправки.
+</p>
+
+</div>
+
+
+<div class="info">
+
+<strong>Как это работает?</strong>
+
+<p>
+1. Вы заполняете форму.<br>
+2. Сайт формирует сообщение с информацией об устройстве.<br>
+3. Открывается Telegram.<br>
+4. Вы проверяете заявку и отправляете её нам.
+</p>
+
+</div>
+
+</div>
+
+</main>
+
+
+<footer>
+
+<div class="footer">
+
+<div>
+
+<h3>
+Техно <span style="color:#ff5a00">Лис</span>
+</h3>
+
+<p>
+Техника в надёжных лапах!
+</p>
+
+</div>
+
+
+<div>
+
+<h3>
+Навигация
+</h3>
+
+<a href="index.html">Главная</a>
+<a href="services.html">Услуги</a>
+<a href="price.html">Прайс</a>
+<a href="accessories.html">Аксессуары</a>
+
+</div>
+
+
+<div>
+
+<h3>
+Контакты
+</h3>
+
+<a href="tel:+79621526990">
+📞 8 962 152-69-90
+</a>
+
+<a href="https://t.me/tehnafox" target="_blank">
+✈️ @tehnafox
+</a>
+
+<a href="location.html">
+📍 ТРК «Сити Молл», 1 этаж
+</a>
+
+</div>
+
+</div>
+
+
+<div class="copy">
+© 2026 Техно Лис. Все права защищены.
+</div>
+
+</footer>
+
+
+<div class="mobile-menu">
+
+<a href="tel:+79621526990">
+📞 Позвонить
+</a>
+
+<a href="https://t.me/tehnafox" target="_blank">
+✈️ Telegram
+</a>
+
+</div>
+
+
+<script>
+
+document.getElementById("repairForm").addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    const device =
+        document.getElementById("deviceType").value;
+
+    const model =
+        document.getElementById("model").value;
+
+    const phone =
+        document.getElementById("phone").value;
+
+    const reason =
+        document.getElementById("reason").value || "Не указана";
+
+    const problem =
+        document.getElementById("problem").value;
+
+    const additional =
+        document.getElementById("additional").value || "Нет";
+
+
+
+    const message =
+`🦊 НОВАЯ ЗАЯВКА — ТЕХНО ЛИС
+
+📱 Тип устройства:
+${device}
+
+🔧 Марка и модель:
+${model}
+
+📞 Телефон:
+${phone}
+
+⚠️ Предполагаемая причина:
+${reason}
+
+📝 Описание проблемы:
+${problem}
+
+ℹ️ Дополнительная информация:
+${additional}`;
+
+
+
+    document.getElementById("success").classList.add("show");
+
+
+
+    const telegramURL =
+        "https://t.me/tehnafox?text=" +
+        encodeURIComponent(message);
+
+
+
+    setTimeout(function() {
+
+        window.open(
+            telegramURL,
+            "_blank"
+        );
+
+    }, 500);
+
+});
+
+</script>
+
+</body>
+</html>
