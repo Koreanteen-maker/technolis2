@@ -7,6 +7,7 @@
 <title>Заявка на ремонт — Техно Лис</title>
 
 <style>
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -15,11 +16,22 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background:
-        radial-gradient(circle at 85% 10%, rgba(255,90,0,.15), transparent 30%),
-        radial-gradient(circle at 10% 60%, rgba(255,90,0,.08), transparent 25%),
-        #f3f3f3;
     color: #111;
+
+    background:
+        radial-gradient(
+            circle at 85% 10%,
+            rgba(255, 90, 0, .16),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 10% 80%,
+            rgba(255, 90, 0, .08),
+            transparent 28%
+        ),
+        #f3f3f3;
+
+    min-height: 100vh;
 }
 
 a {
@@ -27,11 +39,14 @@ a {
     color: inherit;
 }
 
-/* HEADER */
+/* =========================
+   HEADER
+========================= */
 
 header {
     background: #090909;
     border-bottom: 3px solid #ff5a00;
+
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -40,6 +55,7 @@ header {
 .header {
     max-width: 1200px;
     min-height: 80px;
+
     margin: auto;
     padding: 10px 25px;
 
@@ -54,6 +70,7 @@ header {
 
     border-radius: 50%;
     border: 2px solid #ff5a00;
+
     background: white;
 
     display: flex;
@@ -61,8 +78,8 @@ header {
     justify-content: center;
 
     color: #ff5a00;
-    font-size: 11px;
-    font-weight: bold;
+    font-size: 10px;
+    font-weight: 900;
 }
 
 .brand {
@@ -79,13 +96,15 @@ nav {
     margin-left: auto;
 
     display: flex;
-    gap: 20px;
+    gap: 18px;
 }
 
 nav a {
     color: #ddd;
     font-size: 14px;
     font-weight: bold;
+
+    transition: .2s;
 }
 
 nav a:hover {
@@ -97,32 +116,43 @@ nav a:hover {
     color: white;
 
     padding: 14px 18px;
+
     border-radius: 12px;
 
-    font-weight: bold;
+    font-weight: 900;
     white-space: nowrap;
 }
 
-/* HERO */
+/* =========================
+   HERO
+========================= */
 
 .hero {
-    max-width: 1200px;
+    max-width: 1100px;
+
     margin: auto;
-    padding: 70px 25px 40px;
+
+    padding: 65px 25px 35px;
 }
 
 .subtitle {
     color: #ff5a00;
+
     font-size: 14px;
     font-weight: 900;
+
     letter-spacing: 1px;
+
     text-transform: uppercase;
+
     margin-bottom: 12px;
 }
 
 .hero h1 {
-    font-size: clamp(45px, 7vw, 72px);
+    font-size: clamp(45px, 7vw, 70px);
+
     line-height: .95;
+
     letter-spacing: -3px;
 }
 
@@ -132,17 +162,25 @@ nav a:hover {
 
 .hero p {
     max-width: 700px;
-    color: #666;
-    font-size: 18px;
-    line-height: 1.6;
+
     margin-top: 20px;
+
+    color: #666;
+
+    font-size: 18px;
+
+    line-height: 1.6;
 }
 
-/* FORM AREA */
+/* =========================
+   FORM
+========================= */
 
 .form-wrapper {
-    max-width: 1100px;
-    margin: auto;
+    max-width: 900px;
+
+    margin: 0 auto;
+
     padding: 20px 25px 90px;
 }
 
@@ -150,48 +188,58 @@ nav a:hover {
     background: white;
 
     border: 1px solid #e3e3e3;
+
     border-radius: 28px;
 
-    padding: 40px;
+    padding: 35px;
 
-    box-shadow: 0 15px 50px rgba(0,0,0,.07);
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.08);
 }
 
 .form-title {
-    margin-bottom: 30px;
-}
-
-.form-title h2 {
     font-size: 30px;
+    font-weight: 900;
+
     margin-bottom: 8px;
 }
 
-.form-title p {
+.form-description {
     color: #777;
-    line-height: 1.5;
+
+    line-height: 1.6;
+
+    margin-bottom: 30px;
 }
 
-/* FORM */
+/* =========================
+   FORM GRID
+========================= */
 
 .form-grid {
     display: grid;
+
     grid-template-columns: 1fr 1fr;
+
     gap: 20px;
 }
 
-.field {
+.form-group {
     display: flex;
+
     flex-direction: column;
+
+    gap: 8px;
 }
 
-.field.full {
+.form-group.full {
     grid-column: 1 / -1;
 }
 
 label {
     font-size: 14px;
+
     font-weight: 900;
-    margin-bottom: 8px;
 }
 
 .required {
@@ -203,15 +251,17 @@ select,
 textarea {
     width: 100%;
 
-    border: 2px solid #e6e6e6;
-    border-radius: 12px;
+    border: 2px solid #e5e5e5;
 
     background: #fafafa;
 
-    padding: 15px;
+    border-radius: 12px;
+
+    padding: 15px 16px;
 
     font-family: inherit;
-    font-size: 15px;
+
+    font-size: 16px;
 
     outline: none;
 
@@ -222,125 +272,167 @@ input:focus,
 select:focus,
 textarea:focus {
     border-color: #ff5a00;
+
     background: white;
+
+    box-shadow:
+        0 0 0 3px rgba(255,90,0,.10);
 }
 
 textarea {
     min-height: 140px;
+
     resize: vertical;
 }
 
-/* CHECKBOX */
+.hint {
+    color: #999;
 
-.agreement {
-    grid-column: 1 / -1;
-
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-
-    margin-top: 5px;
+    font-size: 12px;
 }
 
-.agreement input {
-    width: 18px;
-    height: 18px;
-    margin-top: 2px;
-}
+/* =========================
+   BUTTON
+========================= */
 
-.agreement label {
-    font-weight: normal;
-    color: #777;
-    line-height: 1.4;
-}
-
-/* BUTTON */
-
-.submit {
-    grid-column: 1 / -1;
-
-    border: none;
+.submit-button {
+    width: 100%;
 
     min-height: 60px;
 
-    background: #ff5a00;
-    color: white;
+    margin-top: 25px;
+
+    border: none;
 
     border-radius: 14px;
 
+    background: #ff5a00;
+
+    color: white;
+
+    font-family: inherit;
+
     font-size: 17px;
+
     font-weight: 900;
 
     cursor: pointer;
 
     transition: .2s;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
 }
 
-.submit:hover {
-    background: #ff6c20;
+.submit-button:hover {
+    background: #e84f00;
+
     transform: translateY(-2px);
 }
 
-/* INFO */
+.submit-button:disabled {
+    opacity: .65;
 
-.info {
-    margin-top: 25px;
+    cursor: not-allowed;
 
-    background: #090909;
-    color: white;
-
-    border-radius: 18px;
-
-    padding: 25px;
+    transform: none;
 }
 
-.info strong {
-    color: #ff5a00;
-}
+/* =========================
+   STATUS
+========================= */
 
-.info p {
-    color: #aaa;
-    line-height: 1.6;
-    margin-top: 7px;
-}
-
-/* SUCCESS */
-
-.success {
+.status {
     display: none;
 
-    margin-top: 25px;
+    margin-top: 20px;
 
-    background: #e9f8ee;
-    border: 1px solid #a9dcb8;
+    padding: 18px;
 
-    color: #246b38;
+    border-radius: 14px;
 
-    padding: 20px;
-
-    border-radius: 15px;
+    font-weight: bold;
 
     line-height: 1.5;
 }
 
-.success.show {
+.status.success {
     display: block;
+
+    background: #e9f8ed;
+
+    color: #217a35;
+
+    border: 1px solid #b8e4c1;
 }
 
-/* FOOTER */
+.status.error {
+    display: block;
+
+    background: #fff0ed;
+
+    color: #a52a16;
+
+    border: 1px solid #ffc9bd;
+}
+
+/* =========================
+   INFO
+========================= */
+
+.info-box {
+    margin-top: 25px;
+
+    padding: 20px;
+
+    border-radius: 16px;
+
+    background: #090909;
+
+    color: white;
+}
+
+.info-box strong {
+    display: block;
+
+    color: #ff5a00;
+
+    margin-bottom: 8px;
+}
+
+.info-box p {
+    color: #aaa;
+
+    line-height: 1.5;
+
+    font-size: 14px;
+}
+
+/* =========================
+   FOOTER
+========================= */
 
 footer {
     background: #090909;
+
     color: white;
+
     padding: 50px 25px 25px;
 }
 
 .footer {
     max-width: 1200px;
+
     margin: auto;
 
     display: grid;
+
     grid-template-columns: 2fr 1fr 1fr;
+
     gap: 40px;
 }
 
@@ -351,7 +443,9 @@ footer h3 {
 footer p,
 footer a {
     display: block;
+
     color: #999;
+
     line-height: 1.8;
 }
 
@@ -361,6 +455,7 @@ footer a:hover {
 
 .copy {
     max-width: 1200px;
+
     margin: 30px auto 0;
 
     padding-top: 20px;
@@ -368,37 +463,33 @@ footer a:hover {
     border-top: 1px solid #252525;
 
     color: #666;
+
     font-size: 13px;
 }
 
-/* MOBILE */
+/* =========================
+   MOBILE MENU
+========================= */
 
 .mobile-menu {
     display: none;
 }
 
-@media(max-width: 900px) {
+/* =========================
+   TABLET
+========================= */
+
+@media(max-width: 1000px) {
 
     nav {
         display: none;
     }
 
-    .form-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .field.full {
-        grid-column: auto;
-    }
-
-    .agreement {
-        grid-column: auto;
-    }
-
-    .submit {
-        grid-column: auto;
-    }
 }
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width: 600px) {
 
@@ -407,16 +498,18 @@ footer a:hover {
     }
 
     .header {
+        min-height: 70px;
+
         padding: 8px 15px;
+    }
+
+    .logo {
+        width: 50px;
+        height: 50px;
     }
 
     .brand {
         font-size: 18px;
-    }
-
-    .logo {
-        width: 52px;
-        height: 52px;
     }
 
     .call {
@@ -430,6 +523,7 @@ footer a:hover {
         border-radius: 50%;
 
         display: flex;
+
         align-items: center;
         justify-content: center;
 
@@ -438,15 +532,16 @@ footer a:hover {
 
     .call::before {
         content: "☎";
-        font-size: 21px;
+
+        font-size: 22px;
     }
 
     .hero {
-        padding: 55px 18px 30px;
+        padding: 50px 18px 25px;
     }
 
     .hero h1 {
-        font-size: 50px;
+        font-size: 48px;
     }
 
     .hero p {
@@ -454,20 +549,39 @@ footer a:hover {
     }
 
     .form-wrapper {
-        padding: 20px 18px 60px;
+        padding: 15px 18px 60px;
     }
 
     .form-card {
-        padding: 23px;
-        border-radius: 20px;
+        padding: 22px;
+
+        border-radius: 22px;
     }
 
-    .form-title h2 {
+    .form-title {
         font-size: 25px;
     }
 
-    .info {
-        padding: 20px;
+    .form-grid {
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+    }
+
+    .form-group.full {
+        grid-column: auto;
+    }
+
+    input,
+    select,
+    textarea {
+        font-size: 16px;
+
+        padding: 14px;
+    }
+
+    .submit-button {
+        min-height: 58px;
     }
 
     .footer {
@@ -476,7 +590,9 @@ footer a:hover {
 
     .mobile-menu {
         position: fixed;
+
         display: grid;
+
         grid-template-columns: 1fr 1fr;
 
         left: 0;
@@ -486,6 +602,7 @@ footer a:hover {
         height: 65px;
 
         background: #090909;
+
         border-top: 2px solid #ff5a00;
 
         z-index: 2000;
@@ -495,6 +612,7 @@ footer a:hover {
         color: white;
 
         display: flex;
+
         align-items: center;
         justify-content: center;
 
@@ -504,123 +622,173 @@ footer a:hover {
     .mobile-menu a:first-child {
         background: #ff5a00;
     }
+
 }
+
 </style>
 </head>
 
+
 <body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
 
 <header>
 
 <div class="header">
 
+
 <a href="index.html" class="logo">
     ЛОГО
 </a>
+
 
 <a href="index.html" class="brand">
     Техно <span>Лис</span>
 </a>
 
+
 <nav>
-    <a href="index.html">Главная</a>
-    <a href="services.html">Услуги</a>
-    <a href="price.html">Прайс</a>
-    <a href="accessories.html">Аксессуары</a>
-    <a href="repair.html">Заявка</a>
-    <a href="location.html">Где мы</a>
-    <a href="contacts.html">Контакты</a>
+
+<a href="index.html">
+    Главная
+</a>
+
+<a href="services.html">
+    Услуги
+</a>
+
+<a href="price.html">
+    Прайс
+</a>
+
+<a href="accessories.html">
+    Аксессуары
+</a>
+
+<a href="repair.html">
+    Заявка
+</a>
+
+<a href="location.html">
+    Где мы
+</a>
+
+<a href="contacts.html">
+    Контакты
+</a>
+
 </nav>
 
-<a href="tel:+79621526990" class="call">
-    Позвонить
+
+<a
+href="tel:+79621526990"
+class="call"
+>
+Позвонить
 </a>
+
 
 </div>
 
 </header>
 
 
+<!-- =========================
+     HERO
+========================= -->
+
 <section class="hero">
 
 <div class="subtitle">
-ТЕХНО ЛИС · РЕМОНТ
+ТЕХНО ЛИС · РЕМОНТ ТЕХНИКИ
 </div>
 
+
 <h1>
-Записаться на <span>ремонт</span>
+Запись на <span>ремонт</span>
 </h1>
 
+
 <p>
-Заполните форму ниже. Опишите устройство и проблему —
-мы свяжемся с вами для уточнения деталей.
+Опишите проблему с вашим устройством,
+и мы свяжемся с вами для уточнения деталей.
 </p>
 
 </section>
 
 
+<!-- =========================
+     FORM
+========================= -->
+
 <main class="form-wrapper">
+
 
 <div class="form-card">
 
+
 <div class="form-title">
+Оставить заявку
+</div>
 
-<h2>
-Информация об устройстве
-</h2>
 
-<p>
-Поля со знаком <span style="color:#ff5a00">*</span> обязательны для заполнения.
-</p>
-
+<div class="form-description">
+Заполните форму ниже. После отправки заявка
+поступит мастеру в Telegram.
 </div>
 
 
 <form id="repairForm">
+
 
 <div class="form-grid">
 
 
 <!-- ТИП -->
 
-<div class="field">
+<div class="form-group">
 
-<label>
+<label for="device">
 Тип устройства <span class="required">*</span>
 </label>
 
-<select id="deviceType" required>
+
+<select
+id="device"
+name="device"
+required
+>
 
 <option value="">
 Выберите устройство
 </option>
 
 <option value="Телефон">
-Телефон
+📱 Телефон
 </option>
 
 <option value="Планшет">
-Планшет
+📱 Планшет
 </option>
 
 <option value="Ноутбук">
-Ноутбук
+💻 Ноутбук
 </option>
 
 <option value="ПК">
-ПК
-</option>
-
-<option value="Apple Watch">
-Apple Watch
+🖥️ ПК
 </option>
 
 <option value="VR-очки">
-VR-очки
+🥽 VR-очки
 </option>
 
 <option value="Другое">
-Другое
+🔧 Другое
 </option>
 
 </select>
@@ -630,52 +798,70 @@ VR-очки
 
 <!-- МОДЕЛЬ -->
 
-<div class="field">
+<div class="form-group">
 
-<label>
-Марка и точная модель <span class="required">*</span>
+<label for="model">
+Марка и модель <span class="required">*</span>
 </label>
+
 
 <input
 type="text"
 id="model"
+name="model"
 placeholder="Например: iPhone 15 Pro Max"
 required
 >
+
+
+<span class="hint">
+Укажите точную модель устройства
+</span>
 
 </div>
 
 
 <!-- ТЕЛЕФОН -->
 
-<div class="field">
+<div class="form-group">
 
-<label>
+<label for="phone">
 Номер телефона <span class="required">*</span>
 </label>
+
 
 <input
 type="tel"
 id="phone"
-placeholder="8 900 000-00-00"
+name="phone"
+placeholder="8 962 152-69-90"
 required
 >
+
+
+<span class="hint">
+Мы свяжемся с вами по этому номеру
+</span>
 
 </div>
 
 
 <!-- ПРИЧИНА -->
 
-<div class="field">
+<div class="form-group">
 
-<label>
-Предполагаемая причина
+<label for="reason">
+Примерная причина
 </label>
 
-<select id="reason">
+
+<select
+id="reason"
+name="reason"
+>
 
 <option value="">
-Выберите вариант
+Выберите причину
 </option>
 
 <option value="Падение">
@@ -686,24 +872,20 @@ required
 Попадание воды
 </option>
 
-<option value="Удар / механическое повреждение">
-Удар / механическое повреждение
-</option>
-
-<option value="Износ">
-Износ
-</option>
-
-<option value="Проблема появилась сама">
-Проблема появилась сама
+<option value="Удар / повреждение">
+Удар / повреждение
 </option>
 
 <option value="После ремонта">
-Проблема появилась после ремонта
+После ремонта
 </option>
 
-<option value="После обновления / прошивки">
-После обновления / прошивки
+<option value="После обновления">
+После обновления
+</option>
+
+<option value="Самопроизвольная неисправность">
+Самопроизвольная неисправность
 </option>
 
 <option value="Не знаю">
@@ -715,17 +897,19 @@ required
 </div>
 
 
-<!-- ОПИСАНИЕ -->
+<!-- ПРОБЛЕМА -->
 
-<div class="field full">
+<div class="form-group full">
 
-<label>
+<label for="problem">
 Описание проблемы <span class="required">*</span>
 </label>
 
+
 <textarea
 id="problem"
-placeholder="Например: телефон включается, но экран остаётся чёрным..."
+name="problem"
+placeholder="Например: телефон включается, но экран полностью чёрный..."
 required
 ></textarea>
 
@@ -734,89 +918,88 @@ required
 
 <!-- ДОПОЛНИТЕЛЬНО -->
 
-<div class="field full">
+<div class="form-group full">
 
-<label>
+<label for="additional">
 Дополнительная информация
 </label>
 
+
 <textarea
 id="additional"
-placeholder="Любая дополнительная информация..."
+name="additional"
+placeholder="Например: есть ли пароль, когда появилась проблема, что уже пробовали делать..."
 ></textarea>
 
 </div>
 
-
-<!-- СОГЛАСИЕ -->
-
-<div class="agreement">
-
-<input
-type="checkbox"
-id="agreement"
-required
->
-
-<label for="agreement">
-Я подтверждаю правильность указанных данных и согласен
-на обработку информации для связи со мной.
-</label>
 
 </div>
 
 
 <button
 type="submit"
-class="submit"
+class="submit-button"
+id="submitButton"
 >
-🛠️ Сформировать заявку
+
+<span id="buttonIcon">
+🦊
+</span>
+
+<span id="buttonText">
+Отправить заявку
+</span>
+
 </button>
 
 
+<div
+id="status"
+class="status"
+></div>
+
+
+<div class="info-box">
+
+<strong>
+🔒 Ваши данные
+</strong>
+
+<p>
+Номер телефона используется только для связи
+по поводу ремонта. Заявка передаётся мастеру
+в закрытый Telegram-чат.
+</p>
+
 </div>
+
 
 </form>
 
 
-<div class="success" id="success">
-
-<strong>Заявка сформирована!</strong>
-
-<p>
-Сейчас откроется Telegram с готовым сообщением.
-Проверьте текст и нажмите кнопку отправки.
-</p>
-
 </div>
 
-
-<div class="info">
-
-<strong>Как это работает?</strong>
-
-<p>
-1. Вы заполняете форму.<br>
-2. Сайт формирует сообщение с информацией об устройстве.<br>
-3. Открывается Telegram.<br>
-4. Вы проверяете заявку и отправляете её нам.
-</p>
-
-</div>
-
-</div>
 
 </main>
 
 
+<!-- =========================
+     FOOTER
+========================= -->
+
 <footer>
 
+
 <div class="footer">
+
 
 <div>
 
 <h3>
-Техно <span style="color:#ff5a00">Лис</span>
+Техно <span style="color:#ff5a00">
+Лис
+</span>
 </h3>
 
 <p>
@@ -832,10 +1015,30 @@ class="submit"
 Навигация
 </h3>
 
-<a href="index.html">Главная</a>
-<a href="services.html">Услуги</a>
-<a href="price.html">Прайс</a>
-<a href="accessories.html">Аксессуары</a>
+
+<a href="index.html">
+Главная
+</a>
+
+<a href="services.html">
+Услуги
+</a>
+
+<a href="price.html">
+Прайс
+</a>
+
+<a href="accessories.html">
+Аксессуары
+</a>
+
+<a href="repair.html">
+Заявка
+</a>
+
+<a href="location.html">
+Где мы
+</a>
 
 </div>
 
@@ -846,114 +1049,266 @@ class="submit"
 Контакты
 </h3>
 
+
 <a href="tel:+79621526990">
 📞 8 962 152-69-90
 </a>
 
-<a href="https://t.me/tehnafox" target="_blank">
+
+<a
+href="https://t.me/tehnafox"
+target="_blank"
+>
 ✈️ @tehnafox
 </a>
+
 
 <a href="location.html">
 📍 ТРК «Сити Молл», 1 этаж
 </a>
 
+
 </div>
+
 
 </div>
 
 
 <div class="copy">
+
 © 2026 Техно Лис. Все права защищены.
+
 </div>
+
 
 </footer>
 
 
+<!-- =========================
+     MOBILE MENU
+========================= -->
+
 <div class="mobile-menu">
+
 
 <a href="tel:+79621526990">
 📞 Позвонить
 </a>
 
-<a href="https://t.me/tehnafox" target="_blank">
+
+<a
+href="https://t.me/tehnafox"
+target="_blank"
+>
 ✈️ Telegram
 </a>
+
 
 </div>
 
 
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
 <script>
 
-document.getElementById("repairForm").addEventListener("submit", function(event) {
+const WORKER_URL =
+"https://technolis-bot.koreanteen.workers.dev";
+
+
+const form =
+document.getElementById("repairForm");
+
+
+const button =
+document.getElementById("submitButton");
+
+
+const buttonIcon =
+document.getElementById("buttonIcon");
+
+
+const buttonText =
+document.getElementById("buttonText");
+
+
+const status =
+document.getElementById("status");
+
+
+form.addEventListener("submit", async function(event) {
 
     event.preventDefault();
 
+
+    // Убираем старый статус
+
+    status.className = "status";
+
+    status.textContent = "";
+
+
+    // Получаем данные формы
+
     const device =
-        document.getElementById("deviceType").value;
+        document.getElementById("device").value.trim();
+
 
     const model =
-        document.getElementById("model").value;
+        document.getElementById("model").value.trim();
+
 
     const phone =
-        document.getElementById("phone").value;
+        document.getElementById("phone").value.trim();
+
 
     const reason =
-        document.getElementById("reason").value || "Не указана";
+        document.getElementById("reason").value.trim();
+
 
     const problem =
-        document.getElementById("problem").value;
+        document.getElementById("problem").value.trim();
+
 
     const additional =
-        document.getElementById("additional").value || "Нет";
+        document.getElementById("additional").value.trim();
 
 
+    // Проверка обязательных полей
 
-    const message =
-`🦊 НОВАЯ ЗАЯВКА — ТЕХНО ЛИС
+    if (!device || !model || !phone || !problem) {
 
-📱 Тип устройства:
-${device}
+        status.className = "status error";
 
-🔧 Марка и модель:
-${model}
+        status.textContent =
+            "❌ Пожалуйста, заполните все обязательные поля.";
 
-📞 Телефон:
-${phone}
-
-⚠️ Предполагаемая причина:
-${reason}
-
-📝 Описание проблемы:
-${problem}
-
-ℹ️ Дополнительная информация:
-${additional}`;
+        return;
+    }
 
 
+    // Блокируем кнопку
 
-    document.getElementById("success").classList.add("show");
+    button.disabled = true;
 
+    buttonIcon.textContent = "⏳";
 
-
-    const telegramURL =
-        "https://t.me/tehnafox?text=" +
-        encodeURIComponent(message);
-
+    buttonText.textContent = "Отправляем заявку...";
 
 
-    setTimeout(function() {
+    try {
 
-        window.open(
-            telegramURL,
-            "_blank"
-        );
 
-    }, 500);
+        const response =
+            await fetch(
+                WORKER_URL,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json; charset=UTF-8"
+                    },
+
+                    body: JSON.stringify({
+
+                        device: device,
+
+                        model: model,
+
+                        phone: phone,
+
+                        reason: reason,
+
+                        problem: problem,
+
+                        additional: additional
+
+                    })
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if (
+            response.ok &&
+            result.success
+        ) {
+
+
+            status.className =
+                "status success";
+
+
+            status.textContent =
+                "✅ Заявка успешно отправлена! " +
+                "Мы свяжемся с вами в ближайшее время.";
+
+
+            // Очищаем форму
+
+            form.reset();
+
+
+            // Прокручиваем к сообщению
+
+            status.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+
+        } else {
+
+
+            throw new Error(
+                result.error ||
+                result.telegram_error ||
+                "Ошибка отправки"
+            );
+
+        }
+
+
+    } catch (error) {
+
+
+        console.error(error);
+
+
+        status.className =
+            "status error";
+
+
+        status.textContent =
+            "❌ Не удалось отправить заявку. " +
+            "Попробуйте ещё раз или позвоните нам: " +
+            "8 962 152-69-90";
+
+
+    } finally {
+
+
+        // Возвращаем кнопку
+
+        button.disabled = false;
+
+        buttonIcon.textContent = "🦊";
+
+        buttonText.textContent =
+            "Отправить заявку";
+
+
+    }
 
 });
 
 </script>
+
 
 </body>
 </html>
