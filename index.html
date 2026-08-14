@@ -1,1 +1,882 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Техно Лис — ремонт техники</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at 85% 10%, rgba(255, 91, 0, .16), transparent 30%),
+        radial-gradient(circle at 10% 50%, rgba(255, 91, 0, .08), transparent 25%),
+        #f3f3f3;
+    color: #111;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* HEADER */
+
+header {
+    background: #090909;
+    border-bottom: 3px solid #ff5a00;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header {
+    max-width: 1200px;
+    margin: auto;
+    min-height: 80px;
+    padding: 10px 25px;
+
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid #ff5a00;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #ff5a00;
+    font-size: 11px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.logo span {
+    display: none;
+}
+
+.brand {
+    color: white;
+    font-size: 21px;
+    font-weight: 900;
+}
+
+.brand span {
+    color: #ff5a00;
+}
+
+nav {
+    margin-left: auto;
+
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+nav a {
+    color: #ddd;
+    font-size: 14px;
+    font-weight: bold;
+    transition: .2s;
+}
+
+nav a:hover {
+    color: #ff5a00;
+}
+
+.call {
+    background: #ff5a00;
+    color: white;
+
+    padding: 14px 18px;
+    border-radius: 12px;
+
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.call:hover {
+    background: #ff6d20;
+}
+
+/* HERO */
+
+.hero {
+    max-width: 1200px;
+    margin: auto;
+    min-height: 650px;
+    padding: 80px 25px;
+
+    display: grid;
+    grid-template-columns: 1.2fr .8fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.subtitle {
+    color: #ff5a00;
+    font-size: 14px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    margin-bottom: 15px;
+}
+
+.hero h1 {
+    font-size: clamp(48px, 7vw, 88px);
+    line-height: .92;
+    letter-spacing: -4px;
+}
+
+.hero h1 span {
+    color: #ff5a00;
+}
+
+.hero p {
+    max-width: 650px;
+
+    color: #666;
+    font-size: 19px;
+    line-height: 1.6;
+
+    margin: 25px 0 30px;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 55px;
+    padding: 0 23px;
+
+    border-radius: 12px;
+    font-weight: 900;
+}
+
+.orange {
+    background: #ff5a00;
+    color: white;
+}
+
+.black {
+    background: #090909;
+    color: white;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+/* HERO CARD */
+
+.hero-card {
+    background: #090909;
+    color: white;
+
+    padding: 35px;
+    border-radius: 28px;
+
+    box-shadow: 0 20px 60px rgba(0,0,0,.15);
+}
+
+.hero-card h2 {
+    font-size: 30px;
+    margin-bottom: 25px;
+}
+
+.quick {
+    display: grid;
+    gap: 12px;
+}
+
+.quick a {
+    border: 1px solid #292929;
+    border-radius: 14px;
+
+    padding: 17px;
+
+    display: flex;
+    gap: 13px;
+    align-items: center;
+
+    transition: .2s;
+}
+
+.quick a:hover {
+    border-color: #ff5a00;
+    transform: translateX(4px);
+}
+
+.quick-icon {
+    font-size: 25px;
+}
+
+.quick strong {
+    display: block;
+}
+
+.quick small {
+    color: #999;
+}
+
+/* SERVICES */
+
+section {
+    padding: 80px 25px;
+}
+
+.section {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.section-title {
+    margin-bottom: 35px;
+}
+
+.section-title small {
+    color: #ff5a00;
+    font-weight: bold;
+}
+
+.section-title h2 {
+    font-size: 50px;
+    letter-spacing: -2px;
+    margin-top: 8px;
+}
+
+.section-title p {
+    color: #777;
+    max-width: 650px;
+    margin-top: 12px;
+    line-height: 1.6;
+}
+
+.services {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.card {
+    background: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 22px;
+
+    padding: 27px;
+
+    transition: .2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: #ff5a00;
+    box-shadow: 0 15px 40px rgba(0,0,0,.08);
+}
+
+.icon {
+    width: 52px;
+    height: 52px;
+
+    border-radius: 15px;
+
+    background: rgba(255,90,0,.1);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 25px;
+
+    margin-bottom: 18px;
+}
+
+.card h3 {
+    font-size: 19px;
+    margin-bottom: 9px;
+}
+
+.card p {
+    color: #777;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.card a {
+    display: inline-block;
+
+    color: #ff5a00;
+    font-weight: 900;
+    font-size: 14px;
+
+    margin-top: 20px;
+}
+
+/* CTA */
+
+.cta {
+    max-width: 1150px;
+    margin: 40px auto 80px;
+
+    background: #090909;
+    color: white;
+
+    border-radius: 28px;
+    padding: 45px;
+
+    text-align: center;
+}
+
+.cta h2 {
+    font-size: 40px;
+    margin-bottom: 12px;
+}
+
+.cta p {
+    color: #aaa;
+    margin-bottom: 25px;
+}
+
+/* FOOTER */
+
+footer {
+    background: #090909;
+    color: white;
+    padding: 50px 25px 25px;
+}
+
+.footer {
+    max-width: 1200px;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
+}
+
+footer h3 {
+    margin-bottom: 15px;
+}
+
+footer p,
+footer a {
+    color: #999;
+    line-height: 1.7;
+}
+
+footer a:hover {
+    color: #ff5a00;
+}
+
+.copy {
+    max-width: 1200px;
+    margin: 35px auto 0;
+
+    border-top: 1px solid #252525;
+    padding-top: 20px;
+
+    color: #666;
+    font-size: 13px;
+}
+
+/* MOBILE */
+
+.mobile-menu {
+    display: none;
+}
+
+@media(max-width: 950px) {
+
+    nav {
+        display: none;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+    }
+
+    .services {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media(max-width: 600px) {
+
+    body {
+        padding-bottom: 65px;
+    }
+
+    .header {
+        padding: 8px 15px;
+    }
+
+    .brand {
+        font-size: 18px;
+    }
+
+    .logo {
+        width: 52px;
+        height: 52px;
+    }
+
+    .call {
+        margin-left: auto;
+        width: 48px;
+        height: 48px;
+        padding: 0;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: 50%;
+        font-size: 0;
+    }
+
+    .call::before {
+        content: "☎";
+        font-size: 21px;
+    }
+
+    .hero {
+        padding: 60px 18px;
+    }
+
+    .hero h1 {
+        font-size: 52px;
+        letter-spacing: -3px;
+    }
+
+    .hero p {
+        font-size: 17px;
+    }
+
+    .buttons {
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    section {
+        padding: 60px 18px;
+    }
+
+    .section-title h2 {
+        font-size: 40px;
+    }
+
+    .services {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .card h3 {
+        font-size: 16px;
+    }
+
+    .card p {
+        font-size: 12px;
+    }
+
+    .hero-card {
+        padding: 25px;
+    }
+
+    .cta {
+        margin: 20px 18px 60px;
+        padding: 35px 20px;
+    }
+
+    .cta h2 {
+        font-size: 31px;
+    }
+
+    .footer {
+        grid-template-columns: 1fr;
+    }
+
+    .mobile-menu {
+        position: fixed;
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        height: 65px;
+
+        background: #090909;
+
+        border-top: 2px solid #ff5a00;
+
+        z-index: 2000;
+    }
+
+    .mobile-menu a {
+        color: white;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-weight: bold;
+    }
+
+    .mobile-menu a:first-child {
+        background: #ff5a00;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="header">
+
+<a href="index.html" class="logo">
+    ЛОГО
+</a>
+
+<a href="index.html" class="brand">
+    Техно <span>Лис</span>
+</a>
+
+<nav>
+    <a href="index.html">Главная</a>
+    <a href="services.html">Услуги</a>
+    <a href="price.html">Прайс</a>
+    <a href="accessories.html">Аксессуары</a>
+    <a href="repair.html">Заявка</a>
+    <a href="location.html">Где мы</a>
+    <a href="contacts.html">Контакты</a>
+</nav>
+
+<a href="tel:+79621526990" class="call">
+    Позвонить
+</a>
+
+</div>
+
+</header>
+
+
+<main>
+
+<section class="hero">
+
+<div>
+
+<div class="subtitle">
+Сервисный центр · Южно-Сахалинск
+</div>
+
+<h1>
+Техника в
+<span>надёжных лапах!</span>
+</h1>
+
+<p>
+Ремонт смартфонов, планшетов, ноутбуков, ПК и другой техники.
+Поклейка защитных плёнок, установка Windows и Office,
+настройка и обслуживание.
+</p>
+
+<div class="buttons">
+
+<a href="repair.html" class="btn orange">
+🛠️ Записаться на ремонт
+</a>
+
+<a href="https://t.me/tehnafox" target="_blank" class="btn black">
+✈️ Написать в Telegram
+</a>
+
+</div>
+
+</div>
+
+
+<div class="hero-card">
+
+<h2>
+Что нужно?
+</h2>
+
+<div class="quick">
+
+<a href="services.html">
+<div class="quick-icon">📱</div>
+<div>
+<strong>Ремонт техники</strong>
+<small>Телефоны, планшеты, ноутбуки и ПК</small>
+</div>
+</a>
+
+<a href="price.html">
+<div class="quick-icon">💰</div>
+<div>
+<strong>Посмотреть прайс</strong>
+<small>Стоимость наших услуг</small>
+</div>
+</a>
+
+<a href="accessories.html">
+<div class="quick-icon">🛡️</div>
+<div>
+<strong>Аксессуары</strong>
+<small>Чехлы, стёкла, плёнки и зарядки</small>
+</div>
+</a>
+
+<a href="repair.html">
+<div class="quick-icon">📝</div>
+<div>
+<strong>Оставить заявку</strong>
+<small>Записаться на ремонт</small>
+</div>
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section>
+
+<div class="section">
+
+<div class="section-title">
+
+<small>ПОПУЛЯРНЫЕ УСЛУГИ</small>
+
+<h2>
+Что мы делаем
+</h2>
+
+<p>
+Основные направления работы сервисного центра «Техно Лис».
+</p>
+
+</div>
+
+
+<div class="services">
+
+<div class="card">
+
+<div class="icon">📱</div>
+
+<h3>
+Ремонт смартфонов
+</h3>
+
+<p>
+Ремонт iPhone, Samsung, Xiaomi и других смартфонов.
+</p>
+
+<a href="services.html">
+Подробнее →
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">📲</div>
+
+<h3>
+Ремонт планшетов
+</h3>
+
+<p>
+Диагностика, ремонт дисплеев, аккумуляторов и разъёмов.
+</p>
+
+<a href="services.html">
+Подробнее →
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">💻</div>
+
+<h3>
+Ремонт ноутбуков
+</h3>
+
+<p>
+Чистка, диагностика, ремонт и замена комплектующих.
+</p>
+
+<a href="services.html">
+Подробнее →
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">🖥️</div>
+
+<h3>
+Ремонт ПК
+</h3>
+
+<p>
+Сборка, настройка, обслуживание и ремонт компьютеров.
+</p>
+
+<a href="services.html">
+Подробнее →
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<div class="cta">
+
+<h2>
+Нужен ремонт?
+</h2>
+
+<p>
+Заполните заявку, и мы свяжемся с вами.
+</p>
+
+<a href="repair.html" class="btn orange">
+🛠️ Записаться на ремонт
+</a>
+
+</div>
+
+</main>
+
+
+<footer>
+
+<div class="footer">
+
+<div>
+
+<h3>
+Техно <span style="color:#ff5a00">Лис</span>
+</h3>
+
+<p>
+Техника в надёжных лапах!
+</p>
+
+</div>
+
+
+<div>
+
+<h3>
+Навигация
+</h3>
+
+<a href="services.html">Услуги</a>
+<a href="price.html">Прайс</a>
+<a href="accessories.html">Аксессуары</a>
+<a href="repair.html">Заявка на ремонт</a>
+
+</div>
+
+
+<div>
+
+<h3>
+Контакты
+</h3>
+
+<a href="tel:+79621526990">
+📞 8 962 152-69-90
+</a>
+
+<a href="https://t.me/tehnafox" target="_blank">
+✈️ @tehnafox
+</a>
+
+<a href="location.html">
+📍 ТРК «Сити Молл», 1 этаж
+</a>
+
+</div>
+
+</div>
+
+
+<div class="copy">
+
+© 2026 Техно Лис. Все права защищены.
+
+</div>
+
+</footer>
+
+
+<div class="mobile-menu">
+
+<a href="tel:+79621526990">
+📞 Позвонить
+</a>
+
+<a href="https://t.me/tehnafox" target="_blank">
+✈️ Telegram
+</a>
+
+</div>
+
+</body>
+</html>
