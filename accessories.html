@@ -455,146 +455,127 @@ footer a:hover {
     }
 }
 
-
-/* ПРОВЕРКА НАЛИЧИЯ ПО МОДЕЛИ */
+/* ПРОВЕРКА НАЛИЧИЯ */
 .stock-checker {
-    max-width: 1150px;
-    margin: 0 auto 55px;
-    background: white;
-    border: 1px solid #e5e5e5;
-    border-radius: 20px;
-    padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto 45px;
+    padding: 0 25px;
 }
 
-.stock-checker h2 {
+.stock-box {
+    background: #090909;
+    border-radius: 22px;
+    padding: 28px;
+    color: white;
+    border: 1px solid rgba(255,90,0,.18);
+    box-shadow: 0 18px 45px rgba(0,0,0,.10);
+}
+
+.stock-box .stock-kicker {
+    color: #ff5a00;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.stock-box h2 {
     font-size: 30px;
     margin-bottom: 8px;
 }
 
-.stock-checker-subtitle {
-    color: #777;
-    font-size: 15px;
+.stock-box p {
+    color: #bbb;
     line-height: 1.5;
-    margin-bottom: 22px;
+    margin-bottom: 20px;
 }
 
-.stock-checker-form {
+.stock-controls {
     display: grid;
-    grid-template-columns: 1fr 1.5fr auto;
+    grid-template-columns: 1fr 1fr auto;
     gap: 12px;
-    align-items: end;
 }
 
-.stock-checker-field label {
+.stock-controls label {
     display: block;
-    font-size: 12px;
-    font-weight: 900;
-    color: #777;
-    margin-bottom: 7px;
 }
 
-.stock-checker-field select {
+.stock-controls select,
+.stock-controls input {
     width: 100%;
     min-height: 50px;
-    padding: 0 14px;
-    border: 1px solid #ddd;
+    padding: 0 15px;
     border-radius: 12px;
-    background: white;
-    color: #111;
+    border: 1px solid #444;
+    background: #161616;
+    color: white;
     font-size: 15px;
     outline: none;
 }
 
-.stock-checker-field select:focus {
-    border-color: #ff5a00;
-}
-
-.stock-checker-button {
+.stock-controls button {
     min-height: 50px;
     border: 0;
     border-radius: 12px;
-    padding: 0 22px;
     background: #ff5a00;
     color: white;
-    font-weight: 900;
-    font-size: 14px;
+    padding: 0 22px;
+    font-weight: 800;
     cursor: pointer;
 }
 
-.stock-checker-button:hover {
-    opacity: .9;
+.stock-results {
+    margin-top: 20px;
 }
 
-.stock-checker-result {
-    display: none;
-    margin-top: 18px;
-    padding: 18px;
+.stock-status {
+    color: #bbb;
+    font-size: 14px;
+}
+
+.stock-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.stock-item {
+    background: white;
+    color: #111;
     border-radius: 14px;
-    background: #f7f7f7;
+    padding: 16px;
 }
 
-.stock-checker-result.show {
-    display: block;
-}
-
-.stock-result-title {
-    font-size: 18px;
-    font-weight: 900;
+.stock-item-name {
+    font-weight: 800;
     margin-bottom: 8px;
 }
 
-.stock-result-ok {
-    color: #2e7d32;
-}
-
-.stock-result-no {
-    color: #d32f2f;
-}
-
-.stock-result-item {
-    display: flex;
-    justify-content: space-between;
-    gap: 15px;
-    padding: 9px 0;
-    border-bottom: 1px solid #e5e5e5;
+.stock-item-meta {
+    color: #666;
     font-size: 14px;
+    line-height: 1.5;
 }
 
-.stock-result-item:last-child {
-    border-bottom: 0;
+.stock-available {
+    color: #11823b;
+    font-weight: 800;
 }
 
-.stock-result-item strong {
-    color: #111;
+.stock-empty {
+    color: #b3261e;
+    font-weight: 800;
 }
 
-.stock-result-price {
-    color: #111;
-    font-weight: 900;
-    white-space: nowrap;
-}
-
-.stock-checker-error {
-    color: #d32f2f;
-    font-size: 14px;
-}
-
-@media(max-width: 700px) {
-    .stock-checker {
-        margin: 0 18px 45px;
-        padding: 22px 18px;
-    }
-
-    .stock-checker h2 {
-        font-size: 25px;
-    }
-
-    .stock-checker-form {
+@media (max-width: 850px) {
+    .stock-controls {
         grid-template-columns: 1fr;
     }
 
-    .stock-checker-button {
-        width: 100%;
+    .stock-grid {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -653,41 +634,46 @@ footer a:hover {
 
 
 <!-- ПРОВЕРКА НАЛИЧИЯ -->
-<section class="stock-checker">
+<section class="stock-checker" id="check-stock">
+    <div class="stock-box">
+        <div class="stock-kicker">АКСЕССУАРЫ · АКТУАЛЬНЫЕ ОСТАТКИ</div>
 
-    <h2>🔎 Проверить наличие аксессуара</h2>
+        <h2>🔎 Проверить наличие аксессуара</h2>
 
-    <p class="stock-checker-subtitle">
-        Сразу проверьте наличие нужного аксессуара и модели iPhone — сайт покажет актуальный остаток и цену.
-    </p>
+        <p>
+            Выберите модель и аксессуар — сайт покажет актуальный остаток и цену.
+        </p>
 
-    <div class="stock-checker-form">
+        <div class="stock-controls">
+            <select id="stock-model">
+                <option value="">Выберите модель iPhone</option>
+            </select>
 
-        <div class="stock-checker-field">
-            <label for="stockType">Что ищете?</label>
-            <select id="stockType">
-                <option value="case">Чехол</option>
-                <option value="glass">Защитное стекло</option>
+            <select id="stock-category">
+                <option value="">Все аксессуары</option>
+                <option value="glass">Защитные стёкла</option>
                 <option value="lenses">Защитные линзы</option>
+                <option value="clear_cases">Прозрачные чехлы</option>
+                <option value="carbon_cases">Карбоновые чехлы</option>
+                <option value="leather_cases">Кожаные чехлы</option>
+                <option value="apple">Аксессуары Apple</option>
+                <option value="other">Другие аксессуары</option>
             </select>
+
+            <button type="button" id="stock-check-btn">
+                Проверить
+            </button>
         </div>
 
-        <div class="stock-checker-field">
-            <label for="stockModel">Модель iPhone</label>
-            <select id="stockModel">
-                <option value="">Загрузка моделей...</option>
-            </select>
+        <div class="stock-results" id="stock-results">
+            <div class="stock-status">
+                Выберите модель, чтобы проверить наличие.
+            </div>
         </div>
-
-        <button type="button" class="stock-checker-button" id="stockCheckButton">
-            Проверить
-        </button>
-
     </div>
-
-    <div class="stock-checker-result" id="stockCheckerResult"></div>
-
 </section>
+
+
 
 
 
@@ -1063,11 +1049,6 @@ USB-C · Lightning и другие
 </section>
 
 
-
-
-
-
-
 </main>
 
 
@@ -1162,389 +1143,204 @@ USB-C · Lightning и другие
 </div>
 
 
-
 <script>
-/*
-=============================================================
-  ПРОВЕРКА НАЛИЧИЯ ПО МОДЕЛИ
-  Данные берутся напрямую из Worker.
-=============================================================
-*/
+(function () {
+    const API_URL = "https://technolis-bot.koreanteen.workers.dev/products";
 
-const PRODUCTS_API =
-    "https://technolis-bot.koreanteen.workers.dev/products";
+    const modelSelect = document.getElementById("stock-model");
+    const categorySelect = document.getElementById("stock-category");
+    const button = document.getElementById("stock-check-btn");
+    const results = document.getElementById("stock-results");
 
+    let products = [];
 
-const STOCK_MODELS = [
-    { value: "11", label: "iPhone 11" },
-    { value: "11-pro", label: "iPhone 11 Pro" },
-    { value: "11-pro-max", label: "iPhone 11 Pro Max" },
-    { value: "xr", label: "iPhone XR" },
-    { value: "xs", label: "iPhone XS" },
-    { value: "xs-max", label: "iPhone XS Max" },
-    { value: "x", label: "iPhone X" },
-    { value: "12-mini", label: "iPhone 12 mini" },
-    { value: "12", label: "iPhone 12" },
-    { value: "12-pro", label: "iPhone 12 Pro" },
-    { value: "12-pro-max", label: "iPhone 12 Pro Max" },
-    { value: "13-mini", label: "iPhone 13 mini" },
-    { value: "13", label: "iPhone 13" },
-    { value: "13-pro", label: "iPhone 13 Pro" },
-    { value: "13-pro-max", label: "iPhone 13 Pro Max" },
-    { value: "14", label: "iPhone 14" },
-    { value: "14-plus", label: "iPhone 14 Plus" },
-    { value: "14-pro", label: "iPhone 14 Pro" },
-    { value: "14-pro-max", label: "iPhone 14 Pro Max" },
-    { value: "15", label: "iPhone 15" },
-    { value: "15-plus", label: "iPhone 15 Plus" },
-    { value: "15-pro", label: "iPhone 15 Pro" },
-    { value: "15-pro-max", label: "iPhone 15 Pro Max" },
-    { value: "16", label: "iPhone 16" },
-    { value: "16-plus", label: "iPhone 16 Plus" },
-    { value: "16e", label: "iPhone 16e" },
-    { value: "16-pro", label: "iPhone 16 Pro" },
-    { value: "16-pro-max", label: "iPhone 16 Pro Max" },
-    { value: "17", label: "iPhone 17" },
-    { value: "17-air", label: "iPhone 17 Air" },
-    { value: "17-pro", label: "iPhone 17 Pro" },
-    { value: "17-pro-max", label: "iPhone 17 Pro Max" }
-];
+    const models = [
+        "11",
+        "11 Pro",
+        "11 Pro Max",
+        "12",
+        "12 mini",
+        "12 Pro",
+        "12 Pro Max",
+        "13",
+        "13 mini",
+        "13 Pro",
+        "13 Pro Max",
+        "14",
+        "14 Plus",
+        "14 Pro",
+        "14 Pro Max",
+        "15",
+        "15 Plus",
+        "15 Pro",
+        "15 Pro Max",
+        "16",
+        "16 Plus",
+        "16e",
+        "16 Pro",
+        "16 Pro Max",
+        "17",
+        "17 Air",
+        "17 Pro",
+        "17 Pro Max"
+    ];
 
+    const normalize = (value) =>
+        String(value || "")
+            .toLowerCase()
+            .replace(/[+]/g, " plus ")
+            .replace(/iphone/g, "")
+            .replace(/\bpm\b/g, "pro max")
+            .replace(/pro\s*max/g, "pro max")
+            .replace(/\s+/g, " ")
+            .trim();
 
-let stockProducts = [];
+    function modelMatches(productName, model) {
+        const text = normalize(productName);
+        const target = normalize(model);
 
+        if (!text || !target) return false;
 
-function normalizeModel(text) {
-    return String(text || "")
-        .toLowerCase()
-        .replace(/iphone/g, "")
-        .replace(/айфон/g, "")
-        .replace(/[–—]/g, "-")
-        .replace(/\s+/g, " ")
-        .trim();
-}
+        if (text === target) return true;
+        if (text.includes(target)) return true;
 
+        const aliases = {
+            "11": ["11"],
+            "11 pro": ["11 pro"],
+            "11 pro max": ["11 pro max"],
+            "12": ["12"],
+            "12 mini": ["12 mini"],
+            "12 pro": ["12 pro"],
+            "12 pro max": ["12 pro max"],
+            "13": ["13"],
+            "13 mini": ["13 mini"],
+            "13 pro": ["13 pro"],
+            "13 pro max": ["13 pro max"],
+            "14": ["14"],
+            "14 plus": ["14 plus"],
+            "14 pro": ["14 pro"],
+            "14 pro max": ["14 pro max"],
+            "15": ["15"],
+            "15 plus": ["15 plus"],
+            "15 pro": ["15 pro"],
+            "15 pro max": ["15 pro max"],
+            "16": ["16"],
+            "16 plus": ["16 plus"],
+            "16e": ["16e"],
+            "16 pro": ["16 pro"],
+            "16 pro max": ["16 pro max"],
+            "17": ["17"],
+            "17 air": ["17 air"],
+            "17 pro": ["17 pro"],
+            "17 pro max": ["17 pro max"]
+        };
 
-function modelAliases(value) {
-
-    const aliases = {
-        "11": ["11"],
-        "11-pro": ["11 pro"],
-        "11-pro-max": ["11 pro max"],
-        "xr": ["xr"],
-        "xs": ["xs"],
-        "xs-max": ["xs max"],
-        "x": ["x"],
-        "12-mini": ["12 mini"],
-        "12": ["12"],
-        "12-pro": ["12 pro"],
-        "12-pro-max": ["12 pro max"],
-        "13-mini": ["13 mini"],
-        "13": ["13"],
-        "13-pro": ["13 pro"],
-        "13-pro-max": ["13 pro max", "13 pm"],
-        "14": ["14"],
-        "14-plus": ["14 plus", "14+"],
-        "14-pro": ["14 pro"],
-        "14-pro-max": ["14 pro max", "14 pm"],
-        "15": ["15"],
-        "15-plus": ["15 plus", "15+"],
-        "15-pro": ["15 pro"],
-        "15-pro-max": ["15 pro max", "15 pm"],
-        "16": ["16"],
-        "16-plus": ["16 plus", "16+"],
-        "16e": ["16e", "16 e"],
-        "16-pro": ["16 pro"],
-        "16-pro-max": ["16 pro max", "16 pm"],
-        "17": ["17"],
-        "17-air": ["17 air", "17air"],
-        "17-pro": ["17 pro"],
-        "17-pro-max": ["17 pro max", "17 pm", "17pm"]
-    };
-
-    return aliases[value] || [];
-}
-
-
-function productMatchesModel(product, modelValue) {
-
-    const name = normalizeModel(product.name);
-    const aliases = modelAliases(modelValue);
-
-    return aliases.some(alias => {
-
-        const normalizedAlias = normalizeModel(alias);
-
-        if (name === normalizedAlias) {
-            return true;
-        }
-
-        const parts = name
-            .split("/")
-            .map(part => part.trim());
-
-        return parts.includes(normalizedAlias);
-    });
-}
-
-
-function productMatchesType(product, type) {
-
-    if (type === "case") {
-        return [
-            "clear_cases",
-            "carbon_cases",
-            "leather_cases"
-        ].includes(product.category);
+        return (aliases[target] || [target]).some(alias => text.includes(alias));
     }
 
-    return product.category === type;
-}
+    function stockText(stock) {
+        const n = Number(stock) || 0;
 
-
-function formatPrice(price) {
-    return Number(price || 0)
-        .toLocaleString("ru-RU") + " ₽";
-}
-
-
-function fillModelSelect() {
-
-    const select =
-        document.getElementById("stockModel");
-
-    if (!select) return;
-
-    select.innerHTML =
-        '<option value="">Выберите модель</option>';
-
-    STOCK_MODELS.forEach(model => {
-
-        const option =
-            document.createElement("option");
-
-        option.value = model.value;
-        option.textContent = model.label;
-
-        select.appendChild(option);
-    });
-}
-
-
-function showCheckerResult(html) {
-
-    const result =
-        document.getElementById("stockCheckerResult");
-
-    result.innerHTML = html;
-    result.classList.add("show");
-}
-
-
-function checkStock() {
-
-    const type =
-        document.getElementById("stockType").value;
-
-    const model =
-        document.getElementById("stockModel").value;
-
-    if (!model) {
-
-        showCheckerResult(`
-            <div class="stock-checker-error">
-                Выберите модель iPhone.
-            </div>
-        `);
-
-        return;
-    }
-
-
-    const matched =
-        stockProducts.filter(product =>
-            productMatchesType(product, type) &&
-            productMatchesModel(product, model)
-        );
-
-
-    const selectedModel =
-        STOCK_MODELS.find(item => item.value === model);
-
-    const modelName =
-        selectedModel ? selectedModel.label : model;
-
-
-    if (!matched.length) {
-
-        showCheckerResult(`
-            <div class="stock-result-title stock-result-no">
-                ❌ Нет информации о наличии
-            </div>
-
-            <div>
-                Для ${modelName} сейчас нет подходящего товара в базе.
-            </div>
-        `);
-
-        return;
-    }
-
-
-    const available =
-        matched.filter(product =>
-            Number(product.stock || 0) > 0
-        );
-
-
-    if (!available.length) {
-
-        showCheckerResult(`
-            <div class="stock-result-title stock-result-no">
-                ❌ Нет в наличии
-            </div>
-
-            <div>
-                Для ${modelName} сейчас ничего нет в наличии.
-            </div>
-        `);
-
-        return;
-    }
-
-
-    let items = "";
-
-    available.forEach(product => {
-
-        let title = product.name;
-
-        if (type === "case") {
-
-            const categoryNames = {
-                clear_cases: "Прозрачный чехол",
-                carbon_cases: "Карбоновый чехол",
-                leather_cases: "Кожаный чехол"
+        if (n > 0) {
+            return {
+                text: `В наличии: ${n} шт.`,
+                className: "stock-available"
             };
-
-            title =
-                categoryNames[product.category] ||
-                "Чехол";
         }
 
-        if (type === "glass") {
-            title = "Защитное стекло";
+        return {
+            text: "Нет в наличии",
+            className: "stock-empty"
+        };
+    }
+
+    function renderResults() {
+        const model = modelSelect.value;
+        const category = categorySelect.value;
+
+        if (!model) {
+            results.innerHTML =
+                '<div class="stock-status">Выберите модель, чтобы проверить наличие.</div>';
+            return;
         }
 
-        if (type === "lenses") {
-            title = "Защитные линзы";
-        }
-
-        items += `
-            <div class="stock-result-item">
-                <span>
-                    ${title}<br>
-                    <strong>В наличии: ${Number(product.stock)} шт.</strong>
-                </span>
-
-                <span class="stock-result-price">
-                    ${formatPrice(product.price)}
-                </span>
-            </div>
-        `;
-    });
-
-
-    showCheckerResult(`
-        <div class="stock-result-title stock-result-ok">
-            ✅ Есть в наличии
-        </div>
-
-        <div style="margin-bottom:8px;">
-            ${modelName}
-        </div>
-
-        ${items}
-    `);
-}
-
-
-async function loadStockProducts() {
-
-    try {
-
-        const response =
-            await fetch(
-                PRODUCTS_API + "?t=" + Date.now(),
-                {
-                    method: "GET",
-                    cache: "no-store"
-                }
-            );
-
-        if (!response.ok) {
-            throw new Error("Worker вернул ошибку");
-        }
-
-        const data =
-            await response.json();
-
-        if (
-            !data ||
-            !data.success ||
-            !Array.isArray(data.products)
-        ) {
-            throw new Error("Неверный ответ Worker");
-        }
-
-        stockProducts = data.products;
-
-        /*
-         * Если модель уже выбрана, автоматически обновляем
-         * отображаемый результат после получения новых данных.
-         */
-        const selectedModel =
-            document.getElementById("stockModel")?.value;
-
-        if (selectedModel) {
-            checkStock();
-        }
-
-    } catch (error) {
-
-        console.error(
-            "Ошибка загрузки остатков:",
-            error
+        let filtered = products.filter(product =>
+            modelMatches(product.name, model) &&
+            (!category || product.category === category)
         );
 
-        stockProducts = [];
+        if (!filtered.length) {
+            results.innerHTML =
+                '<div class="stock-status">Для этой модели подходящих аксессуаров не найдено.</div>';
+            return;
+        }
 
-        showCheckerResult(`
-            <div class="stock-checker-error">
-                Не удалось получить актуальные остатки. Попробуйте обновить страницу.
-            </div>
-        `);
+        results.innerHTML =
+            '<div class="stock-grid">' +
+            filtered.map(product => {
+                const stock = stockText(product.stock);
+
+                return `
+                    <div class="stock-item">
+                        <div class="stock-item-name">${escapeHtml(product.name)}</div>
+                        <div class="stock-item-meta">
+                            Цена: <strong>${Number(product.price).toLocaleString("ru-RU")} ₽</strong><br>
+                            <span class="${stock.className}">${stock.text}</span>
+                        </div>
+                    </div>
+                `;
+            }).join("") +
+            '</div>';
     }
-}
 
+    function escapeHtml(value) {
+        return String(value || "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
 
-document.addEventListener("DOMContentLoaded", async () => {
+    async function loadProducts() {
+        results.innerHTML =
+            '<div class="stock-status">Загружаем актуальные остатки…</div>';
 
-    fillModelSelect();
+        try {
+            const response = await fetch(API_URL, {
+                cache: "no-store"
+            });
 
-    await loadStockProducts();
+            const data = await response.json();
 
-    document
-        .getElementById("stockCheckButton")
-        .addEventListener("click", checkStock);
+            if (!data.success || !Array.isArray(data.products)) {
+                throw new Error("Не удалось получить остатки");
+            }
 
-});
+            products = data.products;
 
+            modelSelect.innerHTML =
+                '<option value="">Выберите модель iPhone</option>' +
+                models.map(model =>
+                    `<option value="${escapeHtml(model)}">iPhone ${escapeHtml(model)}</option>`
+                ).join("");
 
-/* Обновляем данные раз в 30 секунд */
-setInterval(loadStockProducts, 30000);
+            results.innerHTML =
+                '<div class="stock-status">Выберите модель, чтобы проверить наличие.</div>';
+
+        } catch (error) {
+            results.innerHTML =
+                '<div class="stock-status">Не удалось загрузить актуальные остатки. Попробуйте обновить страницу.</div>';
+        }
+    }
+
+    button.addEventListener("click", renderResults);
+    modelSelect.addEventListener("change", renderResults);
+    categorySelect.addEventListener("change", renderResults);
+
+    loadProducts();
+})();
 </script>
-
 
 </body>
 </html>
