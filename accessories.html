@@ -638,7 +638,9 @@ footer a:hover {
 #live-catalog .live-head{display:flex;align-items:center;gap:12px;margin-bottom:18px}
 #live-catalog .live-head h2{font-size:30px;margin:0}
 #live-catalog .live-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-#live-catalog .live-card{background:#fff;border-radius:16px;padding:16px;box-shadow:0 8px 25px rgba(0,0,0,.06)}
+#live-catalog .live-card{background:#fff;border-radius:16px;padding:16px;box-shadow:0 8px 25px rgba(0,0,0,.06);cursor:pointer;transition:transform .2s,box-shadow .2s,border-color .2s;border:1px solid transparent}
+#live-catalog .live-card:hover{transform:translateY(-4px);box-shadow:0 16px 35px rgba(0,0,0,.12);border-color:#ff5a00}
+#live-catalog .live-card:focus-visible{outline:3px solid rgba(255,90,0,.35);outline-offset:3px}
 #live-catalog .live-card h3{margin:7px 0}
 #live-catalog .live-price{font-weight:900;font-size:20px}
 #live-catalog .live-stock{font-weight:800;margin-top:6px}
@@ -706,7 +708,48 @@ footer a:hover {
 
 <!-- ПРОВЕРКА НАЛИЧИЯ -->
 
+<div class="product-modal" id="product-modal" aria-hidden="true">
+  <div class="product-modal-backdrop" data-modal-close></div>
+  <div class="product-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="product-modal-title">
+    <button class="product-modal-close" type="button" aria-label="Закрыть" data-modal-close>×</button>
+    <div class="product-modal-media" id="product-modal-media"></div>
+    <div class="product-modal-content">
+      <div class="product-modal-category" id="product-modal-category"></div>
+      <h2 id="product-modal-title"></h2>
+      <div class="product-modal-price" id="product-modal-price"></div>
+      <div class="product-modal-stock" id="product-modal-stock"></div>
+      <div class="product-modal-description" id="product-modal-description"></div>
+    </div>
+  </div>
+</div>
 
+<style>
+.product-modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:20px;z-index:3000}
+.product-modal.is-open{display:flex}
+.product-modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.68);backdrop-filter:blur(3px)}
+.product-modal-dialog{position:relative;z-index:1;width:min(760px,100%);max-height:min(90vh,820px);overflow:auto;background:#fff;border-radius:24px;box-shadow:0 30px 80px rgba(0,0,0,.3);display:grid;grid-template-columns:minmax(260px,1fr) minmax(260px,1fr)}
+.product-modal-close{position:absolute;right:14px;top:12px;width:42px;height:42px;border:0;border-radius:50%;background:rgba(0,0,0,.72);color:#fff;font-size:30px;line-height:1;cursor:pointer;z-index:2}
+.product-modal-media{min-height:360px;background:#f3f3f3;display:flex;align-items:center;justify-content:center;border-radius:24px 0 0 24px;overflow:hidden}
+.product-modal-media img{width:100%;height:100%;min-height:360px;max-height:560px;object-fit:contain;background:#f7f7f7}
+.product-modal-placeholder{font-size:72px;opacity:.55}
+.product-modal-content{padding:40px 34px 34px;display:flex;flex-direction:column;justify-content:center}
+.product-modal-category{font-size:12px;color:#ff5a00;font-weight:900;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.product-modal-content h2{font-size:30px;line-height:1.1;margin-bottom:18px}
+.product-modal-price{font-size:28px;font-weight:900;margin-bottom:10px}
+.product-modal-stock{font-size:17px;font-weight:800;color:#11823b;margin-bottom:22px}
+.product-modal-stock.out{color:#b3261e}
+.product-modal-description{color:#555;font-size:16px;line-height:1.65;white-space:pre-line}
+body.modal-open{overflow:hidden}
+@media(max-width:700px){
+  .product-modal{padding:10px}
+  .product-modal-dialog{grid-template-columns:1fr;max-height:94vh;border-radius:20px}
+  .product-modal-media{min-height:250px;height:280px;border-radius:20px 20px 0 0}
+  .product-modal-media img{min-height:250px;max-height:280px}
+  .product-modal-content{padding:26px 22px 28px}
+  .product-modal-content h2{font-size:24px}
+  .product-modal-price{font-size:24px}
+}
+</style>
 
 <div class="cta">
 
@@ -1027,9 +1070,57 @@ footer a:hover {
 
   function productTitle(p,category){
     const type=productTypes[category]||categoryNames[category]||"Аксессуар";
-    const model=modelLabel(p.name);
-    return model ? `${type} для ${model}` : type;
+    const model=modelLabel(p.models || p.name);
+    return model ? `${type} для ${model}` : (p.name || type);
   }
+
+  const modal=document.getElementById("product-modal");
+  const modalMedia=document.getElementById("product-modal-media");
+  const modalCategory=document.getElementById("product-modal-category");
+  const modalTitle=document.getElementById("product-modal-title");
+  const modalPrice=document.getElementById("product-modal-price");
+  const modalStock=document.getElementById("product-modal-stock");
+  const modalDescription=document.getElementById("product-modal-description");
+
+  let catalogProducts=[];
+
+  function openProduct(product,category){
+    if(!modal)return;
+    modalCategory.textContent=categoryNames[category]||"Аксессуар";
+    modalTitle.textContent=productTitle(product,category);
+    modalPrice.textContent=`${Number(product.price||0).toLocaleString("ru-RU")} ₽`;
+
+    const stock=Number(product.stock||0);
+    modalStock.textContent=stock>0 ? `В наличии · ${stock} шт.` : "Нет в наличии";
+    modalStock.classList.toggle("out",stock<=0);
+
+    modalDescription.textContent=String(product.description||"").trim() || "Описание товара пока не добавлено.";
+
+    if(product.image){
+      modalMedia.innerHTML=`<img src="${esc(product.image)}" alt="${esc(productTitle(product,category))}">`;
+    }else{
+      modalMedia.innerHTML=`<div class="product-modal-placeholder">${esc(product.icon||"📦")}</div>`;
+    }
+
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden","false");
+    document.body.classList.add("modal-open");
+  }
+
+  function closeProduct(){
+    if(!modal)return;
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden","true");
+    document.body.classList.remove("modal-open");
+  }
+
+  modal?.addEventListener("click",e=>{
+    if(e.target.closest("[data-modal-close]")) closeProduct();
+  });
+
+  document.addEventListener("keydown",e=>{
+    if(e.key==="Escape" && modal?.classList.contains("is-open")) closeProduct();
+  });
 
   fetch(API_URL,{cache:"no-store"})
     .then(r=>r.json())
@@ -1052,8 +1143,8 @@ footer a:hover {
         <div style="margin-bottom:30px">
           <h3 style="font-size:22px;margin:0 0 12px">${esc(categoryNames[category]||category)}</h3>
           <div class="live-grid">
-            ${items.map(p=>`
-              <article class="live-card">
+            ${items.map((p,index)=>`
+              <article class="live-card" tabindex="0" role="button" data-product-index="${index}" data-product-category="${esc(category)}" aria-label="Подробнее: ${esc(productTitle(p,category))}">
                 ${p.image?`<img src="${esc(p.image)}" alt="${esc(productTitle(p,category))}" style="width:100%;height:170px;object-fit:cover;border-radius:10px">`:``}
                 <div class="live-icon">${esc(p.icon||"📦")}</div>
                 <h3>${esc(productTitle(p,category))}</h3>
@@ -1065,6 +1156,21 @@ footer a:hover {
           </div>
         </div>
       `).join("");
+
+      body.querySelectorAll(".live-card").forEach(card=>{
+        const category=card.dataset.productCategory || "other";
+        const index=Number(card.dataset.productIndex);
+        const product=grouped[category]?.[index];
+        if(!product)return;
+        const open=()=>openProduct(product,category);
+        card.addEventListener("click",open);
+        card.addEventListener("keydown",e=>{
+          if(e.key==="Enter" || e.key===" "){
+            e.preventDefault();
+            open();
+          }
+        });
+      });
     })
     .catch(()=>{
       body.innerHTML='<div class="card"><p>Не удалось загрузить актуальный каталог. Попробуйте обновить страницу.</p></div>';
