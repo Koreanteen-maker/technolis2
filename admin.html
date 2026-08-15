@@ -99,6 +99,8 @@ textarea{min-height:90px;resize:vertical}
 </main>
 
 <script>
+const API_BASE = "https://technolis-bot.koreanteen.workers.dev";
+
 const state={secret:localStorage.getItem("techno_admin_secret")||"",products:[],editing:null};
 
 const $=id=>document.getElementById(id);
@@ -109,10 +111,10 @@ function hide(el){el.classList.add("hidden")}
 
 async function api(path,options={}){
   options.headers={...(options.headers||{}),"X-Admin-Secret":state.secret,"Content-Type":"application/json"};
-  const r=await fetch(path,options);
+  const r=await fetch(API_BASE + path,options);
   let data={};
   try{data=await r.json()}catch{}
-  if(!r.ok) throw new Error(data.error||"Ошибка запроса");
+  if(!r.ok) throw new Error(data.error||(`HTTP ${r.status}: ошибка запроса`));
   return data;
 }
 
