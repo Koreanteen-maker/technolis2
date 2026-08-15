@@ -473,6 +473,174 @@ footer a:hover {
         background: #ff5a00;
     }
 }
+
+/* ==============================
+   КАЛЬКУЛЯТОР РЕМОНТА
+   ============================== */
+
+.repair-calculator {
+    max-width: 1200px;
+    margin: 0 auto 55px;
+    padding: 0 25px;
+}
+
+.repair-calculator-box {
+    background: #090909;
+    color: white;
+    border-radius: 24px;
+    padding: 32px;
+}
+
+.repair-calculator-title {
+    font-size: 30px;
+    font-weight: 900;
+    margin-bottom: 8px;
+}
+
+.repair-calculator-subtitle {
+    color: #aaa;
+    line-height: 1.5;
+    margin-bottom: 24px;
+}
+
+.repair-calculator-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+}
+
+.repair-field label {
+    display: block;
+    color: #aaa;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+.repair-field select,
+.repair-field input {
+    width: 100%;
+    height: 52px;
+    border: 1px solid #333;
+    border-radius: 11px;
+    background: #151515;
+    color: white;
+    padding: 0 14px;
+    font: inherit;
+    outline: none;
+}
+
+.repair-field select:focus,
+.repair-field input:focus {
+    border-color: #ff5a00;
+}
+
+.repair-calculator-button {
+    width: 100%;
+    height: 52px;
+    border: 0;
+    border-radius: 11px;
+    background: #ff5a00;
+    color: white;
+    font-weight: 900;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 21px;
+}
+
+.repair-calculator-button:disabled {
+    opacity: .55;
+    cursor: wait;
+}
+
+.repair-result {
+    margin-top: 20px;
+    display: none;
+}
+
+.repair-result.active {
+    display: block;
+}
+
+.repair-result-card {
+    background: white;
+    color: #111;
+    border-radius: 18px;
+    padding: 22px;
+}
+
+.repair-result-card + .repair-result-card {
+    margin-top: 10px;
+}
+
+.repair-result-name {
+    font-size: 17px;
+    font-weight: 900;
+    line-height: 1.35;
+}
+
+.repair-result-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 9px;
+    color: #666;
+}
+
+.repair-result-total {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+.repair-stock {
+    margin-top: 13px;
+    font-weight: 900;
+}
+
+.repair-stock.ok {
+    color: #2e7d32;
+}
+
+.repair-stock.no {
+    color: #d32f2f;
+}
+
+.repair-calculator-note {
+    color: #777;
+    font-size: 12px;
+    line-height: 1.5;
+    margin-top: 14px;
+}
+
+.repair-error {
+    color: #d32f2f;
+    font-weight: bold;
+}
+
+@media(max-width: 800px) {
+    .repair-calculator-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .repair-calculator {
+        padding: 0 18px;
+    }
+
+    .repair-calculator-box {
+        padding: 24px 18px;
+    }
+
+    .repair-calculator-title {
+        font-size: 25px;
+    }
+}
+
 </style>
 </head>
 
@@ -523,6 +691,86 @@ footer a:hover {
 Стоимость популярных услуг. Точная цена ремонта зависит
 от модели устройства и характера неисправности.
 </p>
+
+</section>
+
+
+<section class="repair-calculator">
+
+<div class="repair-calculator-box">
+
+<div class="repair-calculator-title">
+🧮 Рассчитать стоимость ремонта
+</div>
+
+<div class="repair-calculator-subtitle">
+Выберите устройство и что нужно заменить. Для iPhone используются цены из прайса Техно Лис, для Android — актуальные карточки запчастей TAGGSM.
+</div>
+
+<div class="repair-calculator-grid">
+
+<div class="repair-field">
+<label for="calcBrand">Производитель</label>
+
+<select id="calcBrand">
+<option value="Apple">Apple</option>
+<option value="Samsung">Samsung</option>
+<option value="Xiaomi">Xiaomi</option>
+<option value="Honor">Honor</option>
+<option value="Huawei">Huawei</option>
+<option value="Google">Google</option>
+<option value="Realme">Realme</option>
+<option value="Oppo">Oppo</option>
+<option value="Vivo">Vivo</option>
+<option value="OnePlus">OnePlus</option>
+<option value="Другое">Другое</option>
+</select>
+</div>
+
+
+<div class="repair-field">
+
+<label for="calcModel">Модель</label>
+
+<select id="calcModel"></select>
+
+<input
+    id="calcModelText"
+    type="text"
+    placeholder="Например, Galaxy A41"
+    style="display:none;"
+>
+
+</div>
+
+
+<div class="repair-field">
+
+<label for="calcService">Что нужно заменить?</label>
+
+<select id="calcService"></select>
+
+</div>
+
+</div>
+
+
+<button
+    type="button"
+    class="repair-calculator-button"
+    id="calcButton"
+>
+Рассчитать стоимость
+</button>
+
+
+<div
+    class="repair-result"
+    id="calcResult"
+>
+</div>
+
+</div>
 
 </section>
 
@@ -895,6 +1143,548 @@ footer a:hover {
 </a>
 
 </div>
+
+
+<script>
+
+const REPAIR_CALC_API =
+    "https://technolis-bot.koreanteen.workers.dev/repair-calc";
+
+
+const IPHONE_MODELS = [
+    "iPhone 17 Pro Max",
+    "iPhone 16 Pro Max",
+    "iPhone 16 Pro",
+    "iPhone 16e",
+    "iPhone 16 Plus",
+    "iPhone 16",
+    "iPhone 15 Pro Max",
+    "iPhone 15 Pro",
+    "iPhone 15 Plus",
+    "iPhone 15",
+    "iPhone 14 Pro Max",
+    "iPhone 14 Pro",
+    "iPhone 14 Plus",
+    "iPhone 14",
+    "iPhone 13 Pro Max",
+    "iPhone 13 Pro",
+    "iPhone 13",
+    "iPhone 12 Pro Max",
+    "iPhone 12/12 Pro",
+    "iPhone 12 mini",
+    "iPhone 11 Pro Max",
+    "iPhone 11 Pro",
+    "iPhone 11",
+    "iPhone XR",
+    "iPhone XS Max",
+    "iPhone XS",
+    "iPhone X",
+    "iPhone 8 Plus",
+    "iPhone 8/SE 2020",
+    "iPhone 7 Plus",
+    "iPhone 7",
+    "iPhone 6s Plus",
+    "iPhone 6s",
+    "iPhone 6"
+];
+
+
+const IPHONE_SERVICES = [
+    ["display", "Дисплей"],
+    ["battery", "Аккумулятор"],
+    ["back_cover", "Задняя крышка"],
+    ["camera_glass", "Стекло камеры"],
+    ["main_camera", "Основная камера"],
+    ["charging_flex", "Шлейф зарядки"],
+    ["glass_replacement", "Разбитое стекло"],
+    ["housing", "Корпус"],
+    ["earpiece", "Слуховой динамик"],
+    ["speaker", "Полифонический динамик"],
+    ["taptic", "Вибромотор Taptic Engine"],
+    ["face_id", "Face ID"],
+    ["motherboard", "Материнская плата"],
+    ["liquid_damage", "Восстановление после влаги"]
+];
+
+
+const ANDROID_SERVICES = [
+    ["display", "Дисплей"],
+    ["battery", "Аккумулятор"],
+    ["charging", "Разъём зарядки"],
+    ["camera", "Камера"],
+    ["back_cover", "Задняя крышка"],
+    ["glass", "Стекло дисплея"],
+    ["housing", "Корпус"],
+    ["speaker", "Динамик"],
+    ["earpiece", "Слуховой динамик"],
+    ["buttons", "Кнопки / шлейф"]
+];
+
+
+const brand =
+    document.getElementById("calcBrand");
+
+const model =
+    document.getElementById("calcModel");
+
+const modelText =
+    document.getElementById("calcModelText");
+
+const service =
+    document.getElementById("calcService");
+
+const button =
+    document.getElementById("calcButton");
+
+const result =
+    document.getElementById("calcResult");
+
+
+function fillSelect(
+    select,
+    items
+) {
+
+    select.innerHTML = "";
+
+    items.forEach(item => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = item[0];
+        option.textContent = item[1];
+
+        select.appendChild(option);
+
+    });
+
+}
+
+
+function setAppleModelList() {
+
+    model.innerHTML = "";
+
+    IPHONE_MODELS.forEach(item => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = item;
+        option.textContent = item;
+
+        model.appendChild(option);
+
+    });
+
+    model.style.display = "";
+    modelText.style.display = "none";
+
+}
+
+
+function setAndroidModelInput() {
+
+    model.innerHTML = "";
+
+    model.style.display = "none";
+    modelText.style.display = "";
+
+}
+
+
+function updateCalculatorFields() {
+
+    const isApple =
+        brand.value === "Apple";
+
+    if (isApple) {
+
+        setAppleModelList();
+
+        fillSelect(
+            service,
+            IPHONE_SERVICES
+        );
+
+    } else {
+
+        setAndroidModelInput();
+
+        fillSelect(
+            service,
+            ANDROID_SERVICES
+        );
+
+    }
+
+    result.classList.remove("active");
+    result.innerHTML = "";
+
+}
+
+
+function formatMoney(value) {
+
+    if (
+        value === null ||
+        value === undefined ||
+        Number.isNaN(Number(value))
+    ) {
+        return "уточняется";
+    }
+
+    return (
+        Math.round(Number(value))
+            .toLocaleString("ru-RU")
+        + " ₽"
+    );
+
+}
+
+
+function escapeHtml(value) {
+
+    return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
+
+function showResult(data) {
+
+    result.classList.add("active");
+
+
+    if (!data.found) {
+
+        result.innerHTML = `
+            <div class="repair-result-card">
+                <div class="repair-result-name">
+                    ${escapeHtml(
+                        data.model || ""
+                    )}
+                </div>
+
+                <div style="margin-top:10px;">
+                    ${escapeHtml(
+                        data.message ||
+                        "Стоимость не найдена."
+                    )}
+                </div>
+
+                ${
+                    data.work
+                    ? `
+                        <div class="repair-result-row">
+                            <span>Работа</span>
+                            <strong>${formatMoney(data.work)}</strong>
+                        </div>
+                    `
+                    : ""
+                }
+
+                <div class="repair-calculator-note">
+                    Окончательная стоимость определяется после проверки устройства.
+                </div>
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    if (
+        Array.isArray(data.variants)
+    ) {
+
+        result.innerHTML =
+            data.variants
+                .map(
+                    variant => {
+
+                        const stockClass =
+                            variant.inStock
+                                ? "ok"
+                                : "no";
+
+                        const stockText =
+                            variant.inStock
+                                ? "✅ Есть в наличии"
+                                : "❌ Нет в наличии";
+
+                        return `
+                            <div class="repair-result-card">
+
+                                <div class="repair-result-name">
+                                    ${escapeHtml(
+                                        variant.title ||
+                                        variant.name
+                                    )}
+                                </div>
+
+                                <div class="repair-result-row">
+                                    <span>Деталь</span>
+                                    <strong>
+                                        ${
+                                            variant.priceText
+                                            ? escapeHtml(
+                                                variant.priceText
+                                            )
+                                            : formatMoney(
+                                                variant.price
+                                            )
+                                        }
+                                    </strong>
+                                </div>
+
+                                ${
+                                    variant.work
+                                    ? `
+                                        <div class="repair-result-row">
+                                            <span>Работа</span>
+                                            <strong>
+                                                ${formatMoney(
+                                                    variant.work
+                                                )}
+                                            </strong>
+                                        </div>
+                                    `
+                                    : ""
+                                }
+
+                                <div class="repair-result-total">
+                                    <span>
+                                        Примерно
+                                    </span>
+
+                                    <span>
+                                        ${formatMoney(
+                                            variant.total
+                                        )}
+                                    </span>
+                                </div>
+
+                                ${
+                                    variant.inStock !== undefined
+                                    ? `
+                                        <div class="repair-stock ${stockClass}">
+                                            ${stockText}
+                                            ${
+                                                variant.availability
+                                                ? `
+                                                    — ${escapeHtml(
+                                                        variant.availability
+                                                    )}
+                                                `
+                                                : ""
+                                            }
+                                        </div>
+                                    `
+                                    : ""
+                                }
+
+                                ${
+                                    variant.url
+                                    ? `
+                                        <div class="repair-calculator-note">
+                                            Цена детали взята из TAGGSM.
+                                        </div>
+                                    `
+                                    : ""
+                                }
+
+                            </div>
+                        `;
+
+                    }
+                )
+                .join("");
+
+        return;
+
+    }
+
+
+    result.innerHTML = `
+        <div class="repair-result-card">
+
+            <div class="repair-result-name">
+                ${escapeHtml(data.model)}
+            </div>
+
+            <div class="repair-result-row">
+                <span>Стоимость</span>
+                <strong>
+                    ${
+                        data.priceText
+                        ? escapeHtml(data.priceText)
+                        : formatMoney(data.price)
+                    }
+                </strong>
+            </div>
+
+            ${
+                data.total !== null
+                ? `
+                    <div class="repair-result-total">
+                        <span>Примерно</span>
+                        <span>${formatMoney(data.total)}</span>
+                    </div>
+                `
+                : ""
+            }
+
+            <div class="repair-calculator-note">
+                ${escapeHtml(
+                    data.note ||
+                    "Окончательная стоимость определяется после диагностики."
+                )}
+            </div>
+
+        </div>
+    `;
+
+}
+
+
+async function calculateRepair() {
+
+    const selectedBrand =
+        brand.value;
+
+    const selectedModel =
+        selectedBrand === "Apple"
+            ? model.value
+            : modelText.value.trim();
+
+    const selectedService =
+        service.value;
+
+
+    if (!selectedModel) {
+
+        result.classList.add("active");
+
+        result.innerHTML = `
+            <div class="repair-result-card repair-error">
+                Укажите модель телефона.
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    button.disabled = true;
+    button.textContent = "Считаем...";
+
+
+    result.classList.add("active");
+
+    result.innerHTML = `
+        <div class="repair-result-card">
+            Ищем актуальную цену и наличие...
+        </div>
+    `;
+
+
+    try {
+
+        const url =
+            new URL(
+                REPAIR_CALC_API
+            );
+
+        url.searchParams.set(
+            "brand",
+            selectedBrand
+        );
+
+        url.searchParams.set(
+            "model",
+            selectedModel
+        );
+
+        url.searchParams.set(
+            "service",
+            selectedService
+        );
+
+
+        const response =
+            await fetch(
+                url.toString(),
+                {
+                    method: "GET",
+                    cache: "no-store"
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok || !data.success) {
+
+            throw new Error(
+                data.error ||
+                "Не удалось получить расчёт"
+            );
+
+        }
+
+
+        showResult(data);
+
+
+    } catch (error) {
+
+        console.error(error);
+
+        result.classList.add("active");
+
+        result.innerHTML = `
+            <div class="repair-result-card repair-error">
+                ${escapeHtml(
+                    error.message ||
+                    "Не удалось получить расчёт."
+                )}
+            </div>
+        `;
+
+    } finally {
+
+        button.disabled = false;
+        button.textContent =
+            "Рассчитать стоимость";
+
+    }
+
+}
+
+
+brand.addEventListener(
+    "change",
+    updateCalculatorFields
+);
+
+button.addEventListener(
+    "click",
+    calculateRepair
+);
+
+updateCalculatorFields();
+
+</script>
 
 </body>
 </html>
