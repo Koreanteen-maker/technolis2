@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Техно Лис — Админка товаров</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f4f4f4;color:#111}
+header{background:#090909;color:#fff;border-bottom:3px solid #ff5a00;position:sticky;top:0;z-index:10}
+.wrap{max-width:1200px;margin:auto;padding:20px}
+.head{display:flex;align-items:center;justify-content:space-between;gap:15px}
+h1{margin:0;font-size:28px}
+button{border:0;border-radius:10px;padding:11px 15px;font-weight:700;cursor:pointer}
+.primary{background:#ff5a00;color:#fff}
+.dark{background:#111;color:#fff}
+.danger{background:#d93025;color:#fff}
+.muted{color:#666}
+.card{background:#fff;border-radius:16px;padding:18px;box-shadow:0 8px 30px rgba(0,0,0,.06);margin-top:18px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.grid{grid-template-columns:1fr}.head{align-items:flex-start;flex-direction:column}}
+label{display:block;font-weight:700;font-size:13px;margin-bottom:6px}
+input,textarea,select{width:100%;padding:11px;border:1px solid #ccc;border-radius:10px;font-size:15px}
+textarea{min-height:90px;resize:vertical}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(max-width:700px){.form-grid{grid-template-columns:1fr}}
+.product{border:1px solid #e6e6e6;border-radius:14px;padding:14px;background:#fff}
+.product h3{margin:0 0 7px;font-size:18px}
+.product .price{font-weight:900;font-size:18px}
+.stock{font-weight:800;margin:8px 0}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.hidden{display:none}
+.message{margin-top:12px;padding:12px;border-radius:10px;background:#eee}
+.login{max-width:460px;margin:70px auto}
+.small{font-size:13px;color:#666}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap head">
+    <h1>🦊 Техно Лис — товары</h1>
+    <div>
+      <button class="dark" id="refreshBtn">Обновить</button>
+      <button class="primary" id="newBtn">+ Добавить товар</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="card login" id="loginCard">
+    <h2>Доступ администратора</h2>
+    <p class="muted">Введите ADMIN_SECRET, который задан в Variables Worker.</p>
+    <label for="secret">Ключ</label>
+    <input id="secret" type="password" autocomplete="current-password">
+    <div class="row">
+      <button class="primary" id="loginBtn">Войти</button>
+    </div>
+    <div id="loginMsg" class="message hidden"></div>
+  </section>
+
+  <section id="app" class="hidden">
+    <div class="card">
+      <div class="form-grid">
+        <div>
+          <label>Поиск</label>
+          <input id="search" placeholder="Название, модель, категория">
+        </div>
+        <div>
+          <label>Категория</label>
+          <select id="filterCategory">
+            <option value="">Все категории</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <section class="card hidden" id="editor">
+      <h2 id="editorTitle">Добавить товар</h2>
+      <div class="form-grid">
+        <div><label>Название</label><input id="fName"></div>
+        <div><label>Категория</label><input id="fCategory" placeholder="clear_cases"></div>
+        <div><label>Цена, ₽</label><input id="fPrice" type="number" min="0"></div>
+        <div><label>Остаток, шт.</label><input id="fStock" type="number" min="0"></div>
+        <div><label>Модели</label><input id="fModels" placeholder="iPhone 17, 17 Pro..."></div>
+        <div><label>Иконка</label><input id="fIcon" placeholder="📦"></div>
+        <div><label>Фото URL</label><input id="fImage"></div>
+        <div><label>Описание</label><input id="fDescription"></div>
+      </div>
+      <div class="row">
+        <button class="primary" id="saveBtn">Сохранить</button>
+        <button class="dark" id="cancelBtn">Отмена</button>
+      </div>
+      <div id="editMsg" class="message hidden"></div>
+    </section>
+
+    <section id="productsWrap"></section>
+  </section>
+</main>
+
+<script>
+const state={secret:localStorage.getItem("techno_admin_secret")||"",products:[],editing:null};
+
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+
+function showMsg(el,text,error=false){el.textContent=text;el.classList.remove("hidden");el.style.background=error?"#ffe2df":"#e7f7e9"}
+function hide(el){el.classList.add("hidden")}
+
+async function api(path,options={}){
+  options.headers={...(options.headers||{}),"X-Admin-Secret":state.secret,"Content-Type":"application/json"};
+  const r=await fetch(path,options);
+  let data={};
+  try{data=await r.json()}catch{}
+  if(!r.ok) throw new Error(data.error||"Ошибка запроса");
+  return data;
+}
+
+function categories(){
+  return [...new Set(state.products.map(p=>p.category).filter(Boolean))].sort((a,b)=>a.localeCompare(b));
+}
+
+function fillCategories(){
+  const select=$("filterCategory");
+  const current=select.value;
+  select.innerHTML='<option value="">Все категории</option>'+categories().map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join("");
+  select.value=current;
+}
+
+function render(){
+  const q=$("search").value.trim().toLowerCase();
+  const cat=$("filterCategory").value;
+  const items=state.products.filter(p=>{
+    const hay=[p.name,p.category,p.models,p.description].join(" ").toLowerCase();
+    return (!q||hay.includes(q))&&(!cat||p.category===cat);
+  });
+
+  $("productsWrap").innerHTML=items.length?`<div class="card"><div class="grid">${items.map(p=>`
+    <article class="product">
+      ${p.image?`<img src="${esc(p.image)}" alt="" style="width:100%;height:150px;object-fit:cover;border-radius:10px;margin-bottom:10px">`:""}
+      <div class="small">${esc(p.icon||"📦")} ${esc(p.category||"")}</div>
+      <h3>${esc(p.name)}</h3>
+      <div class="price">${Number(p.price||0).toLocaleString("ru-RU")} ₽</div>
+      <div class="stock">Остаток: ${Number(p.stock||0)} шт.</div>
+      ${p.models?`<div class="small">Модели: ${esc(p.models)}</div>`:""}
+      ${p.description?`<div class="small" style="margin-top:6px">${esc(p.description)}</div>`:""}
+      <div class="row">
+        <button class="dark" onclick="editProduct('${encodeURIComponent(p.id)}')">Изменить</button>
+        <button class="danger" onclick="deleteProduct('${encodeURIComponent(p.id)}')">Удалить</button>
+      </div>
+    </article>
+  `).join("")}</div></div>`:`<div class="card"><p>Ничего не найдено.</p></div>`;
+}
+
+async function load(){
+  const data=await api("/admin/products");
+  state.products=data.products||[];
+  fillCategories();
+  render();
+}
+
+function openEditor(product=null){
+  state.editing=product?product.id:null;
+  $("editorTitle").textContent=product?"Изменить товар":"Добавить товар";
+  $("fName").value=product?.name||"";
+  $("fCategory").value=product?.category||"";
+  $("fPrice").value=product?.price??"";
+  $("fStock").value=product?.stock??0;
+  $("fModels").value=product?.models||"";
+  $("fIcon").value=product?.icon||"📦";
+  $("fImage").value=product?.image||"";
+  $("fDescription").value=product?.description||"";
+  hide($("editMsg"));
+  $("editor").classList.remove("hidden");
+  window.scrollTo({top:$("editor").offsetTop-20,behavior:"smooth"});
+}
+
+async function save(){
+  try{
+    const body={
+      name:$("fName").value,
+      category:$("fCategory").value,
+      price:Number($("fPrice").value||0),
+      stock:Number($("fStock").value||0),
+      models:$("fModels").value,
+      icon:$("fIcon").value,
+      image:$("fImage").value,
+      description:$("fDescription").value
+    };
+    const path=state.editing?`/admin/products/${encodeURIComponent(state.editing)}`:"/admin/products";
+    await api(path,{method:state.editing?"PUT":"POST",body:JSON.stringify(body)});
+    $("editor").classList.add("hidden");
+    await load();
+  }catch(e){showMsg($("editMsg"),e.message,true)}
+}
+
+window.editProduct=function(id){
+  const p=state.products.find(x=>x.id===decodeURIComponent(id));
+  if(p) openEditor(p);
+};
+
+window.deleteProduct=async function(id){
+  const real=decodeURIComponent(id);
+  const p=state.products.find(x=>x.id===real);
+  if(!p||!confirm(`Удалить «${p.name}»?`)) return;
+  try{await api(`/admin/products/${encodeURIComponent(real)}`,{method:"DELETE"});await load()}
+  catch(e){alert(e.message)}
+};
+
+$("loginBtn").onclick=async()=>{
+  const secret=$("secret").value.trim();
+  if(!secret){showMsg($("loginMsg"),"Введите ключ",true);return}
+  state.secret=secret;
+  try{
+    await load();
+    localStorage.setItem("techno_admin_secret",secret);
+    $("loginCard").classList.add("hidden");
+    $("app").classList.remove("hidden");
+  }catch(e){
+    showMsg($("loginMsg"),e.message,true);
+    state.secret="";
+  }
+};
+
+$("newBtn").onclick=()=>openEditor();
+$("cancelBtn").onclick=()=>hide($("editor"));
+$("saveBtn").onclick=save;
+$("refreshBtn").onclick=()=>load().catch(e=>alert(e.message));
+$("search").oninput=render;
+$("filterCategory").onchange=render;
+
+if(state.secret){
+  load().then(()=>{
+    $("loginCard").classList.add("hidden");
+    $("app").classList.remove("hidden");
+  }).catch(()=>{state.secret=""});
+}
+</script>
+</body>
+</html>
