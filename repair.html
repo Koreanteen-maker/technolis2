@@ -292,6 +292,48 @@ textarea {
 }
 
 /* =========================
+   PERSONAL DATA CONSENT
+========================= */
+
+.consent {
+    margin-top: 20px;
+}
+
+.consent-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    cursor: pointer;
+    color: #555;
+    font-size: 13px;
+    line-height: 1.5;
+    font-weight: normal;
+}
+
+.consent-label input[type="checkbox"] {
+    width: 19px;
+    height: 19px;
+    flex: 0 0 19px;
+    margin-top: 1px;
+    accent-color: #ff5a00;
+    cursor: pointer;
+}
+
+.consent-label a {
+    color: #ff5a00;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.consent-label a:hover {
+    color: #ff6d20;
+}
+
+.consent.error .consent-label {
+    color: #d93025;
+}
+
+/* =========================
    BUTTON
 ========================= */
 
@@ -628,28 +670,19 @@ footer a:hover {
 </style>
 </head>
 
-
 <body>
-
-
-<!-- =========================
-     HEADER
-========================= -->
 
 <header>
 
 <div class="header">
 
-
 <a href="index.html" class="logo">
     ЛОГО
 </a>
 
-
 <a href="index.html" class="brand">
     Техно <span>Лис</span>
 </a>
-
 
 <nav>
 
@@ -683,7 +716,6 @@ footer a:hover {
 
 </nav>
 
-
 <a
 href="tel:+79621526990"
 class="call"
@@ -691,15 +723,9 @@ class="call"
 Позвонить
 </a>
 
-
 </div>
 
 </header>
-
-
-<!-- =========================
-     HERO
-========================= -->
 
 <section class="hero">
 
@@ -707,11 +733,9 @@ class="call"
 ТЕХНО ЛИС · РЕМОНТ ТЕХНИКИ
 </div>
 
-
 <h1>
 Запись на <span>ремонт</span>
 </h1>
-
 
 <p>
 Опишите проблему с вашим устройством,
@@ -720,42 +744,28 @@ class="call"
 
 </section>
 
-
-<!-- =========================
-     FORM
-========================= -->
-
 <main class="form-wrapper">
 
-
 <div class="form-card">
-
 
 <div class="form-title">
 Оставить заявку
 </div>
-
 
 <div class="form-description">
 Заполните форму ниже. После отправки заявка
 поступит мастеру в Telegram.
 </div>
 
-
 <form id="repairForm">
 
-
 <div class="form-grid">
-
-
-<!-- ТИП -->
 
 <div class="form-group">
 
 <label for="device">
 Тип устройства <span class="required">*</span>
 </label>
-
 
 <select
 id="device"
@@ -795,15 +805,11 @@ required
 
 </div>
 
-
-<!-- МОДЕЛЬ -->
-
 <div class="form-group">
 
 <label for="model">
 Марка и модель <span class="required">*</span>
 </label>
-
 
 <input
 type="text"
@@ -813,22 +819,17 @@ placeholder="Например: iPhone 15 Pro Max"
 required
 >
 
-
 <span class="hint">
 Укажите точную модель устройства
 </span>
 
 </div>
 
-
-<!-- ТЕЛЕФОН -->
-
 <div class="form-group">
 
 <label for="phone">
 Номер телефона <span class="required">*</span>
 </label>
-
 
 <input
 type="tel"
@@ -838,22 +839,17 @@ placeholder="8 962 152-69-90"
 required
 >
 
-
 <span class="hint">
 Мы свяжемся с вами по этому номеру
 </span>
 
 </div>
 
-
-<!-- ПРИЧИНА -->
-
 <div class="form-group">
 
 <label for="reason">
 Примерная причина
 </label>
-
 
 <select
 id="reason"
@@ -896,15 +892,11 @@ name="reason"
 
 </div>
 
-
-<!-- ПРОБЛЕМА -->
-
 <div class="form-group full">
 
 <label for="problem">
 Описание проблемы <span class="required">*</span>
 </label>
-
 
 <textarea
 id="problem"
@@ -915,15 +907,11 @@ required
 
 </div>
 
-
-<!-- ДОПОЛНИТЕЛЬНО -->
-
 <div class="form-group full">
 
 <label for="additional">
 Дополнительная информация
 </label>
-
 
 <textarea
 id="additional"
@@ -933,9 +921,36 @@ placeholder="Например: есть ли пароль, когда появи
 
 </div>
 
-
 </div>
 
+<div class="consent" id="consentBlock">
+
+<label class="consent-label">
+
+<input
+type="checkbox"
+id="personalDataConsent"
+name="personalDataConsent"
+required
+>
+
+<span>
+Я согласен(на) на обработку моих персональных данных
+для обработки заявки и связи со мной по вопросу ремонта.
+
+<a
+href="privacy.html"
+target="_blank"
+rel="noopener"
+>
+Подробнее
+</a>
+
+</span>
+
+</label>
+
+</div>
 
 <button
 type="submit"
@@ -953,12 +968,10 @@ id="submitButton"
 
 </button>
 
-
 <div
 id="status"
 class="status"
 ></div>
-
 
 <div class="info-box">
 
@@ -974,25 +987,15 @@ class="status"
 
 </div>
 
-
 </form>
-
 
 </div>
 
-
 </main>
-
-
-<!-- =========================
-     FOOTER
-========================= -->
 
 <footer>
 
-
 <div class="footer">
-
 
 <div>
 
@@ -1008,13 +1011,11 @@ class="status"
 
 </div>
 
-
 <div>
 
 <h3>
 Навигация
 </h3>
-
 
 <a href="index.html">
 Главная
@@ -1042,18 +1043,15 @@ class="status"
 
 </div>
 
-
 <div>
 
 <h3>
 Контакты
 </h3>
 
-
 <a href="tel:+79621526990">
 📞 8 962 152-69-90
 </a>
-
 
 <a
 href="https://t.me/tehnafox"
@@ -1062,17 +1060,13 @@ target="_blank"
 ✈️ @tehnafox
 </a>
 
-
 <a href="location.html">
 📍 ТРК «Сити Молл», 1 этаж
 </a>
 
-
 </div>
 
-
 </div>
-
 
 <div class="copy">
 
@@ -1080,21 +1074,13 @@ target="_blank"
 
 </div>
 
-
 </footer>
 
-
-<!-- =========================
-     MOBILE MENU
-========================= -->
-
 <div class="mobile-menu">
-
 
 <a href="tel:+79621526990">
 📞 Позвонить
 </a>
-
 
 <a
 href="https://t.me/tehnafox"
@@ -1103,79 +1089,60 @@ target="_blank"
 ✈️ Telegram
 </a>
 
-
 </div>
-
-
-<!-- =========================
-     JAVASCRIPT
-========================= -->
 
 <script>
 
 const WORKER_URL =
 "https://technolis-bot.koreanteen.workers.dev";
 
-
 const form =
 document.getElementById("repairForm");
-
 
 const button =
 document.getElementById("submitButton");
 
-
 const buttonIcon =
 document.getElementById("buttonIcon");
-
 
 const buttonText =
 document.getElementById("buttonText");
 
-
 const status =
 document.getElementById("status");
+
+const consent =
+document.getElementById("personalDataConsent");
+
+const consentBlock =
+document.getElementById("consentBlock");
 
 
 form.addEventListener("submit", async function(event) {
 
     event.preventDefault();
 
-
-    // Убираем старый статус
-
     status.className = "status";
-
     status.textContent = "";
-
-
-    // Получаем данные формы
 
     const device =
         document.getElementById("device").value.trim();
 
-
     const model =
         document.getElementById("model").value.trim();
-
 
     const phone =
         document.getElementById("phone").value.trim();
 
-
     const reason =
         document.getElementById("reason").value.trim();
-
 
     const problem =
         document.getElementById("problem").value.trim();
 
-
     const additional =
         document.getElementById("additional").value.trim();
 
-
-    // Проверка обязательных полей
 
     if (!device || !model || !phone || !problem) {
 
@@ -1188,7 +1155,23 @@ form.addEventListener("submit", async function(event) {
     }
 
 
-    // Блокируем кнопку
+    if (!consent.checked) {
+
+        consentBlock.className = "consent error";
+
+        status.className = "status error";
+
+        status.textContent =
+            "❌ Для отправки заявки необходимо согласие на обработку персональных данных.";
+
+        consent.focus();
+
+        return;
+    }
+
+
+    consentBlock.className = "consent";
+
 
     button.disabled = true;
 
@@ -1198,7 +1181,6 @@ form.addEventListener("submit", async function(event) {
 
 
     try {
-
 
         const response =
             await fetch(
@@ -1223,7 +1205,9 @@ form.addEventListener("submit", async function(event) {
 
                         problem: problem,
 
-                        additional: additional
+                        additional: additional,
+
+                        personalDataConsent: true
 
                     })
                 }
@@ -1239,31 +1223,21 @@ form.addEventListener("submit", async function(event) {
             result.success
         ) {
 
-
             status.className =
                 "status success";
-
 
             status.textContent =
                 "✅ Заявка успешно отправлена! " +
                 "Мы свяжемся с вами в ближайшее время.";
 
-
-            // Очищаем форму
-
             form.reset();
-
-
-            // Прокручиваем к сообщению
 
             status.scrollIntoView({
                 behavior: "smooth",
                 block: "center"
             });
 
-
         } else {
-
 
             throw new Error(
                 result.error ||
@@ -1273,27 +1247,19 @@ form.addEventListener("submit", async function(event) {
 
         }
 
-
     } catch (error) {
-
 
         console.error(error);
 
-
         status.className =
             "status error";
-
 
         status.textContent =
             "❌ Не удалось отправить заявку. " +
             "Попробуйте ещё раз или позвоните нам: " +
             "8 962 152-69-90";
 
-
     } finally {
-
-
-        // Возвращаем кнопку
 
         button.disabled = false;
 
@@ -1302,13 +1268,11 @@ form.addEventListener("submit", async function(event) {
         buttonText.textContent =
             "Отправить заявку";
 
-
     }
 
 });
 
 </script>
-
 
 </body>
 </html>
