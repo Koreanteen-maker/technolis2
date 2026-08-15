@@ -292,6 +292,47 @@ textarea {
 }
 
 /* =========================
+   PERSONAL DATA
+========================= */
+
+.consent {
+    margin-top: 20px;
+}
+
+.consent label {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 10px;
+
+    font-size: 13px;
+    font-weight: normal;
+
+    line-height: 1.5;
+
+    color: #555;
+
+    cursor: pointer;
+}
+
+.consent input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+
+    margin-top: 2px;
+
+    flex-shrink: 0;
+
+    accent-color: #ff5a00;
+}
+
+.consent a {
+    color: #ff5a00;
+
+    text-decoration: underline;
+}
+
+/* =========================
    BUTTON
 ========================= */
 
@@ -937,6 +978,34 @@ placeholder="Например: есть ли пароль, когда появи
 </div>
 
 
+<!-- СОГЛАСИЕ НА ОБРАБОТКУ ПЕРСОНАЛЬНЫХ ДАННЫХ -->
+
+<div class="consent">
+
+<label>
+
+<input
+type="checkbox"
+id="personalDataConsent"
+name="personalDataConsent"
+required
+>
+
+<span>
+Я соглашаюсь на обработку персональных данных согласно
+<a
+href="privacy.html"
+target="_blank"
+>
+Политике конфиденциальности
+</a>.
+</span>
+
+</label>
+
+</div>
+
+
 <button
 type="submit"
 class="submit-button"
@@ -1175,6 +1244,10 @@ form.addEventListener("submit", async function(event) {
         document.getElementById("additional").value.trim();
 
 
+    const personalDataConsent =
+        document.getElementById("personalDataConsent").checked;
+
+
     // Проверка обязательных полей
 
     if (!device || !model || !phone || !problem) {
@@ -1183,6 +1256,19 @@ form.addEventListener("submit", async function(event) {
 
         status.textContent =
             "❌ Пожалуйста, заполните все обязательные поля.";
+
+        return;
+    }
+
+
+    // Проверка согласия на обработку персональных данных
+
+    if (!personalDataConsent) {
+
+        status.className = "status error";
+
+        status.textContent =
+            "❌ Необходимо согласиться на обработку персональных данных.";
 
         return;
     }
@@ -1223,7 +1309,9 @@ form.addEventListener("submit", async function(event) {
 
                         problem: problem,
 
-                        additional: additional
+                        additional: additional,
+
+                        personalDataConsent: personalDataConsent
 
                     })
                 }
