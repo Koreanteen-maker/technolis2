@@ -139,7 +139,7 @@ function render(){
 
   $("productsWrap").innerHTML=items.length?`<div class="card"><div class="grid">${items.map(p=>`
     <article class="product">
-      ${p.image?`<img src="${esc(p.image)}" alt="" style="width:100%;height:150px;object-fit:cover;border-radius:10px;margin-bottom:10px">`:""}
+      ${p.image?`<div style="width:100%;height:150px;border-radius:10px;background:#f7f7f7;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-bottom:10px"><img src="${esc(p.image)}" alt="" style="width:100%;height:100%;object-fit:contain;display:block"></div>`:""}
       <div class="small">${esc(p.icon||"📦")} ${esc(p.category||"")}</div>
       <h3>${esc(p.name)}</h3>
       <div class="price">${Number(p.price||0).toLocaleString("ru-RU")} ₽</div>
