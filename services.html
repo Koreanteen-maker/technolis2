@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Услуги — Техно Лис</title>
+<title>Где мы — Техно Лис</title>
 
 <style>
 * {
@@ -16,7 +16,7 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
     background:
-        radial-gradient(circle at 85% 10%, rgba(255,90,0,.14), transparent 30%),
+        radial-gradient(circle at 85% 10%, rgba(255,90,0,.15), transparent 30%),
         #f3f3f3;
     color: #111;
 }
@@ -36,8 +36,8 @@ header {
 
 .header {
     max-width: 1200px;
-    margin: auto;
     min-height: 80px;
+    margin: auto;
     padding: 10px 25px;
 
     display: flex;
@@ -48,9 +48,10 @@ header {
 .logo {
     width: 58px;
     height: 58px;
+
     border-radius: 50%;
-    background: white;
     border: 2px solid #ff5a00;
+    background: white;
 
     display: flex;
     align-items: center;
@@ -73,10 +74,8 @@ header {
 
 nav {
     margin-left: auto;
-
     display: flex;
     gap: 20px;
-    align-items: center;
 }
 
 nav a {
@@ -92,20 +91,16 @@ nav a:hover {
 .call {
     background: #ff5a00;
     color: white;
-
     padding: 14px 18px;
     border-radius: 12px;
-
     font-weight: bold;
     white-space: nowrap;
 }
 
-/* HERO */
-
 .hero {
     max-width: 1200px;
     margin: auto;
-    padding: 75px 25px 55px;
+    padding: 70px 25px 40px;
 }
 
 .subtitle {
@@ -117,13 +112,13 @@ nav a:hover {
     margin-bottom: 12px;
 }
 
-h1 {
-    font-size: clamp(48px, 7vw, 76px);
+.hero h1 {
+    font-size: clamp(48px, 7vw, 72px);
     line-height: .95;
     letter-spacing: -3px;
 }
 
-h1 span {
+.hero h1 span {
     color: #ff5a00;
 }
 
@@ -132,33 +127,46 @@ h1 span {
     color: #666;
     font-size: 18px;
     line-height: 1.6;
-    margin-top: 22px;
+    margin-top: 20px;
 }
 
-/* CONTENT */
-
-.content {
-    max-width: 1200px;
+.location {
+    max-width: 1100px;
     margin: auto;
     padding: 20px 25px 90px;
 }
 
-.category {
-    margin-bottom: 55px;
+.location-card {
+    background: white;
+    border-radius: 28px;
+    overflow: hidden;
+    border: 1px solid #e3e3e3;
+    box-shadow: 0 15px 50px rgba(0,0,0,.07);
 }
 
-.category-title {
+.info {
+    padding: 35px;
+}
+
+.info h2 {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.address {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 15px;
-    margin-bottom: 22px;
+    margin-bottom: 25px;
 }
 
-.category-title .big-icon {
-    width: 55px;
-    height: 55px;
+.icon {
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
 
-    border-radius: 15px;
+    border-radius: 14px;
+
     background: #090909;
     color: #ff5a00;
 
@@ -166,93 +174,52 @@ h1 span {
     align-items: center;
     justify-content: center;
 
-    font-size: 25px;
+    font-size: 23px;
 }
 
-.category-title h2 {
-    font-size: 30px;
+.address strong {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 5px;
 }
 
-.grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-}
-
-.card {
-    background: white;
-    border: 1px solid #e5e5e5;
-    border-radius: 20px;
-    padding: 25px;
-
-    transition: .2s;
-}
-
-.card:hover {
-    transform: translateY(-4px);
-    border-color: #ff5a00;
-    box-shadow: 0 15px 35px rgba(0,0,0,.08);
-}
-
-.card h3 {
-    font-size: 19px;
-    margin-bottom: 9px;
-}
-
-.card p {
+.address p {
     color: #777;
-    font-size: 14px;
-    line-height: 1.55;
+    line-height: 1.5;
 }
 
-.price-link {
-    display: inline-block;
-    color: #ff5a00;
-    font-weight: 900;
-    margin-top: 18px;
-}
-
-/* CTA */
-
-.cta {
-    max-width: 1150px;
-    margin: 0 auto 80px;
-
-    background: #090909;
-    color: white;
-
-    border-radius: 28px;
-    padding: 45px;
-
-    text-align: center;
-}
-
-.cta h2 {
-    font-size: 40px;
-    margin-bottom: 12px;
-}
-
-.cta p {
-    color: #aaa;
-    margin-bottom: 25px;
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
 }
 
 .btn {
+    min-height: 52px;
+    padding: 0 20px;
+
     display: inline-flex;
     align-items: center;
     justify-content: center;
 
-    min-height: 55px;
-    padding: 0 25px;
+    border-radius: 12px;
 
     background: #ff5a00;
     color: white;
 
-    border-radius: 12px;
     font-weight: 900;
 }
 
-/* FOOTER */
+.btn.dark {
+    background: #090909;
+}
+
+.map {
+    width: 100%;
+    height: 500px;
+    border: 0;
+    display: block;
+}
 
 footer {
     background: #090909;
@@ -288,12 +255,12 @@ footer a:hover {
     max-width: 1200px;
     margin: 30px auto 0;
     padding-top: 20px;
+
     border-top: 1px solid #252525;
+
     color: #666;
     font-size: 13px;
 }
-
-/* MOBILE */
 
 .mobile-menu {
     display: none;
@@ -303,10 +270,6 @@ footer a:hover {
 
     nav {
         display: none;
-    }
-
-    .grid {
-        grid-template-columns: repeat(2, 1fr);
     }
 }
 
@@ -334,6 +297,7 @@ footer a:hover {
 
         width: 48px;
         height: 48px;
+
         padding: 0;
 
         border-radius: 50%;
@@ -351,36 +315,39 @@ footer a:hover {
     }
 
     .hero {
-        padding: 55px 18px 35px;
+        padding: 55px 18px 30px;
     }
 
-    h1 {
-        font-size: 52px;
+    .hero h1 {
+        font-size: 50px;
     }
 
     .hero p {
         font-size: 16px;
     }
 
-    .content {
+    .location {
         padding: 20px 18px 60px;
     }
 
-    .category-title h2 {
-        font-size: 24px;
+    .info {
+        padding: 23px;
     }
 
-    .grid {
-        grid-template-columns: 1fr;
+    .info h2 {
+        font-size: 25px;
     }
 
-    .cta {
-        margin: 0 18px 60px;
-        padding: 35px 20px;
+    .map {
+        height: 420px;
     }
 
-    .cta h2 {
-        font-size: 30px;
+    .buttons {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
     }
 
     .footer {
@@ -453,520 +420,123 @@ footer a:hover {
 
 </header>
 
-
 <section class="hero">
 
 <div class="subtitle">
-ТЕХНО ЛИС · СЕРВИСНЫЙ ЦЕНТР
+ТЕХНО ЛИС · МЫ НА КАРТЕ
 </div>
 
 <h1>
-Наши <span>услуги</span>
+Как нас <span>найти</span>
 </h1>
 
 <p>
-Ремонт и обслуживание техники в Южно-Сахалинске.
-Диагностика, замена комплектующих, настройка устройств
-и установка программ.
+Мы находимся в Южно-Сахалинске, в ТРК «Сити Молл».
+Найти нас можно на первом этаже.
 </p>
 
 </section>
 
+<main class="location">
 
-<main class="content">
+<div class="location-card">
 
-
-<!-- СМАРТФОНЫ -->
-
-<section class="category">
-
-<div class="category-title">
-
-<div class="big-icon">
-📱
-</div>
+<div class="info">
 
 <h2>
-Ремонт смартфонов
+Наш адрес
 </h2>
 
+<div class="address">
+
+<div class="icon">
+📍
 </div>
 
+<div>
 
-<div class="grid">
-
-<div class="card">
-
-<h3>
-Замена дисплея
-</h3>
+<strong>
+ТРК «Сити Молл», 1 этаж
+</strong>
 
 <p>
-Замена разбитого, повреждённого или неисправного экрана смартфона.
+г. Южно-Сахалинск
 </p>
 
-<a href="price.html" class="price-link">
-Посмотреть цены →
+</div>
+
+</div>
+
+<div class="address">
+
+<div class="icon">
+📞
+</div>
+
+<div>
+
+<strong>
+8 962 152-69-90
+</strong>
+
+<p>
+Позвоните нам, если не можете найти магазин.
+</p>
+
+</div>
+
+</div>
+
+<div class="address">
+
+<div class="icon">
+✈️
+</div>
+
+<div>
+
+<strong>
+Telegram: @tehnafox
+</strong>
+
+<p>
+Можно написать нам и уточнить, как пройти.
+</p>
+
+</div>
+
+</div>
+
+<div class="buttons">
+
+<a
+href="tel:+79621526990"
+class="btn"
+>
+📞 Позвонить
 </a>
 
-</div>
-
-
-<div class="card">
-
-<h3>
-Замена аккумулятора
-</h3>
-
-<p>
-Замена изношенной батареи и восстановление нормального времени работы.
-</p>
-
-<a href="price.html" class="price-link">
-Посмотреть цены →
-</a>
-
-</div>
-
-
-<div class="card">
-
-<h3>
-Ремонт разъёма зарядки
-</h3>
-
-<p>
-Ремонт или замена неисправного разъёма зарядки и передачи данных.
-</p>
-
-<a href="price.html" class="price-link">
-Посмотреть цены →
-</a>
-
-</div>
-
-
-<div class="card">
-
-<h3>
-Ремонт камеры
-</h3>
-
-<p>
-Диагностика и ремонт основной и фронтальной камеры.
-</p>
-
-<a href="price.html" class="price-link">
-Посмотреть цены →
-</a>
-
-</div>
-
-
-<div class="card">
-
-<h3>
-Ремонт после воды
-</h3>
-
-<p>
-Диагностика и восстановление устройств после попадания жидкости.
-</p>
-
-<a href="price.html" class="price-link">
-Посмотреть цены →
-</a>
-
-</div>
-
-
-<div class="card">
-
-<h3>
-Программный ремонт
-</h3>
-
-<p>
-Прошивка, восстановление системы, установка и настройка программ.
-</p>
-
-<a href="price.html" class="price-link">
-Посмотреть цены →
+<a
+href="https://t.me/tehnafox"
+target="_blank"
+class="btn dark"
+>
+✈️ Написать в Telegram
 </a>
 
 </div>
 
 </div>
 
-</section>
-
-
-<!-- ПЛАНШЕТЫ -->
-
-<section class="category">
-
-<div class="category-title">
-
-<div class="big-icon">
-📲
-</div>
-
-<h2>
-Ремонт планшетов
-</h2>
+<iframe
+class="map"
+src="https://yandex.ru/map-widget/v1/?text=ТРК%20Сити%20Молл%20Южно-Сахалинск&z=16"
+allowfullscreen>
+</iframe>
 
 </div>
-
-
-<div class="grid">
-
-<div class="card">
-
-<h3>
-Замена дисплея
-</h3>
-
-<p>
-Замена разбитого или неисправного дисплейного модуля.
-</p>
-
-<a href="price.html" class="price-link">
-Посмотреть цены →
-</a>
-
-</div>
-
-
-<div class="card">
-
-<h3>
-Замена аккумулятора
-</h3>
-
-<p>
-Установка нового аккумулятора и проверка системы питания.
-</p>
-
-<a href="price.html" class="price-link">
-Посмотреть цены →
-</a>
-
-</div>
-
-
-<div class="card">
-
-<h3>
-Ремонт разъёмов
-</h3>
-
-<p>
-Ремонт USB, Lightning, Type-C и других разъёмов.
-</p>
-
-<a href="price.html" class="price-link">
-Посмотреть цены →
-</a>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- НОУТБУКИ -->
-
-<section class="category">
-
-<div class="category-title">
-
-<div class="big-icon">
-💻
-</div>
-
-<h2>
-Ремонт ноутбуков
-</h2>
-
-</div>
-
-
-<div class="grid">
-
-<div class="card">
-
-<h3>
-Диагностика
-</h3>
-
-<p>
-Поиск неисправностей ноутбука и определение причины поломки.
-</p>
-
-<a href="price.html" class="price-link">
-Посмотреть цены →
-</a>
-
-</div>
-
-
-<div class="card">
-
-<h3>
-Чистка системы охлаждения
-</h3>
-
-<p>
-Очистка от пыли и обслуживание системы охлаждения.
-</p>
-
-<a href="price.html" class="price-link">
-Посмотреть цены →
-</a>
-
-</div>
-
-
-<div class="card">
-
-<h3>
-Замена комплектующих
-</h3>
-
-<p>
-Замена SSD, оперативной памяти, аккумулятора и других компонентов.
-</p>
-
-<a href="price.html" class="price-link">
-Посмотреть цены →
-</a>
-
-</div>
-
-
-<div class="card">
-
-<h3>
-Установка Windows
-</h3>
-
-<p>
-Установка и настройка Windows, драйверов и необходимых программ.
-</p>
-
-<a href="price.html" class="price-link">
-Посмотреть цены →
-</a>
-
-</div>
-
-
-<div class="card">
-
-<h3>
-Установка Office
-</h3>
-
-<p>
-Установка и настройка офисных программ.
-</p>
-
-<a href="price.html" class="price-link">
-Посмотреть цены →
-</a>
-
-</div>
-
-
-<div class="card">
-
-<h3>
-Восстановление системы
-</h3>
-
-<p>
-Исправление ошибок Windows и восстановление работоспособности.
-</p>
-
-<a href="price.html" class="price-link">
-Посмотреть цены →
-</a>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ПК -->
-
-<section class="category">
-
-<div class="category-title">
-
-<div class="big-icon">
-🖥️
-</div>
-
-<h2>
-Ремонт и обслуживание ПК
-</h2>
-
-</div>
-
-
-<div class="grid">
-
-<div class="card">
-
-<h3>
-Диагностика компьютера
-</h3>
-
-<p>
-Проверка комплектующих и поиск причины неисправности.
-</p>
-
-<a href="price.html" class="price-link">
-Посмотреть цены →
-</a>
-
-</div>
-
-
-<div class="card">
-
-<h3>
-Сборка ПК
-</h3>
-
-<p>
-Подбор комплектующих и сборка компьютера под ваши задачи.
-</p>
-
-<a href="repair.html" class="price-link">
-Оставить заявку →
-</a>
-
-</div>
-
-
-<div class="card">
-
-<h3>
-Установка Windows
-</h3>
-
-<p>
-Установка операционной системы и необходимых драйверов.
-</p>
-
-<a href="price.html" class="price-link">
-Посмотреть цены →
-</a>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- ЗАЩИТА -->
-
-<section class="category">
-
-<div class="category-title">
-
-<div class="big-icon">
-🛡️
-</div>
-
-<h2>
-Защита смартфонов
-</h2>
-
-</div>
-
-
-<div class="grid">
-
-<div class="card">
-
-<h3>
-Премиум-плёнка
-</h3>
-
-<p>
-Поклейка защитной плёнки на смартфон.
-</p>
-
-<a href="price.html" class="price-link">
-Цена →
-</a>
-
-</div>
-
-
-<div class="card">
-
-<h3>
-Бронеплёнка
-</h3>
-
-<p>
-Усиленная защита экрана от царапин и повреждений.
-</p>
-
-<a href="price.html" class="price-link">
-Цена →
-</a>
-
-</div>
-
-
-<div class="card">
-
-<h3>
-Бронестекло
-</h3>
-
-<p>
-Установка защитного стекла для iPhone.
-</p>
-
-<a href="price.html" class="price-link">
-Цена →
-</a>
-
-</div>
-
-</div>
-
-</section>
-
 
 </main>
-
-
-<div class="cta">
-
-<h2>
-Не нашли нужную услугу?
-</h2>
-
-<p>
-Опишите проблему — мы подскажем, что можно сделать.
-</p>
-
-<a href="repair.html" class="btn">
-🛠️ Оставить заявку
-</a>
-
-</div>
-
 
 <footer>
 
@@ -984,7 +554,6 @@ footer a:hover {
 
 </div>
 
-
 <div>
 
 <h3>
@@ -992,12 +561,12 @@ footer a:hover {
 </h3>
 
 <a href="index.html">Главная</a>
+<a href="services.html">Услуги</a>
 <a href="price.html">Прайс</a>
 <a href="accessories.html">Аксессуары</a>
 <a href="repair.html">Заявка</a>
 
 </div>
-
 
 <div>
 
@@ -1021,13 +590,11 @@ footer a:hover {
 
 </div>
 
-
 <div class="copy">
 © 2026 Техно Лис. Все права защищены.
 </div>
 
 </footer>
-
 
 <div class="mobile-menu">
 
