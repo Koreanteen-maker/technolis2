@@ -652,6 +652,45 @@ footer a:hover {
 </section>
 
 
+<!-- ПРОВЕРКА НАЛИЧИЯ -->
+<section class="stock-checker">
+
+    <h2>🔎 Проверить наличие аксессуара</h2>
+
+    <p class="stock-checker-subtitle">
+        Сразу проверьте наличие нужного аксессуара и модели iPhone — сайт покажет актуальный остаток и цену.
+    </p>
+
+    <div class="stock-checker-form">
+
+        <div class="stock-checker-field">
+            <label for="stockType">Что ищете?</label>
+            <select id="stockType">
+                <option value="case">Чехол</option>
+                <option value="glass">Защитное стекло</option>
+                <option value="lenses">Защитные линзы</option>
+            </select>
+        </div>
+
+        <div class="stock-checker-field">
+            <label for="stockModel">Модель iPhone</label>
+            <select id="stockModel">
+                <option value="">Загрузка моделей...</option>
+            </select>
+        </div>
+
+        <button type="button" class="stock-checker-button" id="stockCheckButton">
+            Проверить
+        </button>
+
+    </div>
+
+    <div class="stock-checker-result" id="stockCheckerResult"></div>
+
+</section>
+
+
+
 <main class="content">
 
 
@@ -1026,42 +1065,7 @@ USB-C · Lightning и другие
 
 
 
-<!-- ПРОВЕРКА НАЛИЧИЯ -->
-<section class="stock-checker">
 
-    <h2>🔎 Проверить наличие</h2>
-
-    <p class="stock-checker-subtitle">
-        Выберите аксессуар и модель iPhone — сайт покажет актуальный остаток и цену.
-    </p>
-
-    <div class="stock-checker-form">
-
-        <div class="stock-checker-field">
-            <label for="stockType">Что ищете?</label>
-            <select id="stockType">
-                <option value="case">Чехол</option>
-                <option value="glass">Защитное стекло</option>
-                <option value="lenses">Защитные линзы</option>
-            </select>
-        </div>
-
-        <div class="stock-checker-field">
-            <label for="stockModel">Модель iPhone</label>
-            <select id="stockModel">
-                <option value="">Загрузка моделей...</option>
-            </select>
-        </div>
-
-        <button type="button" class="stock-checker-button" id="stockCheckButton">
-            Проверить
-        </button>
-
-    </div>
-
-    <div class="stock-checker-result" id="stockCheckerResult"></div>
-
-</section>
 
 
 </main>
