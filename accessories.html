@@ -1495,6 +1495,17 @@ async function loadStockProducts() {
 
         stockProducts = data.products;
 
+        /*
+         * Если модель уже выбрана, автоматически обновляем
+         * отображаемый результат после получения новых данных.
+         */
+        const selectedModel =
+            document.getElementById("stockModel")?.value;
+
+        if (selectedModel) {
+            checkStock();
+        }
+
     } catch (error) {
 
         console.error(
