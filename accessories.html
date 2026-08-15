@@ -228,30 +228,6 @@ nav a:hover {
     font-size: 14px;
 }
 
-/* СИНХРОНИЗИРОВАННОЕ НАЛИЧИЕ */
-
-.card .models.stock-info {
-    color: #666;
-}
-
-.stock-info .price {
-    font-weight: 900;
-    color: #111;
-    margin-bottom: 5px;
-}
-
-.stock-info .availability {
-    font-weight: bold;
-}
-
-.stock-info .availability.in-stock {
-    color: #2e7d32;
-}
-
-.stock-info .availability.out-of-stock {
-    color: #d32f2f;
-}
-
 /* CTA */
 
 .cta {
@@ -478,6 +454,150 @@ footer a:hover {
         background: #ff5a00;
     }
 }
+
+
+/* ПРОВЕРКА НАЛИЧИЯ ПО МОДЕЛИ */
+.stock-checker {
+    max-width: 1150px;
+    margin: 0 auto 55px;
+    background: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 20px;
+    padding: 30px;
+}
+
+.stock-checker h2 {
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.stock-checker-subtitle {
+    color: #777;
+    font-size: 15px;
+    line-height: 1.5;
+    margin-bottom: 22px;
+}
+
+.stock-checker-form {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr auto;
+    gap: 12px;
+    align-items: end;
+}
+
+.stock-checker-field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 900;
+    color: #777;
+    margin-bottom: 7px;
+}
+
+.stock-checker-field select {
+    width: 100%;
+    min-height: 50px;
+    padding: 0 14px;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    background: white;
+    color: #111;
+    font-size: 15px;
+    outline: none;
+}
+
+.stock-checker-field select:focus {
+    border-color: #ff5a00;
+}
+
+.stock-checker-button {
+    min-height: 50px;
+    border: 0;
+    border-radius: 12px;
+    padding: 0 22px;
+    background: #ff5a00;
+    color: white;
+    font-weight: 900;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.stock-checker-button:hover {
+    opacity: .9;
+}
+
+.stock-checker-result {
+    display: none;
+    margin-top: 18px;
+    padding: 18px;
+    border-radius: 14px;
+    background: #f7f7f7;
+}
+
+.stock-checker-result.show {
+    display: block;
+}
+
+.stock-result-title {
+    font-size: 18px;
+    font-weight: 900;
+    margin-bottom: 8px;
+}
+
+.stock-result-ok {
+    color: #2e7d32;
+}
+
+.stock-result-no {
+    color: #d32f2f;
+}
+
+.stock-result-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 9px 0;
+    border-bottom: 1px solid #e5e5e5;
+    font-size: 14px;
+}
+
+.stock-result-item:last-child {
+    border-bottom: 0;
+}
+
+.stock-result-item strong {
+    color: #111;
+}
+
+.stock-result-price {
+    color: #111;
+    font-weight: 900;
+    white-space: nowrap;
+}
+
+.stock-checker-error {
+    color: #d32f2f;
+    font-size: 14px;
+}
+
+@media(max-width: 700px) {
+    .stock-checker {
+        margin: 0 18px 45px;
+        padding: 22px 18px;
+    }
+
+    .stock-checker h2 {
+        font-size: 25px;
+    }
+
+    .stock-checker-form {
+        grid-template-columns: 1fr;
+    }
+
+    .stock-checker-button {
+        width: 100%;
+    }
+}
+
 </style>
 </head>
 
@@ -554,9 +674,7 @@ footer a:hover {
 
 <div class="grid">
 
-
-<div class="card"
-     data-product-category="carbon_cases">
+<div class="card">
 
 <div class="card-icon">
 🧱
@@ -570,8 +688,8 @@ footer a:hover {
 Стильные и прочные чехлы с карбоновой фактурой.
 </p>
 
-<div class="models stock-info">
-Загрузка наличия...
+<div class="models">
+Уточняйте наличие модели
 </div>
 
 <a href="https://t.me/tehnafox" target="_blank" class="ask">
@@ -581,8 +699,7 @@ footer a:hover {
 </div>
 
 
-<div class="card"
-     data-product-category="leather_cases">
+<div class="card">
 
 <div class="card-icon">
 👜
@@ -596,8 +713,8 @@ footer a:hover {
 Классические кожаные чехлы для защиты смартфона.
 </p>
 
-<div class="models stock-info">
-Загрузка наличия...
+<div class="models">
+Уточняйте наличие модели
 </div>
 
 <a href="https://t.me/tehnafox" target="_blank" class="ask">
@@ -607,8 +724,7 @@ footer a:hover {
 </div>
 
 
-<div class="card"
-     data-product-category="clear_cases">
+<div class="card">
 
 <div class="card-icon">
 ▫️
@@ -622,8 +738,8 @@ footer a:hover {
 Минималистичная защита без скрытия дизайна смартфона.
 </p>
 
-<div class="models stock-info">
-Загрузка наличия...
+<div class="models">
+Для разных моделей
 </div>
 
 <a href="https://t.me/tehnafox" target="_blank" class="ask">
@@ -633,8 +749,7 @@ footer a:hover {
 </div>
 
 
-<div class="card"
-     data-product-id="other_cardholder">
+<div class="card">
 
 <div class="card-icon">
 💳
@@ -648,8 +763,8 @@ footer a:hover {
 Компактные картхолдеры для банковских карт и документов.
 </p>
 
-<div class="models stock-info">
-Загрузка наличия...
+<div class="models">
+Уточняйте наличие
 </div>
 
 <a href="https://t.me/tehnafox" target="_blank" class="ask">
@@ -657,7 +772,6 @@ footer a:hover {
 </a>
 
 </div>
-
 
 </div>
 
@@ -683,9 +797,7 @@ footer a:hover {
 
 <div class="grid">
 
-
-<div class="card"
-     data-product-id="apple_magsafe_powerbank">
+<div class="card">
 
 <div class="card-icon">
 🔋
@@ -699,8 +811,8 @@ MagSafe Power Bank
 Магнитный внешний аккумулятор для совместимых iPhone.
 </p>
 
-<div class="models stock-info">
-Загрузка наличия...
+<div class="models">
+Для iPhone с MagSafe
 </div>
 
 <a href="https://t.me/tehnafox" target="_blank" class="ask">
@@ -710,8 +822,7 @@ MagSafe Power Bank
 </div>
 
 
-<div class="card"
-     data-product-id="apple_magsafe_charger">
+<div class="card">
 
 <div class="card-icon">
 🔌
@@ -725,8 +836,8 @@ MagSafe зарядки
 Беспроводные магнитные зарядки для устройств Apple.
 </p>
 
-<div class="models stock-info">
-Загрузка наличия...
+<div class="models">
+Уточняйте наличие
 </div>
 
 <a href="https://t.me/tehnafox" target="_blank" class="ask">
@@ -761,8 +872,7 @@ USB-C · Lightning и другие
 </div>
 
 
-<div class="card"
-     data-product-id="apple_cloth">
+<div class="card">
 
 <div class="card-icon">
 🎧
@@ -776,8 +886,8 @@ USB-C · Lightning и другие
 Различные аксессуары и расходники для техники Apple.
 </p>
 
-<div class="models stock-info">
-Загрузка наличия...
+<div class="models">
+Уточняйте наличие
 </div>
 
 <a href="https://t.me/tehnafox" target="_blank" class="ask">
@@ -785,7 +895,6 @@ USB-C · Lightning и другие
 </a>
 
 </div>
-
 
 </div>
 
@@ -810,7 +919,6 @@ USB-C · Lightning и другие
 
 
 <div class="grid">
-
 
 <div class="card">
 
@@ -862,8 +970,7 @@ USB-C · Lightning и другие
 </div>
 
 
-<div class="card"
-     data-product-category="glass">
+<div class="card">
 
 <div class="card-icon">
 🔲
@@ -877,8 +984,8 @@ USB-C · Lightning и другие
 Защитное стекло для экрана iPhone.
 </p>
 
-<div class="models stock-info">
-Загрузка наличия...
+<div class="models">
+2 000 ₽
 </div>
 
 <a href="price.html" class="ask">
@@ -888,8 +995,7 @@ USB-C · Lightning и другие
 </div>
 
 
-<div class="card"
-     data-product-category="lenses">
+<div class="card">
 
 <div class="card-icon">
 📷
@@ -903,8 +1009,8 @@ USB-C · Lightning и другие
 Защитные стёкла для объективов камеры iPhone.
 </p>
 
-<div class="models stock-info">
-Загрузка наличия...
+<div class="models">
+Уточняйте наличие модели
 </div>
 
 <a href="https://t.me/tehnafox" target="_blank" class="ask">
@@ -913,8 +1019,47 @@ USB-C · Lightning и другие
 
 </div>
 
-
 </div>
+
+</section>
+
+
+
+
+<!-- ПРОВЕРКА НАЛИЧИЯ -->
+<section class="stock-checker">
+
+    <h2>🔎 Проверить наличие</h2>
+
+    <p class="stock-checker-subtitle">
+        Выберите аксессуар и модель iPhone — сайт покажет актуальный остаток и цену.
+    </p>
+
+    <div class="stock-checker-form">
+
+        <div class="stock-checker-field">
+            <label for="stockType">Что ищете?</label>
+            <select id="stockType">
+                <option value="case">Чехол</option>
+                <option value="glass">Защитное стекло</option>
+                <option value="lenses">Защитные линзы</option>
+            </select>
+        </div>
+
+        <div class="stock-checker-field">
+            <label for="stockModel">Модель iPhone</label>
+            <select id="stockModel">
+                <option value="">Загрузка моделей...</option>
+            </select>
+        </div>
+
+        <button type="button" class="stock-checker-button" id="stockCheckButton">
+            Проверить
+        </button>
+
+    </div>
+
+    <div class="stock-checker-result" id="stockCheckerResult"></div>
 
 </section>
 
@@ -1013,283 +1158,342 @@ USB-C · Lightning и другие
 </div>
 
 
-<script>
 
+<script>
 /*
-=========================================================
-  СИНХРОНИЗАЦИЯ АКСЕССУАРОВ С TELEGRAM / WORKER
-=========================================================
+=============================================================
+  ПРОВЕРКА НАЛИЧИЯ ПО МОДЕЛИ
+  Данные берутся напрямую из Worker.
+=============================================================
 */
 
 const PRODUCTS_API =
     "https://technolis-bot.koreanteen.workers.dev/products";
 
 
+const STOCK_MODELS = [
+    { value: "11", label: "iPhone 11" },
+    { value: "11-pro", label: "iPhone 11 Pro" },
+    { value: "11-pro-max", label: "iPhone 11 Pro Max" },
+    { value: "xr", label: "iPhone XR" },
+    { value: "xs", label: "iPhone XS" },
+    { value: "xs-max", label: "iPhone XS Max" },
+    { value: "x", label: "iPhone X" },
+    { value: "12-mini", label: "iPhone 12 mini" },
+    { value: "12", label: "iPhone 12" },
+    { value: "12-pro", label: "iPhone 12 Pro" },
+    { value: "12-pro-max", label: "iPhone 12 Pro Max" },
+    { value: "13-mini", label: "iPhone 13 mini" },
+    { value: "13", label: "iPhone 13" },
+    { value: "13-pro", label: "iPhone 13 Pro" },
+    { value: "13-pro-max", label: "iPhone 13 Pro Max" },
+    { value: "14", label: "iPhone 14" },
+    { value: "14-plus", label: "iPhone 14 Plus" },
+    { value: "14-pro", label: "iPhone 14 Pro" },
+    { value: "14-pro-max", label: "iPhone 14 Pro Max" },
+    { value: "15", label: "iPhone 15" },
+    { value: "15-plus", label: "iPhone 15 Plus" },
+    { value: "15-pro", label: "iPhone 15 Pro" },
+    { value: "15-pro-max", label: "iPhone 15 Pro Max" },
+    { value: "16", label: "iPhone 16" },
+    { value: "16-plus", label: "iPhone 16 Plus" },
+    { value: "16e", label: "iPhone 16e" },
+    { value: "16-pro", label: "iPhone 16 Pro" },
+    { value: "16-pro-max", label: "iPhone 16 Pro Max" },
+    { value: "17", label: "iPhone 17" },
+    { value: "17-air", label: "iPhone 17 Air" },
+    { value: "17-pro", label: "iPhone 17 Pro" },
+    { value: "17-pro-max", label: "iPhone 17 Pro Max" }
+];
+
+
+let stockProducts = [];
+
+
+function normalizeModel(text) {
+    return String(text || "")
+        .toLowerCase()
+        .replace(/iphone/g, "")
+        .replace(/айфон/g, "")
+        .replace(/[–—]/g, "-")
+        .replace(/\s+/g, " ")
+        .trim();
+}
+
+
+function modelAliases(value) {
+
+    const aliases = {
+        "11": ["11"],
+        "11-pro": ["11 pro"],
+        "11-pro-max": ["11 pro max"],
+        "xr": ["xr"],
+        "xs": ["xs"],
+        "xs-max": ["xs max"],
+        "x": ["x"],
+        "12-mini": ["12 mini"],
+        "12": ["12"],
+        "12-pro": ["12 pro"],
+        "12-pro-max": ["12 pro max"],
+        "13-mini": ["13 mini"],
+        "13": ["13"],
+        "13-pro": ["13 pro"],
+        "13-pro-max": ["13 pro max", "13 pm"],
+        "14": ["14"],
+        "14-plus": ["14 plus", "14+"],
+        "14-pro": ["14 pro"],
+        "14-pro-max": ["14 pro max", "14 pm"],
+        "15": ["15"],
+        "15-plus": ["15 plus", "15+"],
+        "15-pro": ["15 pro"],
+        "15-pro-max": ["15 pro max", "15 pm"],
+        "16": ["16"],
+        "16-plus": ["16 plus", "16+"],
+        "16e": ["16e", "16 e"],
+        "16-pro": ["16 pro"],
+        "16-pro-max": ["16 pro max", "16 pm"],
+        "17": ["17"],
+        "17-air": ["17 air", "17air"],
+        "17-pro": ["17 pro"],
+        "17-pro-max": ["17 pro max", "17 pm", "17pm"]
+    };
+
+    return aliases[value] || [];
+}
+
+
+function productMatchesModel(product, modelValue) {
+
+    const name = normalizeModel(product.name);
+    const aliases = modelAliases(modelValue);
+
+    return aliases.some(alias => {
+
+        const normalizedAlias = normalizeModel(alias);
+
+        if (name === normalizedAlias) {
+            return true;
+        }
+
+        const parts = name
+            .split("/")
+            .map(part => part.trim());
+
+        return parts.includes(normalizedAlias);
+    });
+}
+
+
+function productMatchesType(product, type) {
+
+    if (type === "case") {
+        return [
+            "clear_cases",
+            "carbon_cases",
+            "leather_cases"
+        ].includes(product.category);
+    }
+
+    return product.category === type;
+}
+
+
 function formatPrice(price) {
-
-    return Number(price).toLocaleString("ru-RU") + " ₽";
-
+    return Number(price || 0)
+        .toLocaleString("ru-RU") + " ₽";
 }
 
 
-function setStockInfo(element, price, stock) {
+function fillModelSelect() {
 
-    if (stock <= 0) {
+    const select =
+        document.getElementById("stockModel");
 
-        element.innerHTML = `
-            <div class="price">
-                ${formatPrice(price)}
-            </div>
+    if (!select) return;
 
-            <div class="availability out-of-stock">
-                ❌ Нет в наличии
-            </div>
-        `;
+    select.innerHTML =
+        '<option value="">Выберите модель</option>';
 
-        return;
-    }
+    STOCK_MODELS.forEach(model => {
 
+        const option =
+            document.createElement("option");
 
-    element.innerHTML = `
-        <div class="price">
-            ${formatPrice(price)}
-        </div>
+        option.value = model.value;
+        option.textContent = model.label;
 
-        <div class="availability in-stock">
-            ✅ В наличии: ${stock} шт.
-        </div>
-    `;
-
+        select.appendChild(option);
+    });
 }
 
 
-function setCategoryStock(
-    card,
-    products
-) {
+function showCheckerResult(html) {
 
-    const models =
-        card.querySelector(".models");
+    const result =
+        document.getElementById("stockCheckerResult");
 
-    if (!models) {
+    result.innerHTML = html;
+    result.classList.add("show");
+}
+
+
+function checkStock() {
+
+    const type =
+        document.getElementById("stockType").value;
+
+    const model =
+        document.getElementById("stockModel").value;
+
+    if (!model) {
+
+        showCheckerResult(`
+            <div class="stock-checker-error">
+                Выберите модель iPhone.
+            </div>
+        `);
+
         return;
     }
 
 
-    if (!products.length) {
-        return;
-    }
-
-
-    let totalStock = 0;
-
-
-    let prices = [];
-
-
-    products.forEach(product => {
-
-        totalStock +=
-            Number(product.stock || 0);
-
-        prices.push(
-            Number(product.price || 0)
+    const matched =
+        stockProducts.filter(product =>
+            productMatchesType(product, type) &&
+            productMatchesModel(product, model)
         );
 
+
+    const selectedModel =
+        STOCK_MODELS.find(item => item.value === model);
+
+    const modelName =
+        selectedModel ? selectedModel.label : model;
+
+
+    if (!matched.length) {
+
+        showCheckerResult(`
+            <div class="stock-result-title stock-result-no">
+                ❌ Нет информации о наличии
+            </div>
+
+            <div>
+                Для ${modelName} сейчас нет подходящего товара в базе.
+            </div>
+        `);
+
+        return;
+    }
+
+
+    const available =
+        matched.filter(product =>
+            Number(product.stock || 0) > 0
+        );
+
+
+    if (!available.length) {
+
+        showCheckerResult(`
+            <div class="stock-result-title stock-result-no">
+                ❌ Нет в наличии
+            </div>
+
+            <div>
+                Для ${modelName} сейчас ничего нет в наличии.
+            </div>
+        `);
+
+        return;
+    }
+
+
+    let items = "";
+
+    available.forEach(product => {
+
+        let title = product.name;
+
+        if (type === "case") {
+
+            const categoryNames = {
+                clear_cases: "Прозрачный чехол",
+                carbon_cases: "Карбоновый чехол",
+                leather_cases: "Кожаный чехол"
+            };
+
+            title =
+                categoryNames[product.category] ||
+                "Чехол";
+        }
+
+        if (type === "glass") {
+            title = "Защитное стекло";
+        }
+
+        if (type === "lenses") {
+            title = "Защитные линзы";
+        }
+
+        items += `
+            <div class="stock-result-item">
+                <span>
+                    ${title}<br>
+                    <strong>В наличии: ${Number(product.stock)} шт.</strong>
+                </span>
+
+                <span class="stock-result-price">
+                    ${formatPrice(product.price)}
+                </span>
+            </div>
+        `;
     });
 
 
-    /*
-      Если у категории одна цена —
-      показываем её.
+    showCheckerResult(`
+        <div class="stock-result-title stock-result-ok">
+            ✅ Есть в наличии
+        </div>
 
-      Если цены разные —
-      показываем минимальную.
-    */
+        <div style="margin-bottom:8px;">
+            ${modelName}
+        </div>
 
-    const uniquePrices =
-        [...new Set(prices)];
-
-
-    let priceText = "";
-
-    if (uniquePrices.length === 1) {
-
-        priceText =
-            formatPrice(uniquePrices[0]);
-
-    } else {
-
-        const minPrice =
-            Math.min(...uniquePrices);
-
-        const maxPrice =
-            Math.max(...uniquePrices);
-
-        if (minPrice === maxPrice) {
-
-            priceText =
-                formatPrice(minPrice);
-
-        } else {
-
-            priceText =
-                `от ${formatPrice(minPrice)}`;
-
-        }
-
-    }
-
-
-    if (totalStock <= 0) {
-
-        models.innerHTML = `
-            <div class="price">
-                ${priceText}
-            </div>
-
-            <div class="availability out-of-stock">
-                ❌ Нет в наличии
-            </div>
-        `;
-
-    } else {
-
-        models.innerHTML = `
-            <div class="price">
-                ${priceText}
-            </div>
-
-            <div class="availability in-stock">
-                ✅ В наличии: ${totalStock} шт.
-            </div>
-        `;
-
-    }
-
+        ${items}
+    `);
 }
 
 
-async function loadProducts() {
-
-    const cards =
-        document.querySelectorAll(
-            ".card[data-product-id], .card[data-product-category]"
-        );
-
+async function loadStockProducts() {
 
     try {
 
         const response =
             await fetch(
-                PRODUCTS_API,
+                PRODUCTS_API + "?t=" + Date.now(),
                 {
                     method: "GET",
                     cache: "no-store"
                 }
             );
 
-
         if (!response.ok) {
-
-            throw new Error(
-                "Worker вернул ошибку"
-            );
-
+            throw new Error("Worker вернул ошибку");
         }
-
 
         const data =
             await response.json();
 
-
         if (
+            !data ||
             !data.success ||
             !Array.isArray(data.products)
         ) {
-
-            throw new Error(
-                "Неверный ответ Worker"
-            );
-
+            throw new Error("Неверный ответ Worker");
         }
 
-
-        const products =
-            data.products;
-
-
-        cards.forEach(card => {
-
-            const productId =
-                card.dataset.productId;
-
-
-            const category =
-                card.dataset.productCategory;
-
-
-            /*
-              КОНКРЕТНЫЙ ТОВАР
-            */
-
-            if (productId) {
-
-                const product =
-                    products.find(
-                        item =>
-                            item.id === productId
-                    );
-
-
-                if (!product) {
-                    return;
-                }
-
-
-                const models =
-                    card.querySelector(
-                        ".models"
-                    );
-
-
-                if (!models) {
-                    return;
-                }
-
-
-                setStockInfo(
-                    models,
-                    product.price,
-                    Number(product.stock || 0)
-                );
-
-            }
-
-
-            /*
-              КАТЕГОРИЯ
-            */
-
-            if (category) {
-
-                const categoryProducts =
-                    products.filter(
-                        item =>
-                            item.category ===
-                            category
-                    );
-
-
-                setCategoryStock(
-                    card,
-                    categoryProducts
-                );
-
-            }
-
-        });
-
+        stockProducts = data.products;
 
     } catch (error) {
 
@@ -1298,57 +1502,32 @@ async function loadProducts() {
             error
         );
 
+        stockProducts = [];
 
-        /*
-          Если Worker временно недоступен,
-          не ломаем страницу и не меняем
-          остальной дизайн.
-        */
-
-        cards.forEach(card => {
-
-            const models =
-                card.querySelector(
-                    ".models"
-                );
-
-            if (!models) {
-                return;
-            }
-
-            models.innerHTML =
-                "Уточняйте наличие";
-
-        });
-
+        showCheckerResult(`
+            <div class="stock-checker-error">
+                Не удалось получить актуальные остатки. Попробуйте обновить страницу.
+            </div>
+        `);
     }
-
 }
 
 
-/*
-=========================================================
-  ЗАГРУЗКА ПРИ ОТКРЫТИИ
-=========================================================
-*/
+document.addEventListener("DOMContentLoaded", async () => {
 
-document.addEventListener(
-    "DOMContentLoaded",
-    loadProducts
-);
+    fillModelSelect();
+
+    await loadStockProducts();
+
+    document
+        .getElementById("stockCheckButton")
+        .addEventListener("click", checkStock);
+
+});
 
 
-/*
-=========================================================
-  ОБНОВЛЕНИЕ КАЖДЫЕ 30 СЕКУНД
-=========================================================
-*/
-
-setInterval(
-    loadProducts,
-    30000
-);
-
+/* Обновляем данные раз в 30 секунд */
+setInterval(loadStockProducts, 30000);
 </script>
 
 
