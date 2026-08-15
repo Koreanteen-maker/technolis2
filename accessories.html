@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Аксессуары — Техно Лис</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at 85% 10%, rgba(255,90,0,.14), transparent 30%),
+        #f3f3f3;
+    color: #111;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* HEADER */
+
+header {
+    background: #090909;
+    border-bottom: 3px solid #ff5a00;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header {
+    max-width: 1200px;
+    min-height: 80px;
+    margin: auto;
+    padding: 10px 25px;
+
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    border: 2px solid #ff5a00;
+    background: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #ff5a00;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.brand {
+    color: white;
+    font-size: 21px;
+    font-weight: 900;
+}
+
+.brand span {
+    color: #ff5a00;
+}
+
+nav {
+    margin-left: auto;
+
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: #ddd;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #ff5a00;
+}
+
+.call {
+    background: #ff5a00;
+    color: white;
+
+    padding: 14px 18px;
+    border-radius: 12px;
+
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* HERO */
+
+.hero {
+    max-width: 1200px;
+    margin: auto;
+    padding: 75px 25px 50px;
+}
+
+.subtitle {
+    color: #ff5a00;
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.hero h1 {
+    font-size: clamp(48px, 7vw, 76px);
+    line-height: .95;
+    letter-spacing: -3px;
+}
+
+.hero h1 span {
+    color: #ff5a00;
+}
+
+.hero p {
+    max-width: 700px;
+    color: #666;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-top: 22px;
+}
+
+/* CATEGORIES */
+
+.content {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px 25px 90px;
+}
+
+.category {
+    margin-bottom: 55px;
+}
+
+.category-title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 22px;
+}
+
+.category-icon {
+    width: 55px;
+    height: 55px;
+
+    border-radius: 15px;
+
+    background: #090909;
+    color: #ff5a00;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 25px;
+}
+
+.category-title h2 {
+    font-size: 30px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.card {
+    background: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 20px;
+
+    padding: 25px;
+
+    transition: .2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: #ff5a00;
+    box-shadow: 0 15px 35px rgba(0,0,0,.08);
+}
+
+.card-icon {
+    font-size: 38px;
+    margin-bottom: 18px;
+}
+
+.card h3 {
+    font-size: 19px;
+    margin-bottom: 9px;
+}
+
+.card p {
+    color: #777;
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.card .models {
+    color: #aaa;
+    font-size: 12px;
+    margin-top: 12px;
+}
+
+.card .ask {
+    display: inline-block;
+    margin-top: 18px;
+
+    color: #ff5a00;
+    font-weight: 900;
+    font-size: 14px;
+}
+
+/* CTA */
+
+.cta {
+    max-width: 1150px;
+    margin: 0 auto 80px;
+
+    background: #090909;
+    color: white;
+
+    border-radius: 28px;
+    padding: 45px;
+
+    text-align: center;
+}
+
+.cta h2 {
+    font-size: 40px;
+    margin-bottom: 12px;
+}
+
+.cta p {
+    color: #aaa;
+    margin-bottom: 25px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 55px;
+    padding: 0 25px;
+
+    background: #ff5a00;
+    color: white;
+
+    border-radius: 12px;
+    font-weight: 900;
+}
+
+/* FOOTER */
+
+footer {
+    background: #090909;
+    color: white;
+    padding: 50px 25px 25px;
+}
+
+.footer {
+    max-width: 1200px;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
+}
+
+footer h3 {
+    margin-bottom: 15px;
+}
+
+footer p,
+footer a {
+    display: block;
+    color: #999;
+    line-height: 1.8;
+}
+
+footer a:hover {
+    color: #ff5a00;
+}
+
+.copy {
+    max-width: 1200px;
+    margin: 30px auto 0;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #252525;
+
+    color: #666;
+    font-size: 13px;
+}
+
+/* MOBILE */
+
+.mobile-menu {
+    display: none;
+}
+
+@media(max-width: 1000px) {
+
+    nav {
+        display: none;
+    }
+
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 600px) {
+
+    body {
+        padding-bottom: 65px;
+    }
+
+    .header {
+        padding: 8px 15px;
+    }
+
+    .brand {
+        font-size: 18px;
+    }
+
+    .logo {
+        width: 52px;
+        height: 52px;
+    }
+
+    .call {
+        margin-left: auto;
+
+        width: 48px;
+        height: 48px;
+        padding: 0;
+
+        border-radius: 50%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 0;
+    }
+
+    .call::before {
+        content: "☎";
+        font-size: 21px;
+    }
+
+    .hero {
+        padding: 55px 18px 35px;
+    }
+
+    .hero h1 {
+        font-size: 52px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .content {
+        padding: 20px 18px 60px;
+    }
+
+    .category-title h2 {
+        font-size: 24px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .card {
+        padding: 18px;
+    }
+
+    .card-icon {
+        font-size: 30px;
+    }
+
+    .card h3 {
+        font-size: 16px;
+    }
+
+    .card p {
+        font-size: 12px;
+    }
+
+    .cta {
+        margin: 0 18px 60px;
+        padding: 35px 20px;
+    }
+
+    .cta h2 {
+        font-size: 30px;
+    }
+
+    .footer {
+        grid-template-columns: 1fr;
+    }
+
+    .mobile-menu {
+        position: fixed;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        height: 65px;
+
+        background: #090909;
+        border-top: 2px solid #ff5a00;
+
+        z-index: 2000;
+    }
+
+    .mobile-menu a {
+        color: white;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-weight: bold;
+    }
+
+    .mobile-menu a:first-child {
+        background: #ff5a00;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="header">
+
+<a href="index.html" class="logo">
+    ЛОГО
+</a>
+
+<a href="index.html" class="brand">
+    Техно <span>Лис</span>
+</a>
+
+<nav>
+    <a href="index.html">Главная</a>
+    <a href="services.html">Услуги</a>
+    <a href="price.html">Прайс</a>
+    <a href="accessories.html">Аксессуары</a>
+    <a href="repair.html">Заявка</a>
+    <a href="location.html">Где мы</a>
+    <a href="contacts.html">Контакты</a>
+</nav>
+
+<a href="tel:+79621526990" class="call">
+    Позвонить
+</a>
+
+</div>
+
+</header>
+
+
+<section class="hero">
+
+<div class="subtitle">
+ТЕХНО ЛИС · АКСЕССУАРЫ
+</div>
+
+<h1>
+Всё для <span>твоего устройства</span>
+</h1>
+
+<p>
+Защитные плёнки и стёкла, чехлы, зарядки и другие аксессуары.
+Уточнить наличие нужной модели можно по телефону или в Telegram.
+</p>
+
+</section>
+
+
+<main class="content">
+
+
+<!-- ЧЕХЛЫ -->
+
+<section class="category">
+
+<div class="category-title">
+
+<div class="category-icon">
+📱
+</div>
+
+<h2>
+Чехлы
+</h2>
+
+</div>
+
+
+<div class="grid">
+
+<div class="card">
+
+<div class="card-icon">
+🧱
+</div>
+
+<h3>
+Карбоновые чехлы
+</h3>
+
+<p>
+Стильные и прочные чехлы с карбоновой фактурой.
+</p>
+
+<div class="models">
+Уточняйте наличие модели
+</div>
+
+<a href="https://t.me/tehnafox" target="_blank" class="ask">
+Узнать наличие →
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-icon">
+👜
+</div>
+
+<h3>
+Кожаные чехлы
+</h3>
+
+<p>
+Классические кожаные чехлы для защиты смартфона.
+</p>
+
+<div class="models">
+Уточняйте наличие модели
+</div>
+
+<a href="https://t.me/tehnafox" target="_blank" class="ask">
+Узнать наличие →
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-icon">
+▫️
+</div>
+
+<h3>
+Прозрачные чехлы
+</h3>
+
+<p>
+Минималистичная защита без скрытия дизайна смартфона.
+</p>
+
+<div class="models">
+Для разных моделей
+</div>
+
+<a href="https://t.me/tehnafox" target="_blank" class="ask">
+Узнать наличие →
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-icon">
+💳
+</div>
+
+<h3>
+Картхолдеры
+</h3>
+
+<p>
+Компактные картхолдеры для банковских карт и документов.
+</p>
+
+<div class="models">
+Уточняйте наличие
+</div>
+
+<a href="https://t.me/tehnafox" target="_blank" class="ask">
+Узнать наличие →
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- APPLE -->
+
+<section class="category">
+
+<div class="category-title">
+
+<div class="category-icon">
+
+</div>
+
+<h2>
+Аксессуары для Apple
+</h2>
+
+</div>
+
+
+<div class="grid">
+
+<div class="card">
+
+<div class="card-icon">
+🔋
+</div>
+
+<h3>
+MagSafe Power Bank
+</h3>
+
+<p>
+Магнитный внешний аккумулятор для совместимых iPhone.
+</p>
+
+<div class="models">
+Для iPhone с MagSafe
+</div>
+
+<a href="https://t.me/tehnafox" target="_blank" class="ask">
+Узнать наличие →
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-icon">
+🔌
+</div>
+
+<h3>
+MagSafe зарядки
+</h3>
+
+<p>
+Беспроводные магнитные зарядки для устройств Apple.
+</p>
+
+<div class="models">
+Уточняйте наличие
+</div>
+
+<a href="https://t.me/tehnafox" target="_blank" class="ask">
+Узнать наличие →
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-icon">
+⚡
+</div>
+
+<h3>
+Зарядные устройства
+</h3>
+
+<p>
+Зарядки и кабели для смартфонов и других устройств.
+</p>
+
+<div class="models">
+USB-C · Lightning и другие
+</div>
+
+<a href="https://t.me/tehnafox" target="_blank" class="ask">
+Узнать наличие →
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-icon">
+🎧
+</div>
+
+<h3>
+Аксессуары Apple
+</h3>
+
+<p>
+Различные аксессуары и расходники для техники Apple.
+</p>
+
+<div class="models">
+Уточняйте наличие
+</div>
+
+<a href="https://t.me/tehnafox" target="_blank" class="ask">
+Узнать наличие →
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ЗАЩИТА -->
+
+<section class="category">
+
+<div class="category-title">
+
+<div class="category-icon">
+🛡️
+</div>
+
+<h2>
+Защита экрана и камер
+</h2>
+
+</div>
+
+
+<div class="grid">
+
+<div class="card">
+
+<div class="card-icon">
+🛡️
+</div>
+
+<h3>
+Премиум-плёнка
+</h3>
+
+<p>
+Поклейка защитной плёнки на экран смартфона.
+</p>
+
+<div class="models">
+1 500 ₽
+</div>
+
+<a href="price.html" class="ask">
+Посмотреть прайс →
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-icon">
+🔰
+</div>
+
+<h3>
+Бронеплёнка
+</h3>
+
+<p>
+Усиленная защита экрана от царапин и повреждений.
+</p>
+
+<div class="models">
+2 000 ₽
+</div>
+
+<a href="price.html" class="ask">
+Посмотреть прайс →
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-icon">
+🔲
+</div>
+
+<h3>
+Бронестекло iPhone
+</h3>
+
+<p>
+Защитное стекло для экрана iPhone.
+</p>
+
+<div class="models">
+2 000 ₽
+</div>
+
+<a href="price.html" class="ask">
+Посмотреть прайс →
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-icon">
+📷
+</div>
+
+<h3>
+Стекла на камеры
+</h3>
+
+<p>
+Защитные стёкла для объективов камеры iPhone.
+</p>
+
+<div class="models">
+Уточняйте наличие модели
+</div>
+
+<a href="https://t.me/tehnafox" target="_blank" class="ask">
+Узнать наличие →
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+</main>
+
+
+<div class="cta">
+
+<h2>
+Ищете конкретный аксессуар?
+</h2>
+
+<p>
+Напишите нам модель устройства — мы проверим наличие.
+</p>
+
+<a href="https://t.me/tehnafox" target="_blank" class="btn">
+✈️ Написать в Telegram
+</a>
+
+</div>
+
+
+<footer>
+
+<div class="footer">
+
+<div>
+
+<h3>
+Техно <span style="color:#ff5a00">Лис</span>
+</h3>
+
+<p>
+Техника в надёжных лапах!
+</p>
+
+</div>
+
+
+<div>
+
+<h3>
+Навигация
+</h3>
+
+<a href="index.html">Главная</a>
+<a href="services.html">Услуги</a>
+<a href="price.html">Прайс</a>
+<a href="repair.html">Заявка</a>
+
+</div>
+
+
+<div>
+
+<h3>
+Контакты
+</h3>
+
+<a href="tel:+79621526990">
+📞 8 962 152-69-90
+</a>
+
+<a href="https://t.me/tehnafox" target="_blank">
+✈️ @tehnafox
+</a>
+
+<a href="location.html">
+📍 ТРК «Сити Молл», 1 этаж
+</a>
+
+</div>
+
+</div>
+
+
+<div class="copy">
+© 2026 Техно Лис. Все права защищены.
+</div>
+
+</footer>
+
+
+<div class="mobile-menu">
+
+<a href="tel:+79621526990">
+📞 Позвонить
+</a>
+
+<a href="https://t.me/tehnafox" target="_blank">
+✈️ Telegram
+</a>
+
+</div>
+
+</body>
+</html>
