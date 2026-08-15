@@ -3,386 +3,351 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Где мы — Техно Лис</title>
+<title>Услуги — Техно Лис</title>
 
 <style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f3f3f3;
+    color:#111;
+}
+a{text-decoration:none;color:inherit}
+
+header{
+    background:#090909;
+    border-bottom:3px solid #ff5a00;
+    position:sticky;
+    top:0;
+    z-index:1000;
 }
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background:
-        radial-gradient(circle at 85% 10%, rgba(255,90,0,.15), transparent 30%),
-        #f3f3f3;
-    color: #111;
+.header{
+    max-width:1200px;
+    min-height:80px;
+    margin:auto;
+    padding:10px 25px;
+    display:flex;
+    align-items:center;
+    gap:20px;
 }
 
-a {
-    text-decoration: none;
-    color: inherit;
+.logo{
+    width:58px;
+    height:58px;
+    border-radius:50%;
+    border:2px solid #ff5a00;
+    background:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#ff5a00;
+    font-size:11px;
+    font-weight:bold;
 }
 
-header {
-    background: #090909;
-    border-bottom: 3px solid #ff5a00;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+.brand{
+    color:white;
+    font-size:21px;
+    font-weight:900;
 }
 
-.header {
-    max-width: 1200px;
-    min-height: 80px;
-    margin: auto;
-    padding: 10px 25px;
+.brand span{color:#ff5a00}
 
-    display: flex;
-    align-items: center;
-    gap: 20px;
+nav{
+    margin-left:auto;
+    display:flex;
+    gap:20px;
 }
 
-.logo {
-    width: 58px;
-    height: 58px;
-
-    border-radius: 50%;
-    border: 2px solid #ff5a00;
-    background: white;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    color: #ff5a00;
-    font-size: 11px;
-    font-weight: bold;
+nav a{
+    color:#ddd;
+    font-size:14px;
+    font-weight:bold;
 }
 
-.brand {
-    color: white;
-    font-size: 21px;
-    font-weight: 900;
+nav a:hover{color:#ff5a00}
+
+.call{
+    background:#ff5a00;
+    color:white;
+    padding:14px 18px;
+    border-radius:12px;
+    font-weight:bold;
+    white-space:nowrap;
 }
 
-.brand span {
-    color: #ff5a00;
+.hero{
+    max-width:1200px;
+    margin:auto;
+    padding:70px 25px 40px;
 }
 
-nav {
-    margin-left: auto;
-    display: flex;
-    gap: 20px;
+.subtitle{
+    color:#ff5a00;
+    font-size:14px;
+    font-weight:900;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    margin-bottom:12px;
 }
 
-nav a {
-    color: #ddd;
-    font-size: 14px;
-    font-weight: bold;
+.hero h1{
+    font-size:clamp(48px,7vw,72px);
+    line-height:.95;
+    letter-spacing:-3px;
 }
 
-nav a:hover {
-    color: #ff5a00;
+.hero h1 span{color:#ff5a00}
+
+.hero p{
+    max-width:760px;
+    color:#666;
+    font-size:18px;
+    line-height:1.6;
+    margin-top:20px;
 }
 
-.call {
-    background: #ff5a00;
-    color: white;
-    padding: 14px 18px;
-    border-radius: 12px;
-    font-weight: bold;
-    white-space: nowrap;
+.services{
+    max-width:1200px;
+    margin:auto;
+    padding:20px 25px 90px;
 }
 
-.hero {
-    max-width: 1200px;
-    margin: auto;
-    padding: 70px 25px 40px;
+.grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
 }
 
-.subtitle {
-    color: #ff5a00;
-    font-size: 14px;
-    font-weight: 900;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 12px;
+.card{
+    background:white;
+    border:1px solid #e4e4e4;
+    border-radius:24px;
+    padding:30px;
+    min-height:300px;
+    display:flex;
+    flex-direction:column;
+    transition:.2s;
 }
 
-.hero h1 {
-    font-size: clamp(48px, 7vw, 72px);
-    line-height: .95;
-    letter-spacing: -3px;
+.card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 15px 45px rgba(0,0,0,.08);
 }
 
-.hero h1 span {
-    color: #ff5a00;
+.icon{
+    width:60px;
+    height:60px;
+    border-radius:17px;
+    background:#090909;
+    color:#ff5a00;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:27px;
+    margin-bottom:25px;
 }
 
-.hero p {
-    max-width: 700px;
-    color: #666;
-    font-size: 18px;
-    line-height: 1.6;
-    margin-top: 20px;
+.card h2{
+    font-size:25px;
+    margin-bottom:12px;
 }
 
-.location {
-    max-width: 1100px;
-    margin: auto;
-    padding: 20px 25px 90px;
+.card p{
+    color:#666;
+    line-height:1.6;
+    margin-bottom:20px;
 }
 
-.location-card {
-    background: white;
-    border-radius: 28px;
-    overflow: hidden;
-    border: 1px solid #e3e3e3;
-    box-shadow: 0 15px 50px rgba(0,0,0,.07);
+.card ul{
+    list-style:none;
+    color:#555;
+    line-height:1.9;
+    margin-bottom:20px;
 }
 
-.info {
-    padding: 35px;
+.card li::before{
+    content:"✓";
+    color:#ff5a00;
+    font-weight:bold;
+    margin-right:8px;
 }
 
-.info h2 {
-    font-size: 30px;
-    margin-bottom: 20px;
+.card .link{
+    margin-top:auto;
+    color:#ff5a00;
+    font-weight:900;
 }
 
-.address {
-    display: flex;
-    align-items: flex-start;
-    gap: 15px;
-    margin-bottom: 25px;
+.banner{
+    max-width:1150px;
+    margin:0 auto 80px;
+    background:#090909;
+    color:white;
+    border-radius:28px;
+    padding:45px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:30px;
 }
 
-.icon {
-    width: 50px;
-    height: 50px;
-    flex-shrink: 0;
-
-    border-radius: 14px;
-
-    background: #090909;
-    color: #ff5a00;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 23px;
+.banner h2{
+    font-size:34px;
+    margin-bottom:10px;
 }
 
-.address strong {
-    display: block;
-    font-size: 18px;
-    margin-bottom: 5px;
+.banner p{
+    color:#aaa;
+    max-width:650px;
 }
 
-.address p {
-    color: #777;
-    line-height: 1.5;
+.btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:52px;
+    padding:0 22px;
+    border-radius:12px;
+    background:#ff5a00;
+    color:white;
+    font-weight:900;
+    white-space:nowrap;
 }
 
-.buttons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
+footer{
+    background:#090909;
+    color:white;
+    padding:50px 25px 25px;
 }
 
-.btn {
-    min-height: 52px;
-    padding: 0 20px;
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 12px;
-
-    background: #ff5a00;
-    color: white;
-
-    font-weight: 900;
+.footer{
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr;
+    gap:40px;
 }
 
-.btn.dark {
-    background: #090909;
-}
-
-.map {
-    width: 100%;
-    height: 500px;
-    border: 0;
-    display: block;
-}
-
-footer {
-    background: #090909;
-    color: white;
-    padding: 50px 25px 25px;
-}
-
-.footer {
-    max-width: 1200px;
-    margin: auto;
-
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 40px;
-}
-
-footer h3 {
-    margin-bottom: 15px;
-}
+footer h3{margin-bottom:15px}
 
 footer p,
-footer a {
-    display: block;
-    color: #999;
-    line-height: 1.8;
+footer a{
+    display:block;
+    color:#999;
+    line-height:1.8;
 }
 
-footer a:hover {
-    color: #ff5a00;
+footer a:hover{color:#ff5a00}
+
+.copy{
+    max-width:1200px;
+    margin:30px auto 0;
+    padding-top:20px;
+    border-top:1px solid #252525;
+    color:#666;
+    font-size:13px;
 }
 
-.copy {
-    max-width: 1200px;
-    margin: 30px auto 0;
-    padding-top: 20px;
+.mobile-menu{display:none}
 
-    border-top: 1px solid #252525;
-
-    color: #666;
-    font-size: 13px;
+@media(max-width:950px){
+    nav{display:none}
+    .grid{grid-template-columns:repeat(2,1fr)}
 }
 
-.mobile-menu {
-    display: none;
-}
+@media(max-width:650px){
+    body{padding-bottom:65px}
 
-@media(max-width: 900px) {
+    .header{padding:8px 15px}
 
-    nav {
-        display: none;
-    }
-}
+    .brand{font-size:18px}
 
-@media(max-width: 600px) {
-
-    body {
-        padding-bottom: 65px;
+    .logo{
+        width:52px;
+        height:52px;
     }
 
-    .header {
-        padding: 8px 15px;
+    .call{
+        margin-left:auto;
+        width:48px;
+        height:48px;
+        padding:0;
+        border-radius:50%;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        font-size:0;
     }
 
-    .brand {
-        font-size: 18px;
+    .call::before{
+        content:"☎";
+        font-size:21px;
     }
 
-    .logo {
-        width: 52px;
-        height: 52px;
+    .hero{
+        padding:55px 18px 30px;
     }
 
-    .call {
-        margin-left: auto;
+    .hero h1{font-size:50px}
 
-        width: 48px;
-        height: 48px;
+    .hero p{font-size:16px}
 
-        padding: 0;
-
-        border-radius: 50%;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        font-size: 0;
+    .services{
+        padding:20px 18px 60px;
     }
 
-    .call::before {
-        content: "☎";
-        font-size: 21px;
+    .grid{
+        grid-template-columns:1fr;
     }
 
-    .hero {
-        padding: 55px 18px 30px;
+    .card{
+        min-height:auto;
     }
 
-    .hero h1 {
-        font-size: 50px;
+    .banner{
+        margin:0 18px 60px;
+        padding:28px;
+        display:block;
     }
 
-    .hero p {
-        font-size: 16px;
+    .banner h2{
+        font-size:28px;
     }
 
-    .location {
-        padding: 20px 18px 60px;
+    .banner .btn{
+        margin-top:22px;
+        width:100%;
     }
 
-    .info {
-        padding: 23px;
+    .footer{
+        grid-template-columns:1fr;
     }
 
-    .info h2 {
-        font-size: 25px;
+    .mobile-menu{
+        position:fixed;
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        left:0;
+        right:0;
+        bottom:0;
+        height:65px;
+        background:#090909;
+        border-top:2px solid #ff5a00;
+        z-index:2000;
     }
 
-    .map {
-        height: 420px;
+    .mobile-menu a{
+        color:white;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        font-weight:bold;
     }
 
-    .buttons {
-        flex-direction: column;
-    }
-
-    .btn {
-        width: 100%;
-    }
-
-    .footer {
-        grid-template-columns: 1fr;
-    }
-
-    .mobile-menu {
-        position: fixed;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-
-        left: 0;
-        right: 0;
-        bottom: 0;
-
-        height: 65px;
-
-        background: #090909;
-        border-top: 2px solid #ff5a00;
-
-        z-index: 2000;
-    }
-
-    .mobile-menu a {
-        color: white;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        font-weight: bold;
-    }
-
-    .mobile-menu a:first-child {
-        background: #ff5a00;
+    .mobile-menu a:first-child{
+        background:#ff5a00;
     }
 }
 </style>
@@ -391,159 +356,215 @@ footer a:hover {
 <body>
 
 <header>
-
 <div class="header">
 
-<a href="index.html" class="logo">
-    ЛОГО
-</a>
+<a href="index.html" class="logo">ЛОГО</a>
 
 <a href="index.html" class="brand">
-    Техно <span>Лис</span>
+Техно <span>Лис</span>
 </a>
 
 <nav>
-    <a href="index.html">Главная</a>
-    <a href="services.html">Услуги</a>
-    <a href="price.html">Прайс</a>
-    <a href="accessories.html">Аксессуары</a>
-    <a href="repair.html">Заявка</a>
-    <a href="location.html">Где мы</a>
-    <a href="contacts.html">Контакты</a>
+<a href="index.html">Главная</a>
+<a href="services.html">Услуги</a>
+<a href="price.html">Прайс</a>
+<a href="accessories.html">Аксессуары</a>
+<a href="repair.html">Заявка</a>
+<a href="location.html">Где мы</a>
+<a href="contacts.html">Контакты</a>
 </nav>
 
-<a href="tel:+79621526990" class="call">
-    Позвонить
-</a>
+<a href="tel:+79621526990" class="call">Позвонить</a>
 
 </div>
-
 </header>
 
 <section class="hero">
 
 <div class="subtitle">
-ТЕХНО ЛИС · МЫ НА КАРТЕ
+ТЕХНО ЛИС · РЕМОНТ ТЕХНИКИ
 </div>
 
 <h1>
-Как нас <span>найти</span>
+Наши <span>услуги</span>
 </h1>
 
 <p>
-Мы находимся в Южно-Сахалинске, в ТРК «Сити Молл».
-Найти нас можно на первом этаже.
+Диагностируем и ремонтируем смартфоны, планшеты,
+ноутбуки и другую электронику. Перед ремонтом
+согласовываем стоимость и сроки.
 </p>
 
 </section>
 
-<main class="location">
+<main class="services">
 
-<div class="location-card">
+<div class="grid">
 
-<div class="info">
+<article class="card">
+<div class="icon">📱</div>
 
-<h2>
-Наш адрес
-</h2>
-
-<div class="address">
-
-<div class="icon">
-📍
-</div>
-
-<div>
-
-<strong>
-ТРК «Сити Молл», 1 этаж
-</strong>
+<h2>Смартфоны</h2>
 
 <p>
-г. Южно-Сахалинск
+Ремонт популярных моделей телефонов
+и замена основных компонентов.
 </p>
 
-</div>
+<ul>
+<li>Замена дисплея</li>
+<li>Замена аккумулятора</li>
+<li>Ремонт разъёма зарядки</li>
+<li>Ремонт камер</li>
+<li>Ремонт после попадания влаги</li>
+</ul>
 
-</div>
-
-<div class="address">
-
-<div class="icon">
-📞
-</div>
-
-<div>
-
-<strong>
-8 962 152-69-90
-</strong>
-
-<p>
-Позвоните нам, если не можете найти магазин.
-</p>
-
-</div>
-
-</div>
-
-<div class="address">
-
-<div class="icon">
-✈️
-</div>
-
-<div>
-
-<strong>
-Telegram: @tehnafox
-</strong>
-
-<p>
-Можно написать нам и уточнить, как пройти.
-</p>
-
-</div>
-
-</div>
-
-<div class="buttons">
-
-<a
-href="tel:+79621526990"
-class="btn"
->
-📞 Позвонить
+<a class="link" href="repair.html">
+Оставить заявку →
 </a>
+</article>
 
-<a
-href="https://t.me/tehnafox"
-target="_blank"
-class="btn dark"
->
-✈️ Написать в Telegram
+<article class="card">
+<div class="icon">💻</div>
+
+<h2>Ноутбуки</h2>
+
+<p>
+Диагностика и ремонт аппаратных
+и программных неисправностей.
+</p>
+
+<ul>
+<li>Ремонт материнской платы</li>
+<li>Замена экрана</li>
+<li>Замена клавиатуры</li>
+<li>Чистка системы охлаждения</li>
+<li>Замена накопителя</li>
+</ul>
+
+<a class="link" href="repair.html">
+Оставить заявку →
 </a>
+</article>
 
-</div>
+<article class="card">
+<div class="icon">📲</div>
 
-</div>
+<h2>Планшеты</h2>
 
-<iframe
-class="map"
-src="https://yandex.ru/map-widget/v1/?text=ТРК%20Сити%20Молл%20Южно-Сахалинск&z=16"
-allowfullscreen>
-</iframe>
+<p>
+Восстанавливаем планшеты после падений,
+ударов и других неисправностей.
+</p>
+
+<ul>
+<li>Замена стекла и дисплея</li>
+<li>Замена аккумулятора</li>
+<li>Замена разъёмов</li>
+<li>Ремонт кнопок</li>
+<li>Программный ремонт</li>
+</ul>
+
+<a class="link" href="repair.html">
+Оставить заявку →
+</a>
+</article>
+
+<article class="card">
+<div class="icon">🎮</div>
+
+<h2>Игровые приставки</h2>
+
+<p>
+Ремонтируем игровые консоли и устраняем
+проблемы с перегревом и питанием.
+</p>
+
+<ul>
+<li>Чистка от пыли</li>
+<li>Замена термопасты</li>
+<li>Ремонт HDMI</li>
+<li>Ремонт питания</li>
+<li>Устранение перегрева</li>
+</ul>
+
+<a class="link" href="repair.html">
+Оставить заявку →
+</a>
+</article>
+
+<article class="card">
+<div class="icon">⌚</div>
+
+<h2>Носимая техника</h2>
+
+<p>
+Работаем со смарт-часами и другой
+современной электроникой.
+</p>
+
+<ul>
+<li>Замена аккумулятора</li>
+<li>Замена экрана</li>
+<li>Ремонт кнопок</li>
+<li>Диагностика</li>
+</ul>
+
+<a class="link" href="repair.html">
+Оставить заявку →
+</a>
+</article>
+
+<article class="card">
+<div class="icon">🔧</div>
+
+<h2>Другая техника</h2>
+
+<p>
+Если не нашли свою технику в списке —
+просто напишите нам.
+</p>
+
+<ul>
+<li>Бесплатная консультация</li>
+<li>Предварительная диагностика</li>
+<li>Согласование стоимости</li>
+<li>Гарантия на ремонт</li>
+</ul>
+
+<a class="link" href="repair.html">
+Оставить заявку →
+</a>
+</article>
 
 </div>
 
 </main>
+
+<section class="banner">
+
+<div>
+<h2>
+Не нашли нужную услугу?
+</h2>
+
+<p>
+Опишите проблему — мастер посмотрит заявку
+и подскажет, можем ли мы помочь.
+</p>
+</div>
+
+<a href="repair.html" class="btn">
+Оставить заявку
+</a>
+
+</section>
 
 <footer>
 
 <div class="footer">
 
 <div>
-
 <h3>
 Техно <span style="color:#ff5a00">Лис</span>
 </h3>
@@ -551,28 +572,20 @@ allowfullscreen>
 <p>
 Техника в надёжных лапах!
 </p>
-
 </div>
 
 <div>
-
-<h3>
-Навигация
-</h3>
+<h3>Навигация</h3>
 
 <a href="index.html">Главная</a>
 <a href="services.html">Услуги</a>
 <a href="price.html">Прайс</a>
 <a href="accessories.html">Аксессуары</a>
 <a href="repair.html">Заявка</a>
-
 </div>
 
 <div>
-
-<h3>
-Контакты
-</h3>
+<h3>Контакты</h3>
 
 <a href="tel:+79621526990">
 📞 8 962 152-69-90
@@ -585,7 +598,6 @@ allowfullscreen>
 <a href="location.html">
 📍 ТРК «Сити Молл», 1 этаж
 </a>
-
 </div>
 
 </div>
