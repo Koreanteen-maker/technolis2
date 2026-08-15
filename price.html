@@ -3,409 +3,474 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Прайс — Техно Лис</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-
-body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:#f3f3f3;
-    color:#111;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-a{
-    text-decoration:none;
-    color:inherit;
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background:
+        radial-gradient(circle at 90% 10%, rgba(255,90,0,.14), transparent 30%),
+        radial-gradient(circle at 5% 60%, rgba(255,90,0,.08), transparent 25%),
+        #f3f3f3;
+    color: #111;
 }
 
-header{
-    background:#090909;
-    border-bottom:3px solid #ff5a00;
-    position:sticky;
-    top:0;
-    z-index:1000;
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
-.header{
-    max-width:1200px;
-    min-height:80px;
-    margin:auto;
-    padding:10px 25px;
+/* HEADER */
 
-    display:flex;
-    align-items:center;
-    gap:20px;
+header {
+    background: #090909;
+    border-bottom: 3px solid #ff5a00;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-.logo{
-    width:58px;
-    height:58px;
+.header {
+    max-width: 1200px;
+    min-height: 80px;
+    margin: auto;
+    padding: 10px 25px;
 
-    border-radius:50%;
-    border:2px solid #ff5a00;
-    background:white;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    color:#ff5a00;
-    font-size:11px;
-    font-weight:bold;
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
-.brand{
-    color:white;
-    font-size:21px;
-    font-weight:900;
+.logo {
+    width: 58px;
+    height: 58px;
+
+    border-radius: 50%;
+    border: 2px solid #ff5a00;
+    background: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #ff5a00;
+    font-size: 11px;
+    font-weight: bold;
 }
 
-.brand span{
-    color:#ff5a00;
+.brand {
+    color: white;
+    font-size: 21px;
+    font-weight: 900;
 }
 
-nav{
-    margin-left:auto;
-    display:flex;
-    gap:20px;
+.brand span {
+    color: #ff5a00;
 }
 
-nav a{
-    color:#ddd;
-    font-size:14px;
-    font-weight:bold;
+nav {
+    margin-left: auto;
+
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
-nav a:hover{
-    color:#ff5a00;
+nav a {
+    color: #ddd;
+    font-size: 14px;
+    font-weight: bold;
 }
 
-.call{
-    background:#ff5a00;
-    color:white;
-    padding:14px 18px;
-    border-radius:12px;
-    font-weight:bold;
-    white-space:nowrap;
+nav a:hover {
+    color: #ff5a00;
 }
 
-.hero{
-    max-width:1200px;
-    margin:auto;
-    padding:70px 25px 40px;
+.call {
+    background: #ff5a00;
+    color: white;
+
+    padding: 14px 18px;
+    border-radius: 12px;
+
+    font-weight: bold;
+    white-space: nowrap;
 }
 
-.subtitle{
-    color:#ff5a00;
-    font-size:14px;
-    font-weight:900;
-    letter-spacing:1px;
-    text-transform:uppercase;
-    margin-bottom:12px;
+/* HERO */
+
+.hero {
+    max-width: 1200px;
+    margin: auto;
+    padding: 75px 25px 50px;
 }
 
-.hero h1{
-    font-size:clamp(48px,7vw,72px);
-    line-height:.95;
-    letter-spacing:-3px;
+.subtitle {
+    color: #ff5a00;
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
 }
 
-.hero h1 span{
-    color:#ff5a00;
+.hero h1 {
+    font-size: clamp(48px, 7vw, 76px);
+    line-height: .95;
+    letter-spacing: -3px;
 }
 
-.hero p{
-    max-width:760px;
-    color:#666;
-    font-size:18px;
-    line-height:1.6;
-    margin-top:20px;
+.hero h1 span {
+    color: #ff5a00;
 }
 
-.price{
-    max-width:1100px;
-    margin:auto;
-    padding:20px 25px 90px;
+.hero p {
+    max-width: 700px;
+    color: #666;
+    font-size: 18px;
+    line-height: 1.6;
+    margin-top: 22px;
 }
 
-.table{
-    background:white;
-    border-radius:24px;
-    overflow:hidden;
-    border:1px solid #e2e2e2;
-    box-shadow:0 10px 40px rgba(0,0,0,.05);
+/* PRICE */
+
+.price-wrap {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px 25px 90px;
 }
 
-.row{
-    display:grid;
-    grid-template-columns:2fr 1fr 1fr;
-
-    min-height:70px;
-
-    align-items:center;
-
-    padding:0 25px;
-
-    border-bottom:1px solid #eee;
+.category {
+    margin-bottom: 45px;
 }
 
-.row:last-child{
-    border-bottom:0;
+.category-title {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
 }
 
-.row.header-row{
-    background:#090909;
-    color:white;
-    font-weight:900;
+.category-icon {
+    width: 52px;
+    height: 52px;
+
+    background: #090909;
+    color: #ff5a00;
+
+    border-radius: 14px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 24px;
 }
 
-.row:not(.header-row):hover{
-    background:#fafafa;
+.category-title h2 {
+    font-size: 30px;
 }
 
-.name{
-    font-weight:700;
+.price-list {
+    background: white;
+
+    border: 1px solid #e3e3e3;
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,.04);
 }
 
-.price-value{
-    color:#ff5a00;
-    font-weight:900;
+.price-row {
+    min-height: 72px;
+    padding: 16px 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    border-bottom: 1px solid #eee;
 }
 
-.note{
-    color:#888;
-    font-size:14px;
+.price-row:last-child {
+    border-bottom: none;
 }
 
-.info{
-    margin-top:30px;
-
-    background:#fff3ea;
-    border:1px solid #ffd7be;
-    border-radius:20px;
-
-    padding:25px;
-
-    color:#555;
-    line-height:1.6;
+.service-name {
+    font-size: 16px;
+    font-weight: bold;
 }
 
-.cta{
-    max-width:1100px;
-    margin:0 auto 80px;
-
-    background:#090909;
-    color:white;
-
-    border-radius:28px;
-    padding:45px;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:30px;
+.service-note {
+    display: block;
+    color: #888;
+    font-size: 13px;
+    font-weight: normal;
+    margin-top: 5px;
 }
 
-.cta h2{
-    font-size:34px;
-    margin-bottom:10px;
+.price {
+    color: #ff5a00;
+    font-size: 18px;
+    font-weight: 900;
+    white-space: nowrap;
 }
 
-.cta p{
-    color:#aaa;
+/* NOTE */
+
+.note {
+    margin-top: 30px;
+
+    background: #090909;
+    color: white;
+
+    border-radius: 20px;
+    padding: 25px;
 }
 
-.btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-
-    min-height:52px;
-    padding:0 22px;
-
-    border-radius:12px;
-
-    background:#ff5a00;
-    color:white;
-
-    font-weight:900;
-    white-space:nowrap;
+.note strong {
+    color: #ff5a00;
 }
 
-footer{
-    background:#090909;
-    color:white;
-    padding:50px 25px 25px;
+.note p {
+    color: #aaa;
+    line-height: 1.6;
+    margin-top: 7px;
 }
 
-.footer{
-    max-width:1200px;
-    margin:auto;
+/* CTA */
 
-    display:grid;
-    grid-template-columns:2fr 1fr 1fr;
-    gap:40px;
+.cta {
+    max-width: 1150px;
+    margin: 0 auto 80px;
+
+    background: #090909;
+    color: white;
+
+    border-radius: 28px;
+    padding: 45px;
+
+    text-align: center;
 }
 
-footer h3{
-    margin-bottom:15px;
+.cta h2 {
+    font-size: 40px;
+    margin-bottom: 12px;
+}
+
+.cta p {
+    color: #aaa;
+    margin-bottom: 25px;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 55px;
+    padding: 0 25px;
+
+    background: #ff5a00;
+    color: white;
+
+    border-radius: 12px;
+
+    font-weight: 900;
+}
+
+/* FOOTER */
+
+footer {
+    background: #090909;
+    color: white;
+    padding: 50px 25px 25px;
+}
+
+.footer {
+    max-width: 1200px;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
+}
+
+footer h3 {
+    margin-bottom: 15px;
 }
 
 footer p,
-footer a{
-    display:block;
-    color:#999;
-    line-height:1.8;
+footer a {
+    display: block;
+    color: #999;
+    line-height: 1.8;
 }
 
-footer a:hover{
-    color:#ff5a00;
+footer a:hover {
+    color: #ff5a00;
 }
 
-.copy{
-    max-width:1200px;
-    margin:30px auto 0;
-    padding-top:20px;
+.copy {
+    max-width: 1200px;
+    margin: 30px auto 0;
 
-    border-top:1px solid #252525;
+    padding-top: 20px;
 
-    color:#666;
-    font-size:13px;
+    border-top: 1px solid #252525;
+
+    color: #666;
+    font-size: 13px;
 }
 
-.mobile-menu{
-    display:none;
+/* MOBILE */
+
+.mobile-menu {
+    display: none;
 }
 
-@media(max-width:950px){
+@media(max-width: 900px) {
 
-    nav{
-        display:none;
+    nav {
+        display: none;
     }
 }
 
-@media(max-width:650px){
+@media(max-width: 600px) {
 
-    body{
-        padding-bottom:65px;
+    body {
+        padding-bottom: 65px;
     }
 
-    .header{
-        padding:8px 15px;
+    .header {
+        padding: 8px 15px;
     }
 
-    .brand{
-        font-size:18px;
+    .brand {
+        font-size: 18px;
     }
 
-    .logo{
-        width:52px;
-        height:52px;
+    .logo {
+        width: 52px;
+        height: 52px;
     }
 
-    .call{
-        margin-left:auto;
+    .call {
+        margin-left: auto;
 
-        width:48px;
-        height:48px;
+        width: 48px;
+        height: 48px;
 
-        padding:0;
+        padding: 0;
 
-        border-radius:50%;
+        border-radius: 50%;
 
-        display:flex;
-        align-items:center;
-        justify-content:center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-        font-size:0;
+        font-size: 0;
     }
 
-    .call::before{
-        content:"☎";
-        font-size:21px;
+    .call::before {
+        content: "☎";
+        font-size: 21px;
     }
 
-    .hero{
-        padding:55px 18px 30px;
+    .hero {
+        padding: 55px 18px 35px;
     }
 
-    .hero h1{
-        font-size:50px;
+    .hero h1 {
+        font-size: 52px;
     }
 
-    .hero p{
-        font-size:16px;
+    .hero p {
+        font-size: 16px;
     }
 
-    .price{
-        padding:20px 18px 60px;
+    .price-wrap {
+        padding: 20px 18px 60px;
     }
 
-    .table{
-        border-radius:18px;
+    .category-title h2 {
+        font-size: 24px;
     }
 
-    .row{
-        grid-template-columns:1.5fr .8fr;
-        padding:16px;
-        min-height:65px;
-        gap:10px;
+    .price-row {
+        padding: 17px;
+        align-items: flex-start;
     }
 
-    .row .note{
-        display:none;
+    .service-name {
+        font-size: 14px;
+        line-height: 1.4;
     }
 
-    .cta{
-        margin:0 18px 60px;
-        padding:28px;
-
-        display:block;
+    .service-note {
+        font-size: 12px;
     }
 
-    .cta h2{
-        font-size:28px;
+    .price {
+        font-size: 15px;
     }
 
-    .cta .btn{
-        width:100%;
-        margin-top:22px;
+    .note {
+        padding: 20px;
     }
 
-    .footer{
-        grid-template-columns:1fr;
+    .cta {
+        margin: 0 18px 60px;
+        padding: 35px 20px;
     }
 
-    .mobile-menu{
-        position:fixed;
-        display:grid;
-        grid-template-columns:1fr 1fr;
-
-        left:0;
-        right:0;
-        bottom:0;
-
-        height:65px;
-
-        background:#090909;
-        border-top:2px solid #ff5a00;
-
-        z-index:2000;
+    .cta h2 {
+        font-size: 30px;
     }
 
-    .mobile-menu a{
-        color:white;
-
-        display:flex;
-        align-items:center;
-        justify-content:center;
-
-        font-weight:bold;
+    .footer {
+        grid-template-columns: 1fr;
     }
 
-    .mobile-menu a:first-child{
-        background:#ff5a00;
+    .mobile-menu {
+        position: fixed;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        height: 65px;
+
+        background: #090909;
+
+        border-top: 2px solid #ff5a00;
+
+        z-index: 2000;
+    }
+
+    .mobile-menu a {
+        color: white;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-weight: bold;
+    }
+
+    .mobile-menu a:first-child {
+        background: #ff5a00;
     }
 }
 </style>
@@ -418,35 +483,36 @@ footer a:hover{
 <div class="header">
 
 <a href="index.html" class="logo">
-ЛОГО
+    ЛОГО
 </a>
 
 <a href="index.html" class="brand">
-Техно <span>Лис</span>
+    Техно <span>Лис</span>
 </a>
 
 <nav>
-<a href="index.html">Главная</a>
-<a href="services.html">Услуги</a>
-<a href="price.html">Прайс</a>
-<a href="accessories.html">Аксессуары</a>
-<a href="repair.html">Заявка</a>
-<a href="location.html">Где мы</a>
-<a href="contacts.html">Контакты</a>
+    <a href="index.html">Главная</a>
+    <a href="services.html">Услуги</a>
+    <a href="price.html">Прайс</a>
+    <a href="accessories.html">Аксессуары</a>
+    <a href="repair.html">Заявка</a>
+    <a href="location.html">Где мы</a>
+    <a href="contacts.html">Контакты</a>
 </nav>
 
 <a href="tel:+79621526990" class="call">
-Позвонить
+    Позвонить
 </a>
 
 </div>
 
 </header>
 
+
 <section class="hero">
 
 <div class="subtitle">
-ТЕХНО ЛИС · СТОИМОСТЬ
+ТЕХНО ЛИС · СЕРВИСНЫЙ ЦЕНТР
 </div>
 
 <h1>
@@ -454,103 +520,308 @@ footer a:hover{
 </h1>
 
 <p>
-Ниже указаны ориентировочные цены на популярные
-виды ремонта. Точную стоимость мастер определяет
-после диагностики.
+Стоимость популярных услуг. Точная цена ремонта зависит
+от модели устройства и характера неисправности.
 </p>
 
 </section>
 
-<main class="price">
 
-<div class="table">
+<main class="price-wrap">
 
-<div class="row header-row">
-<div>Услуга</div>
-<div>Цена</div>
-<div class="note">Примечание</div>
+
+<!-- ЗАЩИТА -->
+
+<section class="category">
+
+<div class="category-title">
+
+<div class="category-icon">
+🛡️
 </div>
 
-<div class="row">
-<div class="name">Диагностика</div>
-<div class="price-value">от 0 ₽</div>
-<div class="note">При ремонте — бесплатно</div>
+<h2>
+Защита
+</h2>
+
 </div>
 
-<div class="row">
-<div class="name">Замена аккумулятора</div>
-<div class="price-value">от 1 000 ₽</div>
-<div class="note">Без стоимости детали</div>
+
+<div class="price-list">
+
+<div class="price-row">
+
+<div class="service-name">
+Премиум-плёнка
 </div>
 
-<div class="row">
-<div class="name">Замена дисплея</div>
-<div class="price-value">от 1 500 ₽</div>
-<div class="note">Зависит от модели</div>
-</div>
-
-<div class="row">
-<div class="name">Замена разъёма зарядки</div>
-<div class="price-value">от 1 000 ₽</div>
-<div class="note">Зависит от устройства</div>
-</div>
-
-<div class="row">
-<div class="name">Чистка ноутбука</div>
-<div class="price-value">от 1 500 ₽</div>
-<div class="note">Чистка + термопаста</div>
-</div>
-
-<div class="row">
-<div class="name">Ремонт после влаги</div>
-<div class="price-value">от 1 500 ₽</div>
-<div class="note">После диагностики</div>
-</div>
-
-<div class="row">
-<div class="name">Ремонт HDMI</div>
-<div class="price-value">от 2 000 ₽</div>
-<div class="note">Игровые приставки</div>
-</div>
-
-<div class="row">
-<div class="name">Программный ремонт</div>
-<div class="price-value">от 500 ₽</div>
-<div class="note">Зависит от задачи</div>
+<div class="price">
+1 500 ₽
 </div>
 
 </div>
 
-<div class="info">
-⚠️ Цены являются ориентировочными. Стоимость ремонта
-может отличаться в зависимости от модели устройства,
-необходимых запчастей и характера неисправности.
-Перед выполнением ремонта мастер обязательно
-согласует стоимость с клиентом.
+
+<div class="price-row">
+
+<div class="service-name">
+Бронеплёнка
 </div>
+
+<div class="price">
+2 000 ₽
+</div>
+
+</div>
+
+
+<div class="price-row">
+
+<div class="service-name">
+Бронестекло для iPhone
+</div>
+
+<div class="price">
+2 000 ₽
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ДИАГНОСТИКА -->
+
+<section class="category">
+
+<div class="category-title">
+
+<div class="category-icon">
+🔍
+</div>
+
+<h2>
+Диагностика
+</h2>
+
+</div>
+
+
+<div class="price-list">
+
+<div class="price-row">
+
+<div class="service-name">
+
+Консультация / диагностика
+
+<span class="service-note">
+Первичная диагностика устройства
+</span>
+
+</div>
+
+<div class="price">
+БЕСПЛАТНО
+</div>
+
+</div>
+
+
+<div class="price-row">
+
+<div class="service-name">
+
+Диагностика со вскрытием
+
+<span class="service-note">
+Если для определения неисправности требуется разбор устройства
+</span>
+
+</div>
+
+<div class="price">
+от 1 000 ₽
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- РЕМОНТ -->
+
+<section class="category">
+
+<div class="category-title">
+
+<div class="category-icon">
+🔧
+</div>
+
+<h2>
+Ремонт устройств
+</h2>
+
+</div>
+
+
+<div class="price-list">
+
+<div class="price-row">
+
+<div class="service-name">
+Ремонт смартфона
+</div>
+
+<div class="price">
+от 3 000 ₽
+</div>
+
+</div>
+
+
+<div class="price-row">
+
+<div class="service-name">
+Ремонт планшета
+</div>
+
+<div class="price">
+от 3 500 ₽
+</div>
+
+</div>
+
+
+<div class="price-row">
+
+<div class="service-name">
+Ремонт ноутбука
+</div>
+
+<div class="price">
+от 4 000 ₽
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- СЕРВИС -->
+
+<section class="category">
+
+<div class="category-title">
+
+<div class="category-icon">
+⚙️
+</div>
+
+<h2>
+Сервисные услуги
+</h2>
+
+</div>
+
+
+<div class="price-list">
+
+<div class="price-row">
+
+<div class="service-name">
+Чистка динамиков и разъёмов
+</div>
+
+<div class="price">
+800 ₽
+</div>
+
+</div>
+
+
+<div class="price-row">
+
+<div class="service-name">
+Установка приложений
+</div>
+
+<div class="price">
+от 1 000 ₽
+</div>
+
+</div>
+
+
+<div class="price-row">
+
+<div class="service-name">
+Перепрошивка устройства
+</div>
+
+<div class="price">
+от 2 000 ₽
+</div>
+
+</div>
+
+
+<div class="price-row">
+
+<div class="service-name">
+Прочие услуги
+</div>
+
+<div class="price">
+от 1 000 ₽
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<div class="note">
+
+<strong>Важно:</strong>
+
+<p>
+Окончательная стоимость ремонта определяется после диагностики.
+Цена может зависеть от модели устройства, стоимости запчастей
+и сложности работы.
+</p>
+
+</div>
+
 
 </main>
 
-<section class="cta">
 
-<div>
+<div class="cta">
 
 <h2>
-Не нашли нужную услугу?
+Нужен ремонт?
 </h2>
 
 <p>
-Оставьте заявку — мы уточним стоимость
-и возможность ремонта.
+Оставьте заявку — расскажите, что случилось с устройством.
 </p>
+
+<a href="repair.html" class="btn">
+🛠️ Записаться на ремонт
+</a>
 
 </div>
 
-<a href="repair.html" class="btn">
-Оставить заявку
-</a>
-
-</section>
 
 <footer>
 
@@ -568,6 +839,7 @@ footer a:hover{
 
 </div>
 
+
 <div>
 
 <h3>
@@ -576,11 +848,11 @@ footer a:hover{
 
 <a href="index.html">Главная</a>
 <a href="services.html">Услуги</a>
-<a href="price.html">Прайс</a>
 <a href="accessories.html">Аксессуары</a>
 <a href="repair.html">Заявка</a>
 
 </div>
+
 
 <div>
 
@@ -604,11 +876,13 @@ footer a:hover{
 
 </div>
 
+
 <div class="copy">
 © 2026 Техно Лис. Все права защищены.
 </div>
 
 </footer>
+
 
 <div class="mobile-menu">
 
