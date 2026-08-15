@@ -641,6 +641,8 @@ footer a:hover {
 #live-catalog .live-card{background:#fff;border-radius:16px;padding:16px;box-shadow:0 8px 25px rgba(0,0,0,.06);cursor:pointer;transition:transform .2s,box-shadow .2s,border-color .2s;border:1px solid transparent}
 #live-catalog .live-card:hover{transform:translateY(-4px);box-shadow:0 16px 35px rgba(0,0,0,.12);border-color:#ff5a00}
 #live-catalog .live-card:focus-visible{outline:3px solid rgba(255,90,0,.35);outline-offset:3px}
+#live-catalog .live-card .live-image{width:100%;height:170px;border-radius:10px;background:#f7f7f7;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-bottom:8px}
+#live-catalog .live-card .live-image img{width:100%;height:100%;object-fit:contain;display:block}
 #live-catalog .live-card h3{margin:7px 0}
 #live-catalog .live-price{font-weight:900;font-size:20px}
 #live-catalog .live-stock{font-weight:800;margin-top:6px}
@@ -1145,7 +1147,7 @@ body.modal-open{overflow:hidden}
           <div class="live-grid">
             ${items.map((p,index)=>`
               <article class="live-card" tabindex="0" role="button" data-product-index="${index}" data-product-category="${esc(category)}" aria-label="Подробнее: ${esc(productTitle(p,category))}">
-                ${p.image?`<img src="${esc(p.image)}" alt="${esc(productTitle(p,category))}" style="width:100%;height:170px;object-fit:cover;border-radius:10px">`:``}
+                ${p.image?`<div class="live-image"><img src="${esc(p.image)}" alt="${esc(productTitle(p,category))}"></div>`:``}
                 <div class="live-icon">${esc(p.icon||"📦")}</div>
                 <h3>${esc(productTitle(p,category))}</h3>
                 ${p.description?`<div class="live-description">${esc(p.description)}</div>`:""}
