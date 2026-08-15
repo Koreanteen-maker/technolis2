@@ -676,7 +676,7 @@ footer a:hover {
             </select>
 
             <select id="stock-category">
-                <option value="">Все аксессуары</option>
+                <option value="">Все категории аксессуаров</option>
                 <option value="glass">Защитные стёкла</option>
                 <option value="lenses">Защитные линзы</option>
                 <option value="clear_cases">Прозрачные чехлы</option>
@@ -1181,103 +1181,108 @@ USB-C · Lightning и другие
     let products = [];
 
     const models = [
-        "11",
-        "11 Pro",
-        "11 Pro Max",
-        "12",
-        "12 mini",
-        "12 Pro",
-        "12 Pro Max",
-        "13",
-        "13 mini",
-        "13 Pro",
-        "13 Pro Max",
-        "14",
-        "14 Plus",
-        "14 Pro",
-        "14 Pro Max",
-        "15",
-        "15 Plus",
-        "15 Pro",
-        "15 Pro Max",
-        "16",
-        "16 Plus",
-        "16e",
-        "16 Pro",
-        "16 Pro Max",
-        "17",
-        "17 Air",
-        "17 Pro",
-        "17 Pro Max"
+        "11", "11 Pro", "11 Pro Max",
+        "12", "12 mini", "12 Pro", "12 Pro Max",
+        "13", "13 mini", "13 Pro", "13 Pro Max",
+        "14", "14 Plus", "14 Pro", "14 Pro Max",
+        "15", "15 Plus", "15 Pro", "15 Pro Max",
+        "16", "16 Plus", "16e", "16 Pro", "16 Pro Max",
+        "17", "17 Air", "17 Pro", "17 Pro Max"
     ];
+
+    const categoryNames = {
+        glass: "Защитные стёкла",
+        lenses: "Защитные линзы",
+        clear_cases: "Прозрачные чехлы",
+        carbon_cases: "Карбоновые чехлы",
+        leather_cases: "Кожаные чехлы",
+        apple: "Аксессуары Apple",
+        other: "Другие аксессуары"
+    };
 
     const normalize = (value) =>
         String(value || "")
             .toLowerCase()
-            .replace(/[+]/g, " plus ")
-            .replace(/iphone/g, "")
+            .replace(/iphone/g, " ")
             .replace(/\bpm\b/g, "pro max")
-            .replace(/pro\s*max/g, "pro max")
+            .replace(/\bpro\s*max\b/g, "pro max")
+            .replace(/\bpro\b/g, "pro")
+            .replace(/[+]/g, " plus ")
             .replace(/\s+/g, " ")
             .trim();
 
-    function modelMatches(productName, model) {
-        const text = normalize(productName);
+    // Превращаем строку вроде "13 / 13 Pro / 14 PM" в точный список моделей.
+    // Благодаря этому iPhone 14 НЕ совпадает с 14 Pro/Plus/Pro Max.
+    function extractModels(value) {
+        const text = normalize(value);
+        if (!text) return [];
+
+        const patterns = [
+            ["17 pro max", /\b17\s+pro\s+max\b/g],
+            ["17 pro", /\b17\s+pro\b/g],
+            ["17 air", /\b17\s+air\b/g],
+            ["17", /\b17\b/g],
+            ["16 pro max", /\b16\s+pro\s+max\b/g],
+            ["16 pro", /\b16\s+pro\b/g],
+            ["16 plus", /\b16\s+plus\b/g],
+            ["16e", /\b16e\b/g],
+            ["16", /\b16\b/g],
+            ["15 pro max", /\b15\s+pro\s+max\b/g],
+            ["15 pro", /\b15\s+pro\b/g],
+            ["15 plus", /\b15\s+plus\b/g],
+            ["15", /\b15\b/g],
+            ["14 pro max", /\b14\s+pro\s+max\b/g],
+            ["14 pro", /\b14\s+pro\b/g],
+            ["14 plus", /\b14\s+plus\b/g],
+            ["14", /\b14\b/g],
+            ["13 pro max", /\b13\s+pro\s+max\b/g],
+            ["13 pro", /\b13\s+pro\b/g],
+            ["13 mini", /\b13\s+mini\b/g],
+            ["13", /\b13\b/g],
+            ["12 pro max", /\b12\s+pro\s+max\b/g],
+            ["12 pro", /\b12\s+pro\b/g],
+            ["12 mini", /\b12\s+mini\b/g],
+            ["12", /\b12\b/g],
+            ["11 pro max", /\b11\s+pro\s+max\b/g],
+            ["11 pro", /\b11\s+pro\b/g],
+            ["11", /\b11\b/g]
+        ];
+
+        const found = [];
+        const occupied = [];
+
+        for (const [model, regex] of patterns) {
+            let match;
+            while ((match = regex.exec(text))) {
+                const from = match.index;
+                const to = match.index + match[0].length;
+                if (occupied.some(([a, b]) => from < b && to > a)) continue;
+                occupied.push([from, to]);
+                found.push(model);
+            }
+        }
+
+        return found;
+    }
+
+    function productModels(product) {
+        // Новые товары: поле "Модели" из админки.
+        // Старые товары: модели зашиты в названии (например, "14 PRO").
+        return extractModels(product.models || product.name || "");
+    }
+
+    function modelMatches(product, model) {
         const target = normalize(model);
-
-        if (!text || !target) return false;
-
-        if (text === target) return true;
-        if (text.includes(target)) return true;
-
-        const aliases = {
-            "11": ["11"],
-            "11 pro": ["11 pro"],
-            "11 pro max": ["11 pro max"],
-            "12": ["12"],
-            "12 mini": ["12 mini"],
-            "12 pro": ["12 pro"],
-            "12 pro max": ["12 pro max"],
-            "13": ["13"],
-            "13 mini": ["13 mini"],
-            "13 pro": ["13 pro"],
-            "13 pro max": ["13 pro max"],
-            "14": ["14"],
-            "14 plus": ["14 plus"],
-            "14 pro": ["14 pro"],
-            "14 pro max": ["14 pro max"],
-            "15": ["15"],
-            "15 plus": ["15 plus"],
-            "15 pro": ["15 pro"],
-            "15 pro max": ["15 pro max"],
-            "16": ["16"],
-            "16 plus": ["16 plus"],
-            "16e": ["16e"],
-            "16 pro": ["16 pro"],
-            "16 pro max": ["16 pro max"],
-            "17": ["17"],
-            "17 air": ["17 air"],
-            "17 pro": ["17 pro"],
-            "17 pro max": ["17 pro max"]
-        };
-
-        return (aliases[target] || [target]).some(alias => text.includes(alias));
+        if (!target) return false;
+        return productModels(product).includes(target);
     }
 
     function stockText(stock) {
         const n = Number(stock) || 0;
-
         if (n > 0) {
-            return {
-                text: `В наличии: ${n} шт.`,
-                className: "stock-available"
-            };
+            return { text: `В наличии: ${n} шт.`, className: "stock-available" };
         }
-
-        return {
-            text: "Нет в наличии",
-            className: "stock-empty"
-        };
+        return { text: "Нет в наличии", className: "stock-empty" };
     }
 
     function renderResults() {
@@ -1285,19 +1290,18 @@ USB-C · Lightning и другие
         const category = categorySelect.value;
 
         if (!model) {
-            results.innerHTML =
-                '<div class="stock-status">Выберите модель, чтобы проверить наличие.</div>';
+            results.innerHTML = '<div class="stock-status">Выберите модель, чтобы проверить наличие.</div>';
             return;
         }
 
-        let filtered = products.filter(product =>
-            modelMatches(product.name, model) &&
+        const filtered = products.filter(product =>
+            Number(product.stock) > 0 &&
+            modelMatches(product, model) &&
             (!category || product.category === category)
         );
 
         if (!filtered.length) {
-            results.innerHTML =
-                '<div class="stock-status">Для этой модели подходящих аксессуаров не найдено.</div>';
+            results.innerHTML = '<div class="stock-status">Для этой модели подходящих аксессуаров сейчас нет в наличии.</div>';
             return;
         }
 
@@ -1305,12 +1309,13 @@ USB-C · Lightning и другие
             '<div class="stock-grid">' +
             filtered.map(product => {
                 const stock = stockText(product.stock);
-
+                const categoryName = categoryNames[product.category] || "Аксессуар";
                 return `
                     <div class="stock-item">
+                        <div style="font-size:12px;color:#ff5a00;font-weight:800;text-transform:uppercase;margin-bottom:6px">${escapeHtml(categoryName)}</div>
                         <div class="stock-item-name">${escapeHtml(product.name)}</div>
                         <div class="stock-item-meta">
-                            Цена: <strong>${Number(product.price).toLocaleString("ru-RU")} ₽</strong><br>
+                            Цена: <strong>${Number(product.price || 0).toLocaleString("ru-RU")} ₽</strong><br>
                             <span class="${stock.className}">${stock.text}</span>
                         </div>
                     </div>
@@ -1329,41 +1334,26 @@ USB-C · Lightning и другие
     }
 
     async function loadProducts() {
-        results.innerHTML =
-            '<div class="stock-status">Загружаем актуальные остатки…</div>';
-
+        results.innerHTML = '<div class="stock-status">Загружаем актуальные остатки…</div>';
         try {
-            const response = await fetch(API_URL, {
-                cache: "no-store"
-            });
-
+            const response = await fetch(API_URL, { cache: "no-store" });
             const data = await response.json();
-
-            if (!data.success || !Array.isArray(data.products)) {
-                throw new Error("Не удалось получить остатки");
-            }
+            if (!data.success || !Array.isArray(data.products)) throw new Error("Не удалось получить остатки");
 
             products = data.products;
-
             modelSelect.innerHTML =
                 '<option value="">Выберите модель iPhone</option>' +
-                models.map(model =>
-                    `<option value="${escapeHtml(model)}">iPhone ${escapeHtml(model)}</option>`
-                ).join("");
+                models.map(model => `<option value="${escapeHtml(model)}">iPhone ${escapeHtml(model)}</option>`).join("");
 
-            results.innerHTML =
-                '<div class="stock-status">Выберите модель, чтобы проверить наличие.</div>';
-
+            results.innerHTML = '<div class="stock-status">Выберите модель, чтобы проверить наличие.</div>';
         } catch (error) {
-            results.innerHTML =
-                '<div class="stock-status">Не удалось загрузить актуальные остатки. Попробуйте обновить страницу.</div>';
+            results.innerHTML = '<div class="stock-status">Не удалось загрузить актуальные остатки. Попробуйте обновить страницу.</div>';
         }
     }
 
     button.addEventListener("click", renderResults);
     modelSelect.addEventListener("change", renderResults);
     categorySelect.addEventListener("change", renderResults);
-
     loadProducts();
 })();
 </script>
@@ -1372,3 +1362,61 @@ USB-C · Lightning и другие
 </html>
 
 
+<script>
+(function(){
+  const body=document.getElementById("live-catalog-body");
+  if(!body)return;
+
+  const API_URL="https://technolis-bot.koreanteen.workers.dev/products";
+  const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+  const categoryNames={
+    glass:"Защитные стёкла",
+    lenses:"Защитные линзы",
+    clear_cases:"Прозрачные чехлы",
+    carbon_cases:"Карбоновые чехлы",
+    leather_cases:"Кожаные чехлы",
+    apple:"Аксессуары Apple",
+    other:"Другие аксессуары"
+  };
+
+  fetch(API_URL,{cache:"no-store"})
+    .then(r=>r.json())
+    .then(data=>{
+      const products=(Array.isArray(data.products)?data.products:[])
+        .filter(p=>Number(p.stock||0)>0);
+      const grouped={};
+      products.forEach(p=>{
+        const key=p.category||"other";
+        (grouped[key] ||= []).push(p);
+      });
+
+      const groups=Object.entries(grouped);
+      if(!groups.length){
+        body.innerHTML='<div class="card"><p>Сейчас товаров в наличии нет.</p></div>';
+        return;
+      }
+
+      body.innerHTML=groups.map(([category,items])=>`
+        <div style="margin-bottom:30px">
+          <h3 style="font-size:22px;margin:0 0 12px">${esc(categoryNames[category]||category)}</h3>
+          <div class="live-grid">
+            ${items.map(p=>`
+              <article class="live-card">
+                ${p.image?`<img src="${esc(p.image)}" alt="${esc(p.name||"Аксессуар")}" style="width:100%;height:170px;object-fit:cover;border-radius:10px">`:``}
+                <div style="margin-top:8px">${esc(p.icon||"📦")}</div>
+                <h3>${esc(p.name||"Аксессуар")}</h3>
+                ${p.models?`<div style="color:#666;font-size:14px">Модели: ${esc(p.models)}</div>`:""}
+                ${p.description?`<div style="color:#666;font-size:14px;margin-top:5px">${esc(p.description)}</div>`:""}
+                <div class="live-price">${Number(p.price||0).toLocaleString("ru-RU")} ₽</div>
+                <div class="live-stock">🟢 В наличии · ${Number(p.stock)} шт.</div>
+              </article>
+            `).join("")}
+          </div>
+        </div>
+      `).join("");
+    })
+    .catch(()=>{
+      body.innerHTML='<div class="card"><p>Не удалось загрузить актуальный каталог. Попробуйте обновить страницу.</p></div>';
+    });
+})();
+</script>
