@@ -638,11 +638,7 @@ footer a:hover {
 #live-catalog .live-head{display:flex;align-items:center;gap:12px;margin-bottom:18px}
 #live-catalog .live-head h2{font-size:30px;margin:0}
 #live-catalog .live-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-#live-catalog .live-card{background:#fff;border-radius:16px;padding:16px;box-shadow:0 8px 25px rgba(0,0,0,.06);cursor:pointer;transition:transform .2s,box-shadow .2s,border-color .2s;border:1px solid transparent}
-#live-catalog .live-card:hover{transform:translateY(-4px);box-shadow:0 16px 35px rgba(0,0,0,.12);border-color:#ff5a00}
-#live-catalog .live-card:focus-visible{outline:3px solid rgba(255,90,0,.35);outline-offset:3px}
-#live-catalog .live-card .live-image{width:100%;height:170px;border-radius:10px;background:#f7f7f7;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-bottom:8px}
-#live-catalog .live-card .live-image img{width:100%;height:100%;object-fit:contain;display:block}
+#live-catalog .live-card{background:#fff;border-radius:16px;padding:16px;box-shadow:0 8px 25px rgba(0,0,0,.06)}
 #live-catalog .live-card h3{margin:7px 0}
 #live-catalog .live-price{font-weight:900;font-size:20px}
 #live-catalog .live-stock{font-weight:800;margin-top:6px}
@@ -650,14 +646,28 @@ footer a:hover {
 @media(max-width:600px){#live-catalog .live-grid{grid-template-columns:1fr}}
 </style>
 
+<section id="live-catalog">
+  <div class="live-head">
+    <div class="category-icon">🛒</div>
+    <div>
+      <h2>Актуальные товары</h2>
+      <p class="muted" style="margin-top:5px;color:#666">Наличие и цены обновляются из базы товаров.</p>
+    </div>
+  </div>
+  <div id="live-catalog-body"></div>
+</section>
+
+
+
+<!-- ПРОВЕРКА НАЛИЧИЯ -->
 <section class="stock-checker" id="check-stock">
     <div class="stock-box">
-        <div class="stock-kicker">ПОИСК АКСЕССУАРА · АКТУАЛЬНЫЕ ОСТАТКИ</div>
+        <div class="stock-kicker">АКСЕССУАРЫ · АКТУАЛЬНЫЕ ОСТАТКИ</div>
 
         <h2>🔎 Проверить наличие аксессуара</h2>
 
         <p>
-            Сначала выберите точную модель iPhone, затем категорию аксессуара — сайт покажет только подходящие товары в наличии.
+            Выберите модель и аксессуар — сайт покажет актуальный остаток и цену.
         </p>
 
         <div class="stock-controls">
@@ -666,7 +676,7 @@ footer a:hover {
             </select>
 
             <select id="stock-category">
-                <option value="">Все категории</option>
+                <option value="">Все аксессуары</option>
                 <option value="glass">Защитные стёкла</option>
                 <option value="lenses">Защитные линзы</option>
                 <option value="clear_cases">Прозрачные чехлы</option>
@@ -693,65 +703,380 @@ footer a:hover {
 
 
 
+<main class="content">
 
 
-<section id="live-catalog">
-  <div class="live-head">
-    <div class="category-icon">🛒</div>
-    <div>
-      <h2>Каталог товаров в наличии</h2>
-      <p class="muted" style="margin-top:5px;color:#666">В каждой карточке указано, что это за аксессуар и для какой модели он подходит.</p>
-    </div>
-  </div>
-  <div id="live-catalog-body"></div>
+<!-- ЧЕХЛЫ -->
+
+<section class="category">
+
+<div class="category-title">
+
+<div class="category-icon">
+📱
+</div>
+
+<h2>
+Чехлы
+</h2>
+
+</div>
+
+
+<div class="grid">
+
+<div class="card">
+
+<div class="card-icon">
+🧱
+</div>
+
+<h3>
+Карбоновые чехлы
+</h3>
+
+<p>
+Стильные и прочные чехлы с карбоновой фактурой.
+</p>
+
+<div class="models">
+Уточняйте наличие модели
+</div>
+
+<a href="https://t.me/tehnafox" target="_blank" class="ask">
+Узнать наличие →
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-icon">
+👜
+</div>
+
+<h3>
+Кожаные чехлы
+</h3>
+
+<p>
+Классические кожаные чехлы для защиты смартфона.
+</p>
+
+<div class="models">
+Уточняйте наличие модели
+</div>
+
+<a href="https://t.me/tehnafox" target="_blank" class="ask">
+Узнать наличие →
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-icon">
+▫️
+</div>
+
+<h3>
+Прозрачные чехлы
+</h3>
+
+<p>
+Минималистичная защита без скрытия дизайна смартфона.
+</p>
+
+<div class="models">
+Для разных моделей
+</div>
+
+<a href="https://t.me/tehnafox" target="_blank" class="ask">
+Узнать наличие →
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-icon">
+💳
+</div>
+
+<h3>
+Картхолдеры
+</h3>
+
+<p>
+Компактные картхолдеры для банковских карт и документов.
+</p>
+
+<div class="models">
+Уточняйте наличие
+</div>
+
+<a href="https://t.me/tehnafox" target="_blank" class="ask">
+Узнать наличие →
+</a>
+
+</div>
+
+</div>
+
 </section>
 
 
+<!-- APPLE -->
 
-<!-- ПРОВЕРКА НАЛИЧИЯ -->
+<section class="category">
 
-<div class="product-modal" id="product-modal" aria-hidden="true">
-  <div class="product-modal-backdrop" data-modal-close></div>
-  <div class="product-modal-dialog" role="dialog" aria-modal="true" aria-labelledby="product-modal-title">
-    <button class="product-modal-close" type="button" aria-label="Закрыть" data-modal-close>×</button>
-    <div class="product-modal-media" id="product-modal-media"></div>
-    <div class="product-modal-content">
-      <div class="product-modal-category" id="product-modal-category"></div>
-      <h2 id="product-modal-title"></h2>
-      <div class="product-modal-price" id="product-modal-price"></div>
-      <div class="product-modal-stock" id="product-modal-stock"></div>
-      <div class="product-modal-description" id="product-modal-description"></div>
-    </div>
-  </div>
+<div class="category-title">
+
+<div class="category-icon">
+
 </div>
 
-<style>
-.product-modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;padding:20px;z-index:3000}
-.product-modal.is-open{display:flex}
-.product-modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.68);backdrop-filter:blur(3px)}
-.product-modal-dialog{position:relative;z-index:1;width:min(760px,100%);max-height:min(90vh,820px);overflow:auto;background:#fff;border-radius:24px;box-shadow:0 30px 80px rgba(0,0,0,.3);display:grid;grid-template-columns:minmax(260px,1fr) minmax(260px,1fr)}
-.product-modal-close{position:absolute;right:14px;top:12px;width:42px;height:42px;border:0;border-radius:50%;background:rgba(0,0,0,.72);color:#fff;font-size:30px;line-height:1;cursor:pointer;z-index:2}
-.product-modal-media{min-height:360px;background:#f3f3f3;display:flex;align-items:center;justify-content:center;border-radius:24px 0 0 24px;overflow:hidden}
-.product-modal-media img{width:100%;height:100%;min-height:360px;max-height:560px;object-fit:contain;background:#f7f7f7}
-.product-modal-placeholder{font-size:72px;opacity:.55}
-.product-modal-content{padding:40px 34px 34px;display:flex;flex-direction:column;justify-content:center}
-.product-modal-category{font-size:12px;color:#ff5a00;font-weight:900;text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
-.product-modal-content h2{font-size:30px;line-height:1.1;margin-bottom:18px}
-.product-modal-price{font-size:28px;font-weight:900;margin-bottom:10px}
-.product-modal-stock{font-size:17px;font-weight:800;color:#11823b;margin-bottom:22px}
-.product-modal-stock.out{color:#b3261e}
-.product-modal-description{color:#555;font-size:16px;line-height:1.65;white-space:pre-line}
-body.modal-open{overflow:hidden}
-@media(max-width:700px){
-  .product-modal{padding:10px}
-  .product-modal-dialog{grid-template-columns:1fr;max-height:94vh;border-radius:20px}
-  .product-modal-media{min-height:250px;height:280px;border-radius:20px 20px 0 0}
-  .product-modal-media img{min-height:250px;max-height:280px}
-  .product-modal-content{padding:26px 22px 28px}
-  .product-modal-content h2{font-size:24px}
-  .product-modal-price{font-size:24px}
-}
-</style>
+<h2>
+Аксессуары для Apple
+</h2>
+
+</div>
+
+
+<div class="grid">
+
+<div class="card">
+
+<div class="card-icon">
+🔋
+</div>
+
+<h3>
+MagSafe Power Bank
+</h3>
+
+<p>
+Магнитный внешний аккумулятор для совместимых iPhone.
+</p>
+
+<div class="models">
+Для iPhone с MagSafe
+</div>
+
+<a href="https://t.me/tehnafox" target="_blank" class="ask">
+Узнать наличие →
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-icon">
+🔌
+</div>
+
+<h3>
+MagSafe зарядки
+</h3>
+
+<p>
+Беспроводные магнитные зарядки для устройств Apple.
+</p>
+
+<div class="models">
+Уточняйте наличие
+</div>
+
+<a href="https://t.me/tehnafox" target="_blank" class="ask">
+Узнать наличие →
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-icon">
+⚡
+</div>
+
+<h3>
+Зарядные устройства
+</h3>
+
+<p>
+Зарядки и кабели для смартфонов и других устройств.
+</p>
+
+<div class="models">
+USB-C · Lightning и другие
+</div>
+
+<a href="https://t.me/tehnafox" target="_blank" class="ask">
+Узнать наличие →
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-icon">
+🎧
+</div>
+
+<h3>
+Аксессуары Apple
+</h3>
+
+<p>
+Различные аксессуары и расходники для техники Apple.
+</p>
+
+<div class="models">
+Уточняйте наличие
+</div>
+
+<a href="https://t.me/tehnafox" target="_blank" class="ask">
+Узнать наличие →
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ЗАЩИТА -->
+
+<section class="category">
+
+<div class="category-title">
+
+<div class="category-icon">
+🛡️
+</div>
+
+<h2>
+Защита экрана и камер
+</h2>
+
+</div>
+
+
+<div class="grid">
+
+<div class="card">
+
+<div class="card-icon">
+🛡️
+</div>
+
+<h3>
+Премиум-плёнка
+</h3>
+
+<p>
+Поклейка защитной плёнки на экран смартфона.
+</p>
+
+<div class="models">
+1 500 ₽
+</div>
+
+<a href="price.html" class="ask">
+Посмотреть прайс →
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-icon">
+🔰
+</div>
+
+<h3>
+Бронеплёнка
+</h3>
+
+<p>
+Усиленная защита экрана от царапин и повреждений.
+</p>
+
+<div class="models">
+2 000 ₽
+</div>
+
+<a href="price.html" class="ask">
+Посмотреть прайс →
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-icon">
+🔲
+</div>
+
+<h3>
+Бронестекло iPhone
+</h3>
+
+<p>
+Защитное стекло для экрана iPhone.
+</p>
+
+<div class="models">
+2 000 ₽
+</div>
+
+<a href="price.html" class="ask">
+Посмотреть прайс →
+</a>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-icon">
+📷
+</div>
+
+<h3>
+Стекла на камеры
+</h3>
+
+<p>
+Защитные стёкла для объективов камеры iPhone.
+</p>
+
+<div class="models">
+Уточняйте наличие модели
+</div>
+
+<a href="https://t.me/tehnafox" target="_blank" class="ask">
+Узнать наличие →
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+</main>
+
 
 <div class="cta">
 
@@ -856,108 +1181,103 @@ body.modal-open{overflow:hidden}
     let products = [];
 
     const models = [
-        "11", "11 Pro", "11 Pro Max",
-        "12", "12 mini", "12 Pro", "12 Pro Max",
-        "13", "13 mini", "13 Pro", "13 Pro Max",
-        "14", "14 Plus", "14 Pro", "14 Pro Max",
-        "15", "15 Plus", "15 Pro", "15 Pro Max",
-        "16", "16 Plus", "16e", "16 Pro", "16 Pro Max",
-        "17", "17 Air", "17 Pro", "17 Pro Max"
+        "11",
+        "11 Pro",
+        "11 Pro Max",
+        "12",
+        "12 mini",
+        "12 Pro",
+        "12 Pro Max",
+        "13",
+        "13 mini",
+        "13 Pro",
+        "13 Pro Max",
+        "14",
+        "14 Plus",
+        "14 Pro",
+        "14 Pro Max",
+        "15",
+        "15 Plus",
+        "15 Pro",
+        "15 Pro Max",
+        "16",
+        "16 Plus",
+        "16e",
+        "16 Pro",
+        "16 Pro Max",
+        "17",
+        "17 Air",
+        "17 Pro",
+        "17 Pro Max"
     ];
-
-    const categoryNames = {
-        glass: "Защитные стёкла",
-        lenses: "Защитные линзы",
-        clear_cases: "Прозрачные чехлы",
-        carbon_cases: "Карбоновые чехлы",
-        leather_cases: "Кожаные чехлы",
-        apple: "Аксессуары Apple",
-        other: "Другие аксессуары"
-    };
 
     const normalize = (value) =>
         String(value || "")
             .toLowerCase()
-            .replace(/iphone/g, " ")
-            .replace(/\bpm\b/g, "pro max")
-            .replace(/\bpro\s*max\b/g, "pro max")
-            .replace(/\bpro\b/g, "pro")
             .replace(/[+]/g, " plus ")
+            .replace(/iphone/g, "")
+            .replace(/\bpm\b/g, "pro max")
+            .replace(/pro\s*max/g, "pro max")
             .replace(/\s+/g, " ")
             .trim();
 
-    // Превращаем строку вроде "13 / 13 Pro / 14 PM" в точный список моделей.
-    // Благодаря этому iPhone 14 НЕ совпадает с 14 Pro/Plus/Pro Max.
-    function extractModels(value) {
-        const text = normalize(value);
-        if (!text) return [];
-
-        const patterns = [
-            ["17 pro max", /\b17\s+pro\s+max\b/g],
-            ["17 pro", /\b17\s+pro\b/g],
-            ["17 air", /\b17\s+air\b/g],
-            ["17", /\b17\b/g],
-            ["16 pro max", /\b16\s+pro\s+max\b/g],
-            ["16 pro", /\b16\s+pro\b/g],
-            ["16 plus", /\b16\s+plus\b/g],
-            ["16e", /\b16e\b/g],
-            ["16", /\b16\b/g],
-            ["15 pro max", /\b15\s+pro\s+max\b/g],
-            ["15 pro", /\b15\s+pro\b/g],
-            ["15 plus", /\b15\s+plus\b/g],
-            ["15", /\b15\b/g],
-            ["14 pro max", /\b14\s+pro\s+max\b/g],
-            ["14 pro", /\b14\s+pro\b/g],
-            ["14 plus", /\b14\s+plus\b/g],
-            ["14", /\b14\b/g],
-            ["13 pro max", /\b13\s+pro\s+max\b/g],
-            ["13 pro", /\b13\s+pro\b/g],
-            ["13 mini", /\b13\s+mini\b/g],
-            ["13", /\b13\b/g],
-            ["12 pro max", /\b12\s+pro\s+max\b/g],
-            ["12 pro", /\b12\s+pro\b/g],
-            ["12 mini", /\b12\s+mini\b/g],
-            ["12", /\b12\b/g],
-            ["11 pro max", /\b11\s+pro\s+max\b/g],
-            ["11 pro", /\b11\s+pro\b/g],
-            ["11", /\b11\b/g]
-        ];
-
-        const found = [];
-        const occupied = [];
-
-        for (const [model, regex] of patterns) {
-            let match;
-            while ((match = regex.exec(text))) {
-                const from = match.index;
-                const to = match.index + match[0].length;
-                if (occupied.some(([a, b]) => from < b && to > a)) continue;
-                occupied.push([from, to]);
-                found.push(model);
-            }
-        }
-
-        return found;
-    }
-
-    function productModels(product) {
-        // Новые товары: поле "Модели" из админки.
-        // Старые товары: модели зашиты в названии (например, "14 PRO").
-        return extractModels(product.models || product.name || "");
-    }
-
-    function modelMatches(product, model) {
+    function modelMatches(productName, model) {
+        const text = normalize(productName);
         const target = normalize(model);
-        if (!target) return false;
-        return productModels(product).includes(target);
+
+        if (!text || !target) return false;
+
+        if (text === target) return true;
+        if (text.includes(target)) return true;
+
+        const aliases = {
+            "11": ["11"],
+            "11 pro": ["11 pro"],
+            "11 pro max": ["11 pro max"],
+            "12": ["12"],
+            "12 mini": ["12 mini"],
+            "12 pro": ["12 pro"],
+            "12 pro max": ["12 pro max"],
+            "13": ["13"],
+            "13 mini": ["13 mini"],
+            "13 pro": ["13 pro"],
+            "13 pro max": ["13 pro max"],
+            "14": ["14"],
+            "14 plus": ["14 plus"],
+            "14 pro": ["14 pro"],
+            "14 pro max": ["14 pro max"],
+            "15": ["15"],
+            "15 plus": ["15 plus"],
+            "15 pro": ["15 pro"],
+            "15 pro max": ["15 pro max"],
+            "16": ["16"],
+            "16 plus": ["16 plus"],
+            "16e": ["16e"],
+            "16 pro": ["16 pro"],
+            "16 pro max": ["16 pro max"],
+            "17": ["17"],
+            "17 air": ["17 air"],
+            "17 pro": ["17 pro"],
+            "17 pro max": ["17 pro max"]
+        };
+
+        return (aliases[target] || [target]).some(alias => text.includes(alias));
     }
 
     function stockText(stock) {
         const n = Number(stock) || 0;
+
         if (n > 0) {
-            return { text: `В наличии: ${n} шт.`, className: "stock-available" };
+            return {
+                text: `В наличии: ${n} шт.`,
+                className: "stock-available"
+            };
         }
-        return { text: "Нет в наличии", className: "stock-empty" };
+
+        return {
+            text: "Нет в наличии",
+            className: "stock-empty"
+        };
     }
 
     function renderResults() {
@@ -965,18 +1285,19 @@ body.modal-open{overflow:hidden}
         const category = categorySelect.value;
 
         if (!model) {
-            results.innerHTML = '<div class="stock-status">Выберите модель, чтобы проверить наличие.</div>';
+            results.innerHTML =
+                '<div class="stock-status">Выберите модель, чтобы проверить наличие.</div>';
             return;
         }
 
-        const filtered = products.filter(product =>
-            Number(product.stock) > 0 &&
-            modelMatches(product, model) &&
+        let filtered = products.filter(product =>
+            modelMatches(product.name, model) &&
             (!category || product.category === category)
         );
 
         if (!filtered.length) {
-            results.innerHTML = '<div class="stock-status">Для этой модели подходящих аксессуаров сейчас нет в наличии.</div>';
+            results.innerHTML =
+                '<div class="stock-status">Для этой модели подходящих аксессуаров не найдено.</div>';
             return;
         }
 
@@ -984,13 +1305,12 @@ body.modal-open{overflow:hidden}
             '<div class="stock-grid">' +
             filtered.map(product => {
                 const stock = stockText(product.stock);
-                const categoryName = categoryNames[product.category] || "Аксессуар";
+
                 return `
                     <div class="stock-item">
-                        <div style="font-size:12px;color:#ff5a00;font-weight:800;text-transform:uppercase;margin-bottom:6px">${escapeHtml(categoryName)}</div>
                         <div class="stock-item-name">${escapeHtml(product.name)}</div>
                         <div class="stock-item-meta">
-                            Цена: <strong>${Number(product.price || 0).toLocaleString("ru-RU")} ₽</strong><br>
+                            Цена: <strong>${Number(product.price).toLocaleString("ru-RU")} ₽</strong><br>
                             <span class="${stock.className}">${stock.text}</span>
                         </div>
                     </div>
@@ -1009,26 +1329,41 @@ body.modal-open{overflow:hidden}
     }
 
     async function loadProducts() {
-        results.innerHTML = '<div class="stock-status">Загружаем актуальные остатки…</div>';
+        results.innerHTML =
+            '<div class="stock-status">Загружаем актуальные остатки…</div>';
+
         try {
-            const response = await fetch(API_URL, { cache: "no-store" });
+            const response = await fetch(API_URL, {
+                cache: "no-store"
+            });
+
             const data = await response.json();
-            if (!data.success || !Array.isArray(data.products)) throw new Error("Не удалось получить остатки");
+
+            if (!data.success || !Array.isArray(data.products)) {
+                throw new Error("Не удалось получить остатки");
+            }
 
             products = data.products;
+
             modelSelect.innerHTML =
                 '<option value="">Выберите модель iPhone</option>' +
-                models.map(model => `<option value="${escapeHtml(model)}">iPhone ${escapeHtml(model)}</option>`).join("");
+                models.map(model =>
+                    `<option value="${escapeHtml(model)}">iPhone ${escapeHtml(model)}</option>`
+                ).join("");
 
-            results.innerHTML = '<div class="stock-status">Выберите модель, чтобы проверить наличие.</div>';
+            results.innerHTML =
+                '<div class="stock-status">Выберите модель, чтобы проверить наличие.</div>';
+
         } catch (error) {
-            results.innerHTML = '<div class="stock-status">Не удалось загрузить актуальные остатки. Попробуйте обновить страницу.</div>';
+            results.innerHTML =
+                '<div class="stock-status">Не удалось загрузить актуальные остатки. Попробуйте обновить страницу.</div>';
         }
     }
 
     button.addEventListener("click", renderResults);
     modelSelect.addEventListener("change", renderResults);
     categorySelect.addEventListener("change", renderResults);
+
     loadProducts();
 })();
 </script>
@@ -1036,99 +1371,18 @@ body.modal-open{overflow:hidden}
 </body>
 </html>
 
-\n<script>
+
+<script>
 (function(){
   const body=document.getElementById("live-catalog-body");
   if(!body)return;
 
-  const API_URL="https://technolis-bot.koreanteen.workers.dev/products";
   const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
 
-  const categoryNames={
-    glass:"Защитные стёкла",
-    lenses:"Защитные линзы",
-    clear_cases:"Прозрачные чехлы",
-    carbon_cases:"Карбоновые чехлы",
-    leather_cases:"Кожаные чехлы",
-    apple:"Аксессуары Apple",
-    other:"Другие аксессуары"
-  };
-
-  const productTypes={
-    glass:"Защитное стекло",
-    lenses:"Защитная линза",
-    clear_cases:"Прозрачный чехол",
-    carbon_cases:"Карбоновый чехол",
-    leather_cases:"Кожаный чехол",
-    apple:"Аксессуар Apple",
-    other:"Аксессуар"
-  };
-
-  function modelLabel(value){
-    const raw=String(value??"").trim();
-    if(!raw)return "";
-    return raw.split(/[,;\n]+/).map(x=>x.trim()).filter(Boolean).map(x=>/^iphone\b/i.test(x)?x:`iPhone ${x}`).join(", ");
-  }
-
-  function productTitle(p,category){
-    const type=productTypes[category]||categoryNames[category]||"Аксессуар";
-    const model=modelLabel(p.models || p.name);
-    return model ? `${type} для ${model}` : (p.name || type);
-  }
-
-  const modal=document.getElementById("product-modal");
-  const modalMedia=document.getElementById("product-modal-media");
-  const modalCategory=document.getElementById("product-modal-category");
-  const modalTitle=document.getElementById("product-modal-title");
-  const modalPrice=document.getElementById("product-modal-price");
-  const modalStock=document.getElementById("product-modal-stock");
-  const modalDescription=document.getElementById("product-modal-description");
-
-  let catalogProducts=[];
-
-  function openProduct(product,category){
-    if(!modal)return;
-    modalCategory.textContent=categoryNames[category]||"Аксессуар";
-    modalTitle.textContent=productTitle(product,category);
-    modalPrice.textContent=`${Number(product.price||0).toLocaleString("ru-RU")} ₽`;
-
-    const stock=Number(product.stock||0);
-    modalStock.textContent=stock>0 ? `В наличии · ${stock} шт.` : "Нет в наличии";
-    modalStock.classList.toggle("out",stock<=0);
-
-    modalDescription.textContent=String(product.description||"").trim() || "Описание товара пока не добавлено.";
-
-    if(product.image){
-      modalMedia.innerHTML=`<img src="${esc(product.image)}" alt="${esc(productTitle(product,category))}">`;
-    }else{
-      modalMedia.innerHTML=`<div class="product-modal-placeholder">${esc(product.icon||"📦")}</div>`;
-    }
-
-    modal.classList.add("is-open");
-    modal.setAttribute("aria-hidden","false");
-    document.body.classList.add("modal-open");
-  }
-
-  function closeProduct(){
-    if(!modal)return;
-    modal.classList.remove("is-open");
-    modal.setAttribute("aria-hidden","true");
-    document.body.classList.remove("modal-open");
-  }
-
-  modal?.addEventListener("click",e=>{
-    if(e.target.closest("[data-modal-close]")) closeProduct();
-  });
-
-  document.addEventListener("keydown",e=>{
-    if(e.key==="Escape" && modal?.classList.contains("is-open")) closeProduct();
-  });
-
-  fetch(API_URL,{cache:"no-store"})
+  fetch(API_BASE + "/products")
     .then(r=>r.json())
     .then(data=>{
-      const products=(Array.isArray(data.products)?data.products:[])
-        .filter(p=>Number(p.stock||0)>0);
+      const products=data.products||[];
       const grouped={};
       products.forEach(p=>{
         const key=p.category||"other";
@@ -1136,46 +1390,33 @@ body.modal-open{overflow:hidden}
       });
 
       const groups=Object.entries(grouped);
+
       if(!groups.length){
-        body.innerHTML='<div class="card"><p>Сейчас товаров в наличии нет.</p></div>';
+        body.innerHTML='<div class="card"><p>Товары пока не добавлены.</p></div>';
         return;
       }
 
       body.innerHTML=groups.map(([category,items])=>`
         <div style="margin-bottom:30px">
-          <h3 style="font-size:22px;margin:0 0 12px">${esc(categoryNames[category]||category)}</h3>
+          <h3 style="font-size:22px;margin:0 0 12px">${esc(category)}</h3>
           <div class="live-grid">
-            ${items.map((p,index)=>`
-              <article class="live-card" tabindex="0" role="button" data-product-index="${index}" data-product-category="${esc(category)}" aria-label="Подробнее: ${esc(productTitle(p,category))}">
-                ${p.image?`<div class="live-image"><img src="${esc(p.image)}" alt="${esc(productTitle(p,category))}"></div>`:``}
-                <div class="live-icon">${esc(p.icon||"📦")}</div>
-                <h3>${esc(productTitle(p,category))}</h3>
-                ${p.description?`<div class="live-description">${esc(p.description)}</div>`:""}
+            ${items.map(p=>`
+              <article class="live-card">
+                ${p.image?`<img src="${esc(p.image)}" alt="" style="width:100%;height:190px;object-fit:contain;border-radius:10px">`:""}
+                <div style="margin-top:8px">${esc(p.icon||"📦")}</div>
+                <h3>${esc(p.name)}</h3>
+                ${p.models?`<div style="color:#666;font-size:14px">${esc(p.models)}</div>`:""}
                 <div class="live-price">${Number(p.price||0).toLocaleString("ru-RU")} ₽</div>
-                <div class="live-stock">🟢 В наличии · ${Number(p.stock)} шт.</div>
+                <div class="live-stock">${Number(p.stock||0)>0 ? "🟢 В наличии" : "🔴 Нет в наличии"}</div>
+                ${Number(p.stock||0)>0?`<div style="color:#666;font-size:13px;margin-top:3px">${Number(p.stock)} шт.</div>`:""}
               </article>
             `).join("")}
           </div>
         </div>
       `).join("");
-
-      body.querySelectorAll(".live-card").forEach(card=>{
-        const category=card.dataset.productCategory || "other";
-        const index=Number(card.dataset.productIndex);
-        const product=grouped[category]?.[index];
-        if(!product)return;
-        const open=()=>openProduct(product,category);
-        card.addEventListener("click",open);
-        card.addEventListener("keydown",e=>{
-          if(e.key==="Enter" || e.key===" "){
-            e.preventDefault();
-            open();
-          }
-        });
-      });
     })
     .catch(()=>{
-      body.innerHTML='<div class="card"><p>Не удалось загрузить актуальный каталог. Попробуйте обновить страницу.</p></div>';
+      body.innerHTML='<div class="card"><p>Не удалось загрузить актуальный каталог.</p></div>';
     });
 })();
 </script>
