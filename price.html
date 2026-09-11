@@ -94,6 +94,15 @@ nav a:hover {
 }
 
 .call {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: auto;
+    height: 44px;
+    min-height: 44px;
+    line-height: 1;
+    box-sizing: border-box;
     display:inline-flex;
     align-items:center;
     justify-content:center;
@@ -378,7 +387,12 @@ footer a:hover {
         margin-left: auto;
 
         width: 48px;
+        min-width: 48px;
+        max-width: 48px;
         height: 48px;
+        min-height: 48px;
+        max-height: 48px;
+        flex: 0 0 48px;
 
         padding: 0;
 
@@ -484,9 +498,7 @@ footer a:hover {
     }
 }
 
-/* ==============================
-   КАЛЬКУЛЯТОР РЕМОНТА
-   ============================== */
+
 
 </style>
 </head>
@@ -649,63 +661,25 @@ const API_BASE = 'https://technolis-bot.koreanteen.workers.dev';
 const root = document.getElementById('priceRoot');
 const esc = s => String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
 const money = n => Number(n) > 0 ? Number(n).toLocaleString('ru-RU') + ' ₽' : 'БЕСПЛАТНО';
+const iconFor = c => c === 'Аксессуары' ? '🛍️' : c.includes('Диагност') ? '🔍' : c.includes('Защит') ? '🛡️' : c.includes('Программ') ? '💻' : c.includes('Сложн') ? '🧩' : '🔧';
+function renderPrices(rows) {
+  const groups = new Map();
+  rows.forEach(p => { const c = p.category || 'Услуги'; if (!groups.has(c)) groups.set(c, []); groups.get(c).push(p); });
+  root.innerHTML = [...groups.entries()].map(([category, items]) => `
+    <section class="category">
+      <div class="category-title"><div class="category-icon">${iconFor(category)}</div><h2>${esc(category)}</h2></div>
+      <div class="price-list">${items.map(p => `
+        <div class="price-row">
+          <div class="service-name">${esc(p.name)}${p.note ? `<span class="service-note">${esc(p.note)}</span>` : ''}</div>
+          <div class="price">${money(p.price)}</div>
+        </div>`).join('')}</div>
+    </section>`).join('');
+}
 fetch(API_BASE + '/prices', {cache:'no-store'})
-  .then(r => r.json())
-  .then(d => {
-    if (!d.success || !Array.isArray(d.prices)) throw new Error();
-    const groups = new Map();
-    d.prices.forEach(p => { const c = p.category || 'Услуги'; if (!groups.has(c)) groups.set(c, []); groups.get(c).push(p); });
-    root.innerHTML = [...groups.entries()].map(([category, items]) => `
-      <section class="category">
-        <div class="category-title"><div class="category-icon">🔧</div><h2>${esc(category)}</h2></div>
-        <div class="price-list">${items.map(p => `
-          <div class="price-row">
-            <div class="service-name">${esc(p.name)}${p.note ? `<span class="service-note">${esc(p.note)}</span>` : ''}</div>
-            <div class="price">${money(p.price)}</div>
-          </div>`).join('')}</div>
-      </section>`).join('');
-  })
+  .then(r => { if (!r.ok) throw new Error(); return r.json(); })
+  .then(d => { if (!d.success || !Array.isArray(d.prices) || !d.prices.length) throw new Error(); renderPrices(d.prices); })
   .catch(() => {
-    const fallback = [
-  ['Ремонт смартфонов', 'Замена дисплея', 4000, 'от'],
-  ['Ремонт смартфонов', 'Замена аккумулятора', 4000, 'от'],
-  ['Ремонт смартфонов', 'Ремонт разъёма зарядки', 4000, 'от'],
-  ['Ремонт смартфонов', 'Ремонт камеры', 4000, 'от'],
-  ['Ремонт смартфонов', 'Ремонт после воды', 4000, 'от'],
-  ['Ремонт смартфонов', 'Программный ремонт', 4000, 'от'],
-  ['Ремонт планшетов', 'Замена дисплея', 4000, 'от'],
-  ['Ремонт планшетов', 'Замена аккумулятора', 4000, 'от'],
-  ['Ремонт планшетов', 'Ремонт разъёмов', 4000, 'от'],
-  ['Ремонт планшетов', 'Диагностика', 0, 'бесплатно'],
-  ['Ремонт ноутбуков', 'Чистка системы охлаждения', 4000, 'от'],
-  ['Ремонт ноутбуков', 'Замена комплектующих', 4000, 'от'],
-  ['Ремонт ноутбуков', 'Установка Windows', 4000, 'от'],
-  ['Ремонт ноутбуков', 'Установка Office', 4000, 'от'],
-  ['Ремонт ноутбуков', 'Восстановление системы', 4000, 'от'],
-  ['Ремонт и обслуживание ПК', 'Диагностика компьютера', 0, 'бесплатно'],
-  ['Ремонт и обслуживание ПК', 'Сборка ПК', 4000, 'от'],
-  ['Ремонт и обслуживание ПК', 'Чистка системы охлаждения', 4000, 'от'],
-  ['Ремонт и обслуживание ПК', 'Замена комплектующих', 4000, 'от'],
-  ['Ремонт и обслуживание ПК', 'Установка Windows', 4000, 'от'],
-  ['Ремонт и обслуживание ПК', 'Установка Office', 4000, 'от'],
-  ['Защита смартфонов', 'Премиум-плёнка', 0, 'уточняется'],
-  ['Защита смартфонов', 'Бронеплёнка', 0, 'уточняется'],
-  ['Защита смартфонов', 'Бронестекло', 0, 'уточняется']
-];
-const groups = new Map();
-fallback.forEach(([category,name,price,mode]) => {
-  if (!groups.has(category)) groups.set(category, []);
-  groups.get(category).push({name, price, note: mode === 'от' ? 'от' : mode});
-});
-root.innerHTML = [...groups.entries()].map(([category, items]) => `
-  <section class="category">
-    <div class="category-title"><div class="category-icon">🔧</div><h2>${esc(category)}</h2></div>
-    <div class="price-list">${items.map(p => `
-      <div class="price-row">
-        <div class="service-name">${esc(p.name)}${p.note ? `<span class="service-note">${esc(p.note)}</span>` : ''}</div>
-        <div class="price">${Number(p.price) > 0 ? 'от ' + Number(p.price).toLocaleString('ru-RU') + ' ₽' : 'Уточняется'}</div>
-      </div>`).join('')}</div>
-  </section>`).join('');
+    root.innerHTML = `<section class="category"><div class="price-list"><div class="price-row"><div class="service-name">Прайс временно недоступен<span class="service-note">Позвоните или напишите нам — актуальную стоимость уточним.</span></div><div class="price">—</div></div></div></section>`;
   });
 </script>
 </body>
