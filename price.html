@@ -94,6 +94,11 @@ nav a:hover {
 }
 
 .call {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:44px;
+    font-size:14px;
     background: #ff5a00;
     color: white;
 
@@ -365,6 +370,11 @@ footer a:hover {
     }
 
     .call {
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-height:44px;
+    font-size:14px;
         margin-left: auto;
 
         width: 48px;
@@ -645,7 +655,6 @@ footer a:hover {
 </head>
 
 <body>
-
 <header>
 
 <div class="header">
@@ -695,365 +704,13 @@ footer a:hover {
 </section>
 
 
-<section class="repair-calculator">
-
-<div class="repair-calculator-box">
-
-<div class="repair-calculator-title">
-🧮 Рассчитать стоимость ремонта
-</div>
-
-<div class="repair-calculator-subtitle">
-Выберите устройство и что нужно заменить. Для iPhone используются цены из прайса Техно Лис, для Android — актуальные карточки запчастей TAGGSM.
-</div>
-
-<div class="repair-calculator-grid">
-
-<div class="repair-field">
-<label for="calcBrand">Производитель</label>
-
-<select id="calcBrand">
-<option value="Apple">Apple</option>
-<option value="Samsung">Samsung</option>
-<option value="Xiaomi">Xiaomi</option>
-<option value="Honor">Honor</option>
-<option value="Huawei">Huawei</option>
-<option value="Google">Google</option>
-<option value="Realme">Realme</option>
-<option value="Oppo">Oppo</option>
-<option value="Vivo">Vivo</option>
-<option value="OnePlus">OnePlus</option>
-<option value="Другое">Другое</option>
-</select>
-</div>
-
-
-<div class="repair-field">
-
-<label for="calcModel">Модель</label>
-
-<select id="calcModel"></select>
-
-<input
-    id="calcModelText"
-    type="text"
-    placeholder="Например, Galaxy A41"
-    style="display:none;"
->
-
-</div>
-
-
-<div class="repair-field">
-
-<label for="calcService">Что нужно заменить?</label>
-
-<select id="calcService"></select>
-
-</div>
-
-</div>
-
-
-<button
-    type="button"
-    class="repair-calculator-button"
-    id="calcButton"
->
-Рассчитать стоимость
-</button>
-
-
-<div
-    class="repair-result"
-    id="calcResult"
->
-</div>
-
-</div>
-
-</section>
-
-
 <main class="price-wrap">
-
-
-<!-- ЗАЩИТА -->
-
 <section class="category">
-
-<div class="category-title">
-
-<div class="category-icon">
-🛡️
-</div>
-
-<h2>
-Защита
-</h2>
-
-</div>
-
-
-<div class="price-list">
-
-<div class="price-row">
-
-<div class="service-name">
-Премиум-плёнка
-</div>
-
-<div class="price">
-1 500 ₽
-</div>
-
-</div>
-
-
-<div class="price-row">
-
-<div class="service-name">
-Бронеплёнка
-</div>
-
-<div class="price">
-2 000 ₽
-</div>
-
-</div>
-
-
-<div class="price-row">
-
-<div class="service-name">
-Бронестекло для iPhone
-</div>
-
-<div class="price">
-2 000 ₽
-</div>
-
-</div>
-
-</div>
-
+<div class="category-title"><div class="category-icon">🔧</div><h2>Ремонт устройств</h2></div>
+<div class="price-list" id="repairPriceList"><div class="price-row"><div class="service-name">Загрузка прайса...</div><div class="price">—</div></div></div>
 </section>
-
-
-<!-- ДИАГНОСТИКА -->
-
-<section class="category">
-
-<div class="category-title">
-
-<div class="category-icon">
-🔍
-</div>
-
-<h2>
-Диагностика
-</h2>
-
-</div>
-
-
-<div class="price-list">
-
-<div class="price-row">
-
-<div class="service-name">
-
-Консультация / диагностика
-
-<span class="service-note">
-Первичная диагностика устройства
-</span>
-
-</div>
-
-<div class="price">
-БЕСПЛАТНО
-</div>
-
-</div>
-
-
-<div class="price-row">
-
-<div class="service-name">
-
-Диагностика со вскрытием
-
-<span class="service-note">
-Если для определения неисправности требуется разбор устройства
-</span>
-
-</div>
-
-<div class="price">
-от 1 000 ₽
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- РЕМОНТ -->
-
-<section class="category">
-
-<div class="category-title">
-
-<div class="category-icon">
-🔧
-</div>
-
-<h2>
-Ремонт устройств
-</h2>
-
-</div>
-
-
-<div class="price-list">
-
-<div class="price-row">
-
-<div class="service-name">
-Ремонт смартфона
-</div>
-
-<div class="price">
-от 3 000 ₽
-</div>
-
-</div>
-
-
-<div class="price-row">
-
-<div class="service-name">
-Ремонт планшета
-</div>
-
-<div class="price">
-от 3 500 ₽
-</div>
-
-</div>
-
-
-<div class="price-row">
-
-<div class="service-name">
-Ремонт ноутбука
-</div>
-
-<div class="price">
-от 4 000 ₽
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- СЕРВИС -->
-
-<section class="category">
-
-<div class="category-title">
-
-<div class="category-icon">
-⚙️
-</div>
-
-<h2>
-Сервисные услуги
-</h2>
-
-</div>
-
-
-<div class="price-list">
-
-<div class="price-row">
-
-<div class="service-name">
-Чистка динамиков и разъёмов
-</div>
-
-<div class="price">
-800 ₽
-</div>
-
-</div>
-
-
-<div class="price-row">
-
-<div class="service-name">
-Установка приложений
-</div>
-
-<div class="price">
-от 1 000 ₽
-</div>
-
-</div>
-
-
-<div class="price-row">
-
-<div class="service-name">
-Перепрошивка устройства
-</div>
-
-<div class="price">
-от 2 000 ₽
-</div>
-
-</div>
-
-
-<div class="price-row">
-
-<div class="service-name">
-Прочие услуги
-</div>
-
-<div class="price">
-от 1 000 ₽
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<div class="note">
-
-<strong>Важно:</strong>
-
-<p>
-Окончательная стоимость ремонта определяется после диагностики.
-Цена может зависеть от модели устройства, стоимости запчастей
-и сложности работы.
-</p>
-
-</div>
-
-
+<div class="note"><strong>Важно:</strong><p>Любой ремонт телефона, планшета или ноутбука — от 4 000 ₽. Окончательная стоимость определяется после диагностики и зависит от модели и сложности работ.</p></div>
 </main>
-
-
 <div class="cta">
 
 <h2>
@@ -1688,3 +1345,5 @@ updateCalculatorFields();
 
 </body>
 </html>
+<script>const API_BASE='https://technolis-bot.koreanteen.workers.dev';const root=document.getElementById('repairPriceList');const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));fetch(API_BASE+'/prices',{cache:'no-store'}).then(r=>r.json()).then(d=>{if(!d.success)throw new Error();root.innerHTML=(d.prices||[]).map(p=>`<div class="price-row"><div class="service-name">${esc(p.name)}<span class="service-note">${esc(p.note||'')}</span></div><div class="price">от ${Number(p.price||0).toLocaleString('ru-RU')} ₽</div></div>`).join('')}).catch(()=>{root.innerHTML='<div class="price-row"><div class="service-name">Ремонт устройств</div><div class="price">от 4 000 ₽</div></div>'});</script>
+</body></html>
