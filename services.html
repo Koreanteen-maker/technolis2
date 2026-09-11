@@ -90,6 +90,15 @@ nav a:hover {
 }
 
 .call {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    width: auto;
+    height: 44px;
+    min-height: 44px;
+    line-height: 1;
+    box-sizing: border-box;
     background: #ff5a00;
     color: white;
 
@@ -333,7 +342,12 @@ footer a:hover {
         margin-left: auto;
 
         width: 48px;
+        min-width: 48px;
+        max-width: 48px;
         height: 48px;
+        min-height: 48px;
+        max-height: 48px;
+        flex: 0 0 48px;
         padding: 0;
 
         border-radius: 50%;
