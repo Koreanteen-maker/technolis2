@@ -30,7 +30,14 @@ const API_BASE="https://technolis-bot.koreanteen.workers.dev";
 const $=id=>document.getElementById(id); const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
 const state={secret:"",operator:sessionStorage.getItem("techno_admin_operator")||"",products:[],editing:null,prices:[]};
 function show(el,t,bad=false){el.textContent=t;el.classList.remove("hidden");el.style.background=bad?"#ffe2df":"#e7f7e9"} function hide(el){el.classList.add("hidden")}
-async function api(path,opts={}){opts.headers={...(opts.headers||{}),"Content-Type":"application/json","X-Admin-Secret":state.secret,"X-Admin-User":state.operator||"admin"};const r=await fetch(API_BASE+path,opts);let d={};try{d=await r.json()}catch{}if(!r.ok)throw new Error(d.error||`HTTP ${r.status}`);return d}
+async function api(path,opts={}){
+  const headers={...(opts.headers||{}),"X-Admin-Secret":state.secret,"X-Admin-User":state.operator||"admin"};
+  if(opts.body!=null) headers["Content-Type"]="application/json";
+  const r=await fetch(API_BASE+path,{...opts,headers,cache:"no-store"});
+  let d={}; try{d=await r.json()}catch{}
+  if(!r.ok || d.success===false) throw new Error(d.error||`HTTP ${r.status}`);
+  return d;
+}
 function categories(){return [...new Set(state.products.map(p=>p.category).filter(Boolean))].sort((a,b)=>a.localeCompare(b))}
 function fillCats(){const s=$("filterCategory");const cur=s.value;s.innerHTML='<option value="">Все категории</option>'+categories().map(c=>`<option>${esc(c)}</option>`).join("");s.value=cur}
 function renderProducts(){const q=$("search").value.trim().toLowerCase(),cat=$("filterCategory").value;const items=state.products.filter(p=>{const hay=[p.name,p.category,p.models,p.description].join(" ").toLowerCase();return(!q||hay.includes(q))&&(!cat||p.category===cat)});$("productsWrap").innerHTML=items.length?`<div class="card"><div class="grid">${items.map(p=>`<article class="stat"><div style="display:flex;gap:10px">${p.image?`<img class="product-img" src="${esc(p.image)}" alt="">`:''}<div><div class="small">${esc(p.icon||"📦")} ${esc(p.category||"")}</div><h3 style="margin:4px 0">${esc(p.name)}</h3><div class="money">${Number(p.price||0).toLocaleString("ru-RU")} ₽</div><div class="pill">Остаток: ${Number(p.stock||0)} шт.</div></div></div>${p.models?`<div class="small" style="margin-top:8px">${esc(p.models)}</div>`:""}<div class="row"><button class="dark" data-edit="${encodeURIComponent(p.id)}">Изменить</button><button class="danger" data-del="${encodeURIComponent(p.id)}">Удалить</button></div></article>`).join("")}</div></div>`:`<div class="card"><p>Ничего не найдено.</p></div>`}
