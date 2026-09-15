@@ -560,9 +560,7 @@ footer a:hover {
     ЛОГО
 </a>
 
-<a href="index.html" class="brand">
-    Техно <span>Лис</span>
-</a>
+<a href="index.html" class="brand" data-site-name>Техно Лис</a>
 
 <nav>
     <a href="index.html">Главная</a>
@@ -589,11 +587,11 @@ footer a:hover {
 ТЕХНО ЛИС · СЕРВИСНЫЙ ЦЕНТР
 </div>
 
-<h1>
+<h1 data-page-title>
 Наш <span>прайс</span>
 </h1>
 
-<p>
+<p data-page-subtitle>
 Стоимость популярных услуг. Точная цена ремонта зависит
 от модели устройства и характера неисправности.
 </p>
@@ -730,5 +728,33 @@ fetch(API_BASE + '/prices', {cache:'no-store', mode:'cors'})
     root.innerHTML = `<section class="category"><div class="price-list"><div class="price-row"><div class="service-name">Прайс временно недоступен<span class="service-note">Позвоните или напишите нам — актуальную стоимость уточним.</span></div><div class="price">—</div></div></div></section>`;
   });
 </script>
-</body>
+
+<script>
+(function(){
+  const API="https://technolis-bot.koreanteen.workers.dev";
+  fetch(API+"/site-settings",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(d=>{
+    const s=d&&d.settings;if(!s)return;
+    document.querySelectorAll('a[href^="tel:"]').forEach(a=>{
+      a.href="tel:"+s.phoneHref.replace(/^\+/,"+");
+      const text=a.textContent.trim();
+      if(/962\s*152-69-90|8\s*962/i.test(text)) a.textContent=text.replace(/8\s*962\s*152-69-90/gi,s.phoneDisplay);
+    });
+    document.querySelectorAll('a[href*="t.me/"]').forEach(a=>{
+      a.href=s.telegramUrl;a.target="_blank";
+      if(/@tehnafox/i.test(a.textContent)) a.textContent=a.textContent.replace(/@tehnafox/gi,s.telegramUsername);
+    });
+    document.querySelectorAll('[data-site-hours]').forEach(el=>el.textContent=s.workingHours);
+    document.querySelectorAll('[data-site-name]').forEach(el=>el.textContent=s.siteName);
+    document.querySelectorAll('[data-site-tagline]').forEach(el=>el.textContent=s.tagline);
+    document.querySelectorAll('[data-site-hero-subtitle]').forEach(el=>el.textContent=s.heroSubtitle);
+    document.querySelectorAll('[data-site-hero-title]').forEach(el=>el.textContent=s.heroTitle);
+    document.querySelectorAll('[data-site-hero-text]').forEach(el=>el.textContent=s.heroText);
+    document.querySelectorAll('[data-site-address]').forEach(el=>el.textContent=s.address);
+    document.querySelectorAll('iframe.map').forEach(el=>el.src=s.mapUrl);
+  }).catch(()=>{});
+})();
+</script>
+<script>
+(function(){const API="https://technolis-bot.koreanteen.workers.dev";fetch(API+"/site-settings",{cache:"no-store"}).then(r=>r.json()).then(d=>{const s=d.settings||{},p=(d.pages||{})["price"]||null;document.querySelectorAll('a[href^="tel:"]').forEach(a=>{if(s.phoneHref)a.href="tel:"+s.phoneHref});document.querySelectorAll('a[href*="t.me/"]').forEach(a=>{if(s.telegramUrl)a.href=s.telegramUrl});if(p){const h=document.querySelector('[data-page-title]'),sub=document.querySelector('[data-page-subtitle]');if(h)h.textContent=p.title;if(sub)sub.textContent=p.subtitle;document.title=p.title+" — "+(s.siteName||"Техно Лис")}}).catch(()=>{});})();
+</script></body>
 </html>

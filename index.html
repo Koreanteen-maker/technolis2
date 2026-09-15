@@ -637,9 +637,7 @@ footer a:hover {
     ЛОГО
 </a>
 
-<a href="index.html" class="brand">
-    Техно <span>Лис</span>
-</a>
+<a href="index.html" class="brand" data-site-name>Техно Лис</a>
 
 <nav>
     <a href="index.html">Главная</a>
@@ -666,20 +664,11 @@ footer a:hover {
 
 <div>
 
-<div class="subtitle">
-Сервисный центр · Южно-Сахалинск
-</div>
+<div class="subtitle" data-site-hero-subtitle>Сервисный центр · Южно-Сахалинск</div>
 
-<h1>
-Техника в
-<span>надёжных лапах!</span>
-</h1>
+<h1 data-site-hero-title>Техника в надёжных лапах!</h1>
 
-<p>
-Ремонт смартфонов, планшетов, ноутбуков, ПК и другой техники.
-Поклейка защитных плёнок, установка Windows и Office,
-настройка и обслуживание.
-</p>
+<p data-site-hero-text>Ремонт смартфонов, планшетов, ноутбуков, ПК и другой техники. Поклейка защитных плёнок, установка Windows и Office, настройка и обслуживание.</p>
 
 <div class="buttons">
 
@@ -941,5 +930,31 @@ footer a:hover {
 
 </div>
 
+
+<script>
+(function(){
+  const API="https://technolis-bot.koreanteen.workers.dev";
+  fetch(API+"/site-settings",{cache:"no-store"}).then(r=>r.ok?r.json():null).then(d=>{
+    const s=d&&d.settings;if(!s)return;
+    document.querySelectorAll('a[href^="tel:"]').forEach(a=>{
+      a.href="tel:"+s.phoneHref.replace(/^\+/,"+");
+      const text=a.textContent.trim();
+      if(/962\s*152-69-90|8\s*962/i.test(text)) a.textContent=text.replace(/8\s*962\s*152-69-90/gi,s.phoneDisplay);
+    });
+    document.querySelectorAll('a[href*="t.me/"]').forEach(a=>{
+      a.href=s.telegramUrl;a.target="_blank";
+      if(/@tehnafox/i.test(a.textContent)) a.textContent=a.textContent.replace(/@tehnafox/gi,s.telegramUsername);
+    });
+    document.querySelectorAll('[data-site-hours]').forEach(el=>el.textContent=s.workingHours);
+    document.querySelectorAll('[data-site-name]').forEach(el=>el.textContent=s.siteName);
+    document.querySelectorAll('[data-site-tagline]').forEach(el=>el.textContent=s.tagline);
+    document.querySelectorAll('[data-site-hero-subtitle]').forEach(el=>el.textContent=s.heroSubtitle);
+    document.querySelectorAll('[data-site-hero-title]').forEach(el=>el.textContent=s.heroTitle);
+    document.querySelectorAll('[data-site-hero-text]').forEach(el=>el.textContent=s.heroText);
+    document.querySelectorAll('[data-site-address]').forEach(el=>el.textContent=s.address);
+    document.querySelectorAll('iframe.map').forEach(el=>el.src=s.mapUrl);
+  }).catch(()=>{});
+})();
+</script>
 </body>
 </html>
