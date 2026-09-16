@@ -549,7 +549,29 @@ footer a:hover {
 }
 </style>
 
-</head>
+<style>
+.price-wrap{padding:8px 25px 65px!important}
+.price-toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.price-filter{border:1px solid #ddd;background:#fff;color:#555;border-radius:999px;padding:7px 12px;font-size:12px;font-weight:800;cursor:pointer}
+.price-filter.active,.price-filter:hover{background:#090909;border-color:#090909;color:#fff}
+.price-count{margin-left:auto;color:#999;font-size:12px}
+.price-row{min-height:44px!important;padding:8px 12px!important}
+.service-name{font-size:13px!important;line-height:1.25}
+.service-note{display:inline!important;margin-left:7px!important;font-size:10px!important}
+.price{font-size:14px!important}
+.category{margin-bottom:20px!important}
+.category-title{margin-bottom:7px!important}
+.category-icon{width:30px!important;height:30px!important;font-size:14px!important}
+.category-title h2{font-size:17px!important}
+@media(max-width:600px){
+ .price-wrap{padding:5px 18px 50px!important}
+ .price-count{width:100%;margin-left:0}
+ .price-row{min-height:42px!important;padding:7px 9px!important}
+ .service-name{font-size:12px!important}
+ .service-note{display:block!important;margin:3px 0 0!important;font-size:9px!important}
+ .price{font-size:12px!important}
+}
+</style></head>
 
 <body>
 <header>
@@ -703,30 +725,24 @@ footer a:hover {
 
 </div>
 <script>
-const API_BASE = 'https://technolis-bot.koreanteen.workers.dev';
-const root = document.getElementById('priceRoot');
-const esc = s => String(s ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
-const money = n => Number(n) > 0 ? Number(n).toLocaleString('ru-RU') + ' ₽' : 'БЕСПЛАТНО';
-const iconFor = c => c === 'Аксессуары' ? '🛍️' : c.includes('Диагност') ? '🔍' : c.includes('Защит') ? '🛡️' : c.includes('Программ') ? '💻' : c.includes('Сложн') ? '🧩' : '🔧';
-function renderPrices(rows) {
-  const groups = new Map();
-  rows.forEach(p => { const c = p.category || 'Услуги'; if (!groups.has(c)) groups.set(c, []); groups.get(c).push(p); });
-  root.innerHTML = [...groups.entries()].map(([category, items]) => `
-    <section class="category">
-      <div class="category-title"><div class="category-icon">${iconFor(category)}</div><h2>${esc(category)}</h2></div>
-      <div class="price-list">${items.map(p => `
-        <div class="price-row">
-          <div class="service-name">${esc(p.name)}${p.note ? `<span class="service-note">${esc(p.note)}</span>` : ''}</div>
-          <div class="price">${money(p.price)}</div>
-        </div>`).join('')}</div>
-    </section>`).join('');
+const API_BASE='https://technolis-bot.koreanteen.workers.dev';
+const root=document.getElementById('priceRoot');
+let prices=[],active='all';
+const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+const money=n=>Number(n)>0?Number(n).toLocaleString('ru-RU')+' ₽':'БЕСПЛАТНО';
+const icon=c=>c.includes('Диагност')?'🔍':c.includes('Защит')?'🛡️':c.includes('Программ')?'💻':c.includes('Сложн')?'🧩':'🔧';
+function render(){
+ const rows=active==='all'?prices:prices.filter(x=>(x.category||'Услуги')===active);
+ const groups=new Map(); rows.forEach(x=>{let c=x.category||'Услуги';if(!groups.has(c))groups.set(c,[]);groups.get(c).push(x)});
+ root.innerHTML=[...groups].map(([c,items])=>`<section class="category"><div class="category-title"><div class="category-icon">${icon(c)}</div><h2>${esc(c)}</h2></div><div class="price-list">${items.map(x=>`<div class="price-row"><div class="service-name">${esc(x.name)}${x.note?`<span class="service-note">${esc(x.note)}</span>`:''}</div><div class="price">${money(x.price)}</div></div>`).join('')}</div></section>`).join('');
+ const old=document.getElementById('priceFilters'); if(old)old.remove();
+ const bar=document.createElement('div');bar.id='priceFilters';bar.className='price-toolbar';
+ const cats=[...new Set(prices.map(x=>x.category||'Услуги'))];
+ bar.innerHTML=`<button class="price-filter active" data-f="all">Все</button>`+cats.map(c=>`<button class="price-filter" data-f="${esc(c)}">${esc(c)}</button>`).join('')+`<span class="price-count">${rows.length} ${rows.length<5?'услуги':'услуг'}</span>`;
+ root.parentNode.insertBefore(bar,root);
+ bar.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{active=b.dataset.f;render()});
 }
-fetch(API_BASE + '/prices', {cache:'no-store', mode:'cors'})
-  .then(r => { if (!r.ok) throw new Error(); return r.json(); })
-  .then(d => { if (!d.success || !Array.isArray(d.prices) || !d.prices.length) throw new Error(); renderPrices(d.prices); })
-  .catch(() => {
-    root.innerHTML = `<section class="category"><div class="price-list"><div class="price-row"><div class="service-name">Прайс временно недоступен<span class="service-note">Позвоните или напишите нам — актуальную стоимость уточним.</span></div><div class="price">—</div></div></div></section>`;
-  });
+fetch(API_BASE+'/prices',{cache:'no-store'}).then(r=>r.json()).then(d=>{if(!d.success)throw 0;prices=d.prices||[];render()}).catch(()=>{root.innerHTML='<div class="price-list"><div class="price-row"><div class="service-name">Прайс временно недоступен</div><div class="price">—</div></div></div>'});
 </script>
 
 <script>
